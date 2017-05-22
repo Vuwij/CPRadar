@@ -1,0 +1,56 @@
+0.000052 : createing logger StdoutLogger
+0.001462 : creating LinuxModuleIo
+0.001997 : RadarCommunicator: 24
+0.002085 : parser constructor
+0.004027 : subscribe_to_radar_settings -- begin
+0.004909 : subscribe_to_radar_settings -- end
+0.005011 : RadarInterface - base -- begin
+0.005055 : log_trace -- begin
+0.005292 : log_trace -- end
+0.005359 : git sha: 2f9d26e69e9a
+0.005401 : build date: 2017-03-06:13:34:40
+0.005436 : RadarInterface - base -- end
+0.005478 : RadarInterface - chained 1 -- begin
+0.005528 : subscribe_to_presence_single -- begin
+0.005988 : subscribe_to_presence_single -- end
+0.006053 : subscribe_to_presence_movinglist -- begin
+0.006311 : subscribe_to_presence_movinglist -- end
+0.006382 : subscribe_to_data_float -- begin
+0.006551 : subscribe_to_data_float -- end
+0.006620 : subscribe_to_data_string -- begin
+0.006768 : subscribe_to_data_string -- end
+0.006835 : subscribe_to_baseband_iq -- begin
+0.007005 : subscribe_to_baseband_iq -- end
+0.007078 : subscribe_to_baseband_ap -- begin
+0.007233 : subscribe_to_baseband_ap -- end
+0.007354 : subscribe_to_system_status -- begin
+0.007530 : subscribe_to_system_status -- end
+0.007594 : open -- begin
+0.007643 : LinuxModuleIo::open -- begin
+0.008080 : LinuxModuleIo::open -- end
+0.008287 : open -- end
+0.008336 : RadarInterface - chained 1 -- end
+0.008565 : ping -- begin
+0.008738 : sending: 
+0.008812 : 8: {0x7d, 0x1, 0xae, 0xea, 0xaa, 0xee, 0x7c, 0x7e, }
+0.008909 : sent
+0.009215 : 8: {0x7d, 0x1, 0xea, 0xae, 0xee, 0xaa, 0x7c, 0x7e, }
+0.009366 : dispatching packet: 
+0.009427 : 5: {0x1, 0xea, 0xae, 0xee, 0xaa, }
+0.009818 : ping -- end
+0.010091 : ~RadarInterface -- begin
+0.010175 : ~RadarInterface -- end
+0.010291 : unsubscribe -- begin
+0.010445 : unsubscribe -- end
+0.010626 : task ending: recorder
+0.010867 : ~ActiveThread: recorder
+0.010981 : ~RadarCommunicator -- begin
+0.011419 : ~RadarCommunicator -- end
+0.019871 : task ending: reader
+0.020203 : Closing: /dev/ttyACM0
+0.021205 : ~PacketDispatcher -- begin
+0.021370 : task ending: dispatcher
+0.021636 : ~PacketDispatcher -- end
+0.021758 : ~ActiveThread: dispatcher
+0.021822 : ~ActiveThread: reader
+0.021911 : ~StdoutLogger

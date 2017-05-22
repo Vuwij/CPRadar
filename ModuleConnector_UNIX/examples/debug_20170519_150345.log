@@ -1,0 +1,34 @@
+0.000051 : createing logger StdoutLogger
+0.001615 : creating LinuxModuleIo
+0.002286 : RadarCommunicator: 24
+0.002418 : parser constructor
+0.003282 : subscribe_to_radar_settings -- begin
+0.004130 : subscribe_to_radar_settings -- end
+0.004222 : RadarInterface - base -- begin
+0.004266 : log_trace -- begin
+0.004513 : log_trace -- end
+0.004567 : git sha: 2f9d26e69e9a
+0.004596 : build date: 2017-03-06:13:34:40
+0.004621 : RadarInterface - base -- end
+0.004648 : RadarInterface - chained 1 -- begin
+0.004694 : subscribe_to_presence_single -- begin
+0.005000 : subscribe_to_presence_single -- end
+0.005039 : subscribe_to_presence_movinglist -- begin
+0.005183 : subscribe_to_presence_movinglist -- end
+0.005220 : subscribe_to_data_float -- begin
+0.005331 : subscribe_to_data_float -- end
+0.005370 : subscribe_to_data_string -- begin
+0.005480 : subscribe_to_data_string -- end
+0.005518 : subscribe_to_baseband_iq -- begin
+0.005636 : subscribe_to_baseband_iq -- end
+0.005677 : subscribe_to_baseband_ap -- begin
+0.005784 : subscribe_to_baseband_ap -- end
+0.005820 : subscribe_to_system_status -- begin
+0.005919 : subscribe_to_system_status -- end
+0.005954 : open -- begin
+0.005985 : LinuxModuleIo::open -- begin
+0.006102 : open: 50 -- Error opening file: /dev/ttyACM1
+
+0.006139 : LinuxModuleIo::open -- end
+0.006164 : module_io::open returned error
+0.006181 : open -- end
