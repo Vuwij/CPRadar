@@ -3,7 +3,7 @@ Lib = ModuleConnector.Library;
 Lib.libfunctions
 
 % Input parameters
-COM = 'COM5';
+COM = 'COM3';
 FPS = 20;
 dataType = 'bb';
 

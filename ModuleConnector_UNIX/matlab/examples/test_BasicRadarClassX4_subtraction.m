@@ -89,7 +89,6 @@ while ishandle(fh)
         % Record peak for respiratory
         if mod(i, RSampleDuration * FPS) == 0
             [MaxResp, RespIndex] = max(frame);
-            line([RespIndex RespIndex].get(
         end
         
         % Take samples at the Maximum Respiratory index
