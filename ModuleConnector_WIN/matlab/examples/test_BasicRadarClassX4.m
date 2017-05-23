@@ -3,7 +3,7 @@ Lib = ModuleConnector.Library;
 Lib.libfunctions
 
 % Input parameters
-COM = 'COM3';
+COM = 'COM4';
 FPS = 20;
 dataType = 'bb';
 
@@ -71,10 +71,8 @@ while ishandle(fh)
         drawnow;
         if mod(i,100)==0
             disp(['Packets available: ' num2str(radar.bufferSize())]);
-        end
-        
+        end 
     end
-        
 end
 
 radar.stop();

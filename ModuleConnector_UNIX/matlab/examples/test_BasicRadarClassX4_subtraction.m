@@ -5,7 +5,7 @@ Lib = ModuleConnector.Library;
 Lib.libfunctions
 
 % Input parameters
-COM = 'COM5';
+COM = 'COM3';
 FPS = 20;
 dataType = 'bb';
 
@@ -117,10 +117,8 @@ while ishandle(fh)
         if mod(i,100)==0
             disp(['Packets available: ' num2str(radar.bufferSize())]);
         end
-        
-    endapp.RadarONLamp.Color = [1.00,0.00,0.00];
                 
-        
+    end
 end
 
 radar.stop();
