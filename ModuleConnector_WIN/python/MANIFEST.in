@@ -1,5 +1,0 @@
-include pymoduleconnector/moduleconnectorwrapper/_moduleconnectorwrapper.*
-include pymoduleconnector/moduleconnectorwrapper/*.dll
-include pymoduleconnector/moduleconnectorwrapper/libstdc++.so.6.0.22
-include README.txt
-graft pymoduleconnector/doc/output/html

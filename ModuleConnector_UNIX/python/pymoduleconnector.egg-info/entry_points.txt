@@ -1,3 +1,0 @@
-[console_scripts]
-xt_x2m200resp = pymoduleconnector.examples.x2m200_respiration_example:main
-
