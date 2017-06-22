@@ -1,0 +1,153 @@
+classdef DataRecorder
+    %DataRecorder is the ModuleConnector DataRecorder interface. This
+    %allows 
+    
+    properties
+        
+        lib_name,
+        device_name,
+        
+        dataRecorder_instance,
+        radarInterface,
+        
+        recordingOptions_instance,
+        recordingSplitSize_instance,
+        
+    end
+    
+    properties (Constant)
+        
+        % Recording data types
+        DataType_BasebandApDataType = uint32(2^0); % = 1 << 0
+        DataType_BasebandIqDataType = uint32(2^1); % = 1 << 1,
+        DataType_SleepDataType = uint32(2^2); % = 1 << 2,
+        DataType_RespirationDataType = uint32(2^3); % = 1 << 3,
+        DataType_PerformanceStatusType = uint32(2^4); % = 1 << 4,
+        DataType_StringDataType = uint32(2^5); % = 1 << 5,
+        DataType_PulseDopplerFloatDataType = uint32(2^6); % = 1 << 6,
+        DataType_PulseDopplerByteDataType = uint32(2^7); % = 1 << 7,
+        DataType_NoiseMapFloatDataType = uint32(2^8); % = 1 << 8,
+        DataType_NoiseMapByteDataType = uint32(2^9); % = 1 << 9,
+        DataType_FloatDataType = uint32(2^10); % = 1 << 10,
+        DataType_ByteDataType = uint32(2^11); % = 1 << 11,
+        DataType_PresenceSingleDataType = uint32(2^12); % = 1 << 12,
+        DataType_PresenceMovingListDataType = uint32(2^13); % = 1 << 13,
+        
+        DataType_InvalidDataType = uint32(0);
+        DataType_AllDataTypes = uint32(2^32); % = 0xffffffff,
+        
+    end
+    
+    properties (Constant)
+                
+    end
+    
+    methods
+        %% Constructor        
+        function dr = DataRecorder(mc)
+            
+            dr.lib_name = mc.lib_name;
+            dr.device_name = mc.device_name;
+            
+            % Check MC mode of operation: playback or COM.
+            switch mc.device_name
+                case 'playback'
+                    % If playback, call get method without MC argument.
+                    dr.dataRecorder_instance = calllib(dr.lib_name,'nva_create_data_recorder');
+                otherwise
+                    % Else, submit MC argument to record from module.
+                    dr.dataRecorder_instance = calllib(dr.lib_name,'nva_get_data_recorder',mc.mcInstance);
+            end
+            assert(~dr.dataRecorder_instance.isNull, 'nva_get_data_recorder failed, check the logs');
+            
+            dr.recordingOptions_instance = calllib(dr.lib_name,'nva_create_recording_options');
+            dr.recordingSplitSize_instance = calllib(dr.lib_name,'nva_create_recording_split_size');
+            
+        end
+        %
+        function set_duration(this, recordingSplitSize_instance, duration)
+            calllib(this.lib_name, 'set_duration', recordingSplitSize_instance, int32(duration));
+        end
+        %
+        function set_byte_count(this, recordingSplitSize_instance, count)
+            calllib(this.lib_name, 'set_byte_count', recordingSplitSize_instance, int64(count))
+        end
+        %
+        function set_fixed_daily_hour(this, recordingSplitSize_instance, hour)
+            calllib(this.lib_name, 'set_fixed_daily_hour', recordingSplitSize_instance, int32(hour));
+        end
+        %
+        function set_session_id(this, recordingOptions_instance, id, lengthOfId)
+            calllib(this.lib_name, 'set_session_id', recordingOptions_instance, id, uint32(lengthOfId));
+        end
+        %
+        % TODO:
+        function get_session_idx(this)
+            % extern int get_session_id(RecordingOptions *self, char *result, uint32_t *length, uint32_t max_length);
+            
+        end
+        %
+        function set_file_split_size(this, recordingOptions_instance, recordingSplitSize_instance)
+            calllib(this.lib_name, 'set_file_split_size', recordingOptions_instance, recordingSplitSize_instance);
+        end
+        %
+        function set_directory_split_size(this, recordingOptions_instance, recordingSplitSize_instance)
+            calllib(this.lib_name, 'set_directory_split_size', recordingOptions_instance, recordingSplitSize_instance);
+        end
+        %
+        function set_data_rate_limit(this, recordingOptions_instance, limit)
+            calllib(this.lib_name, 'set_data_rate_limit', recordingOptions_instance, int32(limit));
+        end
+        %
+        function set_user_header(this, recordingOptions_instance, header, lengthOfHeader)
+            calllib(this.lib_name, 'set_user_header', recordingOptions_instance, header, uint32(lengthOfHeader));
+        end
+        %
+        function int = start_recording( this, dataRecorder_instance, xethruDataType, directory, lengthOfDir, recordingOptions_instance)
+            int = calllib(this.lib_name, 'nva_start_recording', dataRecorder_instance,...
+                uint32(xethruDataType), directory, uint32(lengthOfDir), recordingOptions_instance);
+        end
+        %
+        function stop_recording( this,dataRecorder_instance, xethruDataType)
+            calllib(this.lib_name, 'nva_stop_recording', dataRecorder_instance, uint32(xethruDataType));
+        end
+        %
+        function int = process( this, dataRecorder_instance, xethruDataType, bytes, lengthOfBytes)
+            int = calllib(this.lib_name, 'nva_process', dataRecorder_instance,...
+                uint32(xethruDataType), bytes, uint32(lengthOfBytes));
+        end
+        %
+        % TODO:
+        function set_basename_for_data_type(this)
+            % extern void nva_set_basename_for_data_type(DataRecorder *recorder, uint32_t data_type,
+            %                             const char *name, uint32_t length);
+        end
+        %
+        function set_get_basename_for_data_type(this)
+            % extern int nva_get_basename_for_data_type(DataRecorder *recorder, uint32_t data_type, char *dst,
+            %                             uint32_t *length, uint32_t max_length);
+            
+        end        
+        
+        %% Destructor
+        function delete(dr)
+            % Destructor
+            % DELETE(dr)
+            calllib(dr.lib_name, 'nva_destroy_recording_options',dr.recordingOptions_instance);
+            clear('dr.recordingOptions_instance');
+            calllib(dr.lib_name, 'nva_destroy_recording_split_size',dr.recordingSplitSize_instance);
+            clear('dr.recordingSplitSize_instance');
+            switch dr.device_name
+                case 'playback'
+                    % If playback, destroy data recorder.
+                    calllib(dr.lib_name, 'nva_destroy_data_recorder',dr.dataRecorder_instance);
+                otherwise
+                    % Do nothing.
+            end
+            clear('dr.dataRecorder_instance');
+        end
+        
+        
+    end
+    
+end
