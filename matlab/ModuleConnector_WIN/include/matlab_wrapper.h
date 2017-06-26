@@ -9,31 +9,24 @@
 extern "C" {
 #endif
 
-struct RadarInterface;
+struct RadarInterfacePrivate;
+struct Logger;
 
 const unsigned int ERROR = 1;
 const unsigned int OK = 0;
 
 typedef struct ModuleConnector_Type
 {
-    struct RadarInterface * radar_interface;
+    struct RadarInterfacePrivate *radar_interface;
+    void * factory;
+    void * io;
+    struct Logger * logger;
 } ModuleConnector;
-
-typedef struct X2M200_Type
-{
-    struct RadarInterface * radar_interface;
-} X2M200;
 
 typedef struct X2_Type
 {
-    struct RadarInterface * radar_interface;
+    void *priv;
 } X2;
-
-typedef struct XEP_Type
-{
-    struct RadarInterface *radar_interface;
-    void *nva_xep_instance;
-} XEP;
 
 
 /*********************************************************************************
@@ -42,6 +35,8 @@ typedef struct XEP_Type
 ModuleConnector * nva_create_module_connector(
     const char * device_name,
     unsigned int level);
+
+ModuleConnector * nva_create_module_connector_playback(DataPlayer *player, unsigned int level);
 
 void nva_destroy_module_connector(
     ModuleConnector * mc);
@@ -52,11 +47,6 @@ DataRecorder * nva_get_data_recorder(ModuleConnector *mc);
 // X2
 X2 * nva_get_x2(ModuleConnector * mc);
 void nva_destroy_X2_interface(X2 * x2);
-
-// XEP
-XEP * nva_get_xep(ModuleConnector *mc);
-void nva_destroy_XEP_interface(XEP *xep);
-
 
 void nva_set_log_level(ModuleConnector * mc, int log_level);
 const char * nva_git_sha();
@@ -72,7 +62,8 @@ int nva_get_firmware_version(X2 * instance, char * result, unsigned int max_leng
 int nva_get_serial_number(X2 * instance, char * result, unsigned int max_length);
 int nva_get_build_info(X2 * instance, char * result, unsigned int max_length);
 int nva_get_app_id_list(X2 * instance, char * result, unsigned int max_length);
-int nva_reset(X2 * instance);
+int nva_module_reset(X2 * instance);
+int nva_reset_to_factory_preset(X2 * instance);
 int nva_enter_bootloader(X2 * instance);
 int nva_set_sensor_mode_run(X2 * instance);
 int nva_set_sensor_mode_idle(X2 * instance);
@@ -80,7 +71,9 @@ int nva_load_sleep_profile(X2 * instance);
 int nva_load_respiration_profile(X2 * instance);
 int nva_enable_baseband(X2 * instance, int );
 int nva_enable_baseband_ap(X2 * instance);
+int nva_disable_baseband_ap(X2 * instance);
 int nva_enable_baseband_iq(X2 * instance);
+int nva_disable_baseband_iq(X2 * instance);
 int nva_set_detection_zone(X2 * instance, float start, float end);
 int nva_set_sensitivity(X2 * instance, uint32_t new_sensitivity);
 int nva_set_led_control(X2 * instance, uint8_t mode, uint8_t intensity);
@@ -302,14 +295,17 @@ int nva_read_message_data_float(
     uint32_t * length,
     unsigned int max_length);
 
-int nva_set_profile_parameter_file(
+int nva_set_parameter_file(
     X2 * instance,
     const char * filename,
     const char * data);
 
-int nva_get_profile_parameter_file(
-    X2 * instance,
-    const char * filename);
+int nva_get_parameter_file(
+        X2 * instance,
+        const char * filename,
+        char * data,
+        unsigned int max_length);
+
 
 int nva_load_profile(
     X2 * instance,
@@ -318,6 +314,53 @@ int nva_load_profile(
 int nva_get_trace(X2 * instance, const char * name, char * trace, unsigned int max_length);
 int nva_subscribe_to_trace(X2 * instance, const char * name);
 int nva_subscribe_to_data_byte(X2 * instance, const char * name);
+
+
+//*********************************************************************************
+//*  X4M200
+//*********************************************************************************
+
+int nva_peek_message_respiration_sleep(X2 * instance);
+int nva_read_message_respiration_sleep(
+    X2 * instance,
+    uint32_t * counter,
+    uint32_t * respirationState,
+    float * rpm,
+    float * distance,
+    uint32_t * signalQuality,
+    float * movementSlow,
+    float * movementFast);
+
+int nva_peek_message_respiration_legacy(X2 * instance);
+int nva_read_message_respiration_legacy(
+    X2 * instance,
+    uint32_t * counter,
+    uint32_t * stateCode,
+    uint32_t * stateData,
+    float * distance,
+    float * movement,
+    uint32_t * signalQuality);
+
+int nva_peek_message_respiration_movinglist(X2 * instance);
+
+int nva_read_message_respiration_movinglist(
+    X2 * instance,
+    uint32_t * counter,
+    uint32_t * movementIntervalCount,
+    float * movement_slow_items,
+    float * movement_fast_items,
+    uint32_t max_length);
+
+int nva_peek_message_respiration_detectionlist(X2 * instance);
+int nva_read_message_respiration_detectionlist(
+    X2 * instance,
+    uint32_t * counter,
+    uint32_t * detection_count,
+    float * detection_distance_items,
+    float * detection_radar_cross_section_items,
+    float * detection_velocity_items,
+    uint32_t max_items);
+
 
 //*********************************************************************************
 //*  X4M300
@@ -358,35 +401,35 @@ int nva_read_message_presence_movinglist(
 //*********************************************************************************
 //*  XEP
 //*********************************************************************************
-int xep_x4driver_set_fps(XEP * instance, const float fps);
-int xep_x4driver_set_iterations(XEP * instance, const uint32_t iterations);
-int xep_x4driver_set_pulsesperstep(XEP * instance, const uint32_t pulsesperstep);
-int xep_x4driver_set_downconversion(XEP * instance, const uint8_t downconversion);
-int xep_x4driver_set_frame_area(XEP * instance, const float start, const float end);
-int xep_x4driver_init(XEP * instance);
-int xep_x4driver_set_dac_step(XEP * instance, const uint8_t dac_step);
-int xep_x4driver_set_dac_min(XEP * instance, const uint32_t dac_min);
-int xep_x4driver_set_dac_max(XEP * instance, const uint32_t dac_max);
-int xep_x4driver_set_frame_area_offset(XEP * instance, const float offset);
-int xep_x4driver_set_enable(XEP * instance, const uint8_t enable);
-int xep_x4driver_set_tx_center_frequency(XEP * instance, const uint8_t tx_center_frequency);
-int xep_x4driver_set_tx_power(XEP * instance, const uint8_t tx_power);
-int xep_x4driver_get_fps(XEP * instance, float * fps);
-int xep_x4driver_set_spi_register(XEP * instance, const uint8_t address, const uint8_t value);
-int xep_x4driver_get_spi_register(XEP * instance, const uint8_t address, uint8_t * value);
-int xep_x4driver_set_pif_register(XEP * instance, const uint8_t address, const uint8_t value);
-int xep_x4driver_get_pif_register(XEP * instance, const uint8_t address, uint8_t * value);
-int xep_x4driver_set_xif_register(XEP * instance, const uint8_t address, const uint8_t value);
-int xep_x4driver_get_xif_register(XEP * instance, const uint8_t address, uint8_t * value);
-int xep_x4driver_set_prf_div(XEP * instance, const uint8_t prf_div);
-int xep_x4driver_get_prf_div(XEP * instance, uint8_t * prf_div);
-int xep_x4driver_get_frame_area(XEP * instance, float * start, float * end);
-int xep_x4driver_get_frame_area_offset(XEP * instance, float * offset);
-int xep_set_iopin_control(XEP * instance, const uint32_t pin_id, const uint32_t pin_setup, const uint32_t pin_feature);
-int xep_set_iopin_value(XEP * instance, const uint32_t pin_id, const uint32_t pin_value);
-int xep_get_iopin_value(XEP * instance, const uint32_t pin_id, uint32_t * pin_value);
-int xep_peek_message_data_string(XEP *instance);
-int xep_read_message_data_string(XEP *instance, uint32_t *content_id, uint32_t *info,
+int xep_x4driver_set_fps(X2 * instance, const float fps);
+int xep_x4driver_get_fps(X2 * instance, float * fps);
+int xep_x4driver_set_iterations(X2 * instance, const uint32_t iterations);
+int xep_x4driver_set_pulsesperstep(X2 * instance, const uint32_t pulsesperstep);
+int xep_x4driver_set_downconversion(X2 * instance, const uint8_t downconversion);
+int xep_x4driver_set_frame_area(X2 * instance, const float start, const float end);
+int xep_x4driver_init(X2 * instance);
+int xep_x4driver_set_dac_step(X2 * instance, const uint8_t dac_step);
+int xep_x4driver_set_dac_min(X2 * instance, const uint32_t dac_min);
+int xep_x4driver_set_dac_max(X2 * instance, const uint32_t dac_max);
+int xep_x4driver_set_frame_area_offset(X2 * instance, const float offset);
+int xep_x4driver_set_enable(X2 * instance, const uint8_t enable);
+int xep_x4driver_set_tx_center_frequency(X2 * instance, const uint8_t tx_center_frequency);
+int xep_x4driver_set_tx_power(X2 * instance, const uint8_t tx_power);
+int xep_x4driver_set_spi_register(X2 * instance, const uint8_t address, const uint8_t value);
+int xep_x4driver_get_spi_register(X2 * instance, const uint8_t address, uint8_t * value);
+int xep_x4driver_set_pif_register(X2 * instance, const uint8_t address, const uint8_t value);
+int xep_x4driver_get_pif_register(X2 * instance, const uint8_t address, uint8_t * value);
+int xep_x4driver_set_xif_register(X2 * instance, const uint8_t address, const uint8_t value);
+int xep_x4driver_get_xif_register(X2 * instance, const uint8_t address, uint8_t * value);
+int xep_x4driver_set_prf_div(X2 * instance, const uint8_t prf_div);
+int xep_x4driver_get_prf_div(X2 * instance, uint8_t * prf_div);
+int xep_x4driver_get_frame_area(X2 * instance, float * start, float * end);
+int xep_x4driver_get_frame_area_offset(X2 * instance, float * offset);
+int xep_set_iopin_control(X2 * instance, const uint32_t pin_id, const uint32_t pin_setup, const uint32_t pin_feature);
+int xep_set_iopin_value(X2 * instance, const uint32_t pin_id, const uint32_t pin_value);
+int xep_get_iopin_value(X2 * instance, const uint32_t pin_id, uint32_t * pin_value);
+int xep_peek_message_data_string(X2 * instance);
+int xep_read_message_data_string(X2 * instance, uint32_t *content_id, uint32_t *info,
                                  char *data, uint32_t *length, uint32_t max_length);
 
 int nva_peek_message_baseband_iq(X2 * instance);

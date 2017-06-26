@@ -21,7 +21,7 @@
     <div class="page-title-bar container-fluid">
       <div id="projectalign" class="row">
         <div id="projectname" class="col-sm-12">ModuleConnector
-          &#160;<span id="projectnumber">1.1.5</span>
+          &#160;<span id="projectnumber">1.1.8</span>
         </div>
         <div id="projectbrief" class="col-sm-12">Project brief</div>
       </div>
@@ -84,7 +84,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types. ">DataRecorder</a> class allows recording of xethru data types.  
+<p>The <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types to disk. ">DataRecorder</a> class allows recording of xethru data types to disk.  
  <a href="class_xe_thru_1_1_data_recorder.xhtml#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_data_recorder_8hpp_source.xhtml">DataRecorder.hpp</a>&gt;</code></p>
@@ -103,6 +103,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab5268fda508fab3a32c275fbd421c845"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#ab5268fda508fab3a32c275fbd421c845">DataRecorder</a> ()</td></tr>
 <tr class="memdesc:ab5268fda508fab3a32c275fbd421c845"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs recorder.  <a href="#ab5268fda508fab3a32c275fbd421c845">More...</a><br /></td></tr>
 <tr class="separator:ab5268fda508fab3a32c275fbd421c845"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d8d6fc698f9eff1345e6d84b0fe42fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#a0d8d6fc698f9eff1345e6d84b0fe42fe">DataRecorder</a> (LockedRadarInterfacePtr &amp;radar_interface)</td></tr>
+<tr class="memdesc:a0d8d6fc698f9eff1345e6d84b0fe42fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs recorder.  <a href="#a0d8d6fc698f9eff1345e6d84b0fe42fe">More...</a><br /></td></tr>
+<tr class="separator:a0d8d6fc698f9eff1345e6d84b0fe42fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af58accae9f0b39b0b214131ff2a71a74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#af58accae9f0b39b0b214131ff2a71a74">DataRecorder</a> (Logger &amp;logger)</td></tr>
 <tr class="memdesc:af58accae9f0b39b0b214131ff2a71a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs recorder initialized with a logger.  <a href="#af58accae9f0b39b0b214131ff2a71a74">More...</a><br /></td></tr>
 <tr class="separator:af58accae9f0b39b0b214131ff2a71a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,11 +152,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a8ae81b7bfb01230c62f075905e6651aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types. ">DataRecorder</a> class allows recording of xethru data types. </p>
-<p>The <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types. ">DataRecorder</a> class is a high level recorder class. It can be used to record all data types sent by a xethru device over serial port or similar. All low-level I/O is handled by the recorder itself with no setup required. Data is stored on disk as specified by the <a class="el" href="namespace_xe_thru.xhtml">XeThru</a> File Formats document and can be easily read back using the <em><a class="el" href="class_xe_thru_1_1_data_reader.xhtml" title="The DataReader class allows reading of xethru data records from a recording. ">DataReader</a></em> class.</p>
-<div class="fragment"><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespace_xe_thru.xhtml">XeThru</a>;</div><div class="line"></div><div class="line">    <a class="code" href="class_xe_thru_1_1_module_connector.xhtml">ModuleConnector</a> mc(device_name, 3);</div><div class="line">    <a class="code" href="class_xe_thru_1_1_data_recorder.xhtml">DataRecorder</a> &amp;recorder = mc.get_data_recorder();</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <a class="code" href="datatypes_8h.xhtml#afb6eb4f28419b652027fad41104a6d22">DataTypes</a> data_types = BasebandApDataType | SleepDataType;</div><div class="line">    <span class="keyword">const</span> std::string output_directory = <span class="stringliteral">&quot;.&quot;</span>;</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span> (recorder.<a class="code" href="class_xe_thru_1_1_data_recorder.xhtml#a0c0ec22bd31d182f08452c1bfcaf8cf6">start_recording</a>(data_types, output_directory) != 0) {</div><div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Failed to start recording&quot;</span> &lt;&lt; std::endl;</div><div class="line">        <span class="keywordflow">return</span> 1;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">// Get interface for physical device and enable data output</span></div></div><!-- fragment --> <dl class="section note"><dt>Note</dt><dd>The <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types. ">DataRecorder</a> has no means to enable or disable data output on a physical xethru device. It simply records the specified data type(s) if sent by the module. Therefore, it is the user's responsibility to enable or disable data ouput on the module itself. If no data is sent, no data will be recorded.</dd></dl>
-<p><a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types. ">DataRecorder</a> also supports more advance <em><a class="el" href="class_xe_thru_1_1_recording_options.xhtml" title="The RecordingOptions class allows specifying options for recording. ">RecordingOptions</a></em> such as splitting of files and directories.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#a0c0ec22bd31d182f08452c1bfcaf8cf6" title="Starts recording the specified data type(s) and output recorded files to the directory specified...">start_recording</a> <a class="el" href="class_xe_thru_1_1_recording_options.xhtml" title="The RecordingOptions class allows specifying options for recording. ">RecordingOptions</a> <a class="el" href="class_xe_thru_1_1_data_reader.xhtml" title="The DataReader class allows reading of xethru data records from a recording. ">DataReader</a>. </dd></dl>
+<div class="textblock"><p>The <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types to disk. ">DataRecorder</a> class allows recording of xethru data types to disk. </p>
+<p>The <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types to disk. ">DataRecorder</a> class is a high level recorder class. It can be used to record all data types sent by a xethru device over serial port or similar. All low-level I/O is handled by the recorder itself with no setup required. Data is stored on disk as specified by the <a class="el" href="namespace_xe_thru.xhtml">XeThru</a> File Formats document and can be easily read back using the <a class="el" href="class_xe_thru_1_1_data_reader.xhtml">DataReader</a> class (read disk records) or <a class="el" href="class_xe_thru_1_1_data_player.xhtml">DataPlayer</a> class (playback disk records as binary packets).</p>
+<div class="fragment"><div class="line">    <span class="keyword">using namespace </span><a class="code" href="namespace_xe_thru.xhtml">XeThru</a>;</div><div class="line"></div><div class="line">    <a class="code" href="class_xe_thru_1_1_module_connector.xhtml">ModuleConnector</a> mc(device_name, 3);</div><div class="line">    <a class="code" href="class_xe_thru_1_1_data_recorder.xhtml">DataRecorder</a> &amp;recorder = mc.get_data_recorder();</div><div class="line"></div><div class="line">    <span class="keyword">const</span> <a class="code" href="datatypes_8h.xhtml#afb6eb4f28419b652027fad41104a6d22">DataTypes</a> data_types = BasebandApDataType | SleepDataType;</div><div class="line">    <span class="keyword">const</span> std::string output_directory = <span class="stringliteral">&quot;.&quot;</span>;</div><div class="line"></div><div class="line">    <span class="keywordflow">if</span> (recorder.<a class="code" href="class_xe_thru_1_1_data_recorder.xhtml#a0c0ec22bd31d182f08452c1bfcaf8cf6">start_recording</a>(data_types, output_directory) != 0) {</div><div class="line">        std::cout &lt;&lt; <span class="stringliteral">&quot;Failed to start recording&quot;</span> &lt;&lt; std::endl;</div><div class="line">        <span class="keywordflow">return</span> 1;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="comment">// Get interface for physical device and enable data output</span></div></div><!-- fragment --> <dl class="section note"><dt>Note</dt><dd>The <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types to disk. ">DataRecorder</a> has no means to enable or disable data output on a physical xethru device. It simply records the specified data type(s) if sent by the module. Therefore, it is the user's responsibility to enable or disable data ouput on the module itself. If no data is sent, no data will be recorded.</dd></dl>
+<p><a class="el" href="class_xe_thru_1_1_data_recorder.xhtml" title="The DataRecorder class allows recording of xethru data types to disk. ">DataRecorder</a> also supports more advance <em><a class="el" href="class_xe_thru_1_1_recording_options.xhtml" title="The RecordingOptions class allows specifying options for recording. ">RecordingOptions</a></em> such as splitting of files and directories.</p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#a0c0ec22bd31d182f08452c1bfcaf8cf6" title="Starts recording the specified data type(s) and output recorded files to the directory specified...">start_recording</a>, <a class="el" href="class_xe_thru_1_1_recording_options.xhtml" title="The RecordingOptions class allows specifying options for recording. ">RecordingOptions</a>, <a class="el" href="class_xe_thru_1_1_data_reader.xhtml" title="The DataReader class allows reading of xethru data records from a recording generated by DataRecorder...">DataReader</a>, <a class="el" href="class_xe_thru_1_1_data_player.xhtml" title="The DataPlayer class allows playback of telegrams / binary packets from a recording generated by Data...">DataPlayer</a> </dd></dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a7c474168931972cfeeb38ed7f08e46bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7c474168931972cfeeb38ed7f08e46bb">&sect;&nbsp;</a></span>FileAvailableCallback</h2>
@@ -195,7 +198,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab5268fda508fab3a32c275fbd421c845"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5268fda508fab3a32c275fbd421c845">&sect;&nbsp;</a></span>DataRecorder() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5268fda508fab3a32c275fbd421c845">&sect;&nbsp;</a></span>DataRecorder() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -213,8 +216,29 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a0d8d6fc698f9eff1345e6d84b0fe42fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d8d6fc698f9eff1345e6d84b0fe42fe">&sect;&nbsp;</a></span>DataRecorder() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">XeThru::DataRecorder::DataRecorder </td>
+          <td>(</td>
+          <td class="paramtype">LockedRadarInterfacePtr &amp;&#160;</td>
+          <td class="paramname"><em>radar_interface</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs recorder. </p>
+<p>Only useful for internal use. </p>
+
+</div>
+</div>
 <a id="af58accae9f0b39b0b214131ff2a71a74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af58accae9f0b39b0b214131ff2a71a74">&sect;&nbsp;</a></span>DataRecorder() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af58accae9f0b39b0b214131ff2a71a74">&sect;&nbsp;</a></span>DataRecorder() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -583,7 +607,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Subscribes to notifications when a meta file is available. </p>
 <p>The callback is triggered when a new meta file is stored on disk, i.e. when module connector is done with the file and no longer perform I/O operations on it. This usually triggers when recording is stopped or as a result of file/directory splitting. In either case module connector will no longer hold any reference to the file.</p>
-<p>The meta file contains detailed information about a particular recording session. For example which data types and files were written during the session. This information is possible to extract via <em><a class="el" href="class_xe_thru_1_1_data_reader.xhtml" title="The DataReader class allows reading of xethru data records from a recording. ">DataReader</a></em> and allows for convenient readback of data from disk. The meta file is only intended for use with <em><a class="el" href="class_xe_thru_1_1_data_reader.xhtml" title="The DataReader class allows reading of xethru data records from a recording. ">DataReader</a></em>.</p>
+<p>The meta file contains detailed information about a particular recording session. For example which data types and files were written during the session. This information is possible to extract via <em><a class="el" href="class_xe_thru_1_1_data_reader.xhtml" title="The DataReader class allows reading of xethru data records from a recording generated by DataRecorder...">DataReader</a></em> and allows for convenient readback of data from disk. The meta file is only intended for use with <em><a class="el" href="class_xe_thru_1_1_data_reader.xhtml" title="The DataReader class allows reading of xethru data records from a recording generated by DataRecorder...">DataReader</a></em>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">callback</td><td>Specifies the function to be called when a meta file is available. For example: void on_meta_file_available(const std::string &amp;session_id, const std::string &amp;filename)</td></tr>
@@ -591,7 +615,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 on success, otherwise returns 1</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_xe_thru_1_1_data_reader.xhtml" title="The DataReader class allows reading of xethru data records from a recording. ">DataReader</a>, <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#a0c0ec22bd31d182f08452c1bfcaf8cf6" title="Starts recording the specified data type(s) and output recorded files to the directory specified...">start_recording</a>, <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#ac28266d06a8434134aa6c09d3ca43792" title="Unsubscribes to notifications when a meta file is available. ">unsubscribe_to_meta_file_available</a>, <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#a8446ecbd31b9267f7b216c6cf9046cbf" title="Typedef for std::function&lt;void(const std::string&amp;, const std::string&amp;)&gt;. ">MetaFileAvailableCallback</a>, <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#a24c86f560481264af80cee9b7a5e5b86" title="Subscribes to notifications when a recorded file for a data type is available. ">subscribe_to_file_available</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_xe_thru_1_1_data_reader.xhtml" title="The DataReader class allows reading of xethru data records from a recording generated by DataRecorder...">DataReader</a>, <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#a0c0ec22bd31d182f08452c1bfcaf8cf6" title="Starts recording the specified data type(s) and output recorded files to the directory specified...">start_recording</a>, <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#ac28266d06a8434134aa6c09d3ca43792" title="Unsubscribes to notifications when a meta file is available. ">unsubscribe_to_meta_file_available</a>, <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#a8446ecbd31b9267f7b216c6cf9046cbf" title="Typedef for std::function&lt;void(const std::string&amp;, const std::string&amp;)&gt;. ">MetaFileAvailableCallback</a>, <a class="el" href="class_xe_thru_1_1_data_recorder.xhtml#a24c86f560481264af80cee9b7a5e5b86" title="Subscribes to notifications when a recorded file for a data type is available. ">subscribe_to_file_available</a> </dd></dl>
 
 </div>
 </div>

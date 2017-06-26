@@ -21,7 +21,7 @@
     <div class="page-title-bar container-fluid">
       <div id="projectalign" class="row">
         <div id="projectname" class="col-sm-12">ModuleConnector
-          &#160;<span id="projectnumber">1.1.5</span>
+          &#160;<span id="projectnumber">1.1.8</span>
         </div>
         <div id="projectbrief" class="col-sm-12">Project brief</div>
       </div>
@@ -92,7 +92,7 @@ Include dependency graph for datatypes.h:</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="datatypes_8h__dep__incl.svg" width="427" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="datatypes_8h__dep__incl.svg" width="546" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 </div>
@@ -114,12 +114,13 @@ Typedefs</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ad8ed01ff3ff33333d8e19db4d2818bb6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="datatypes_8h.xhtml#ad8ed01ff3ff33333d8e19db4d2818bb6">DataType</a></td></tr>
+<tr class="memdesc:ad8ed01ff3ff33333d8e19db4d2818bb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enum type is used to specify which data type to record from the module.  <a href="#ad8ed01ff3ff33333d8e19db4d2818bb6">More...</a><br /></td></tr>
 <tr class="separator:ad8ed01ff3ff33333d8e19db4d2818bb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a686d476d7ecb21651a52b817137cadb5"><td class="memItemLeft" align="right" valign="top">static const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="datatypes_8h.xhtml#a686d476d7ecb21651a52b817137cadb5">InvalidDataType</a> = 0</td></tr>
-<tr class="memdesc:a686d476d7ecb21651a52b817137cadb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">InvalidDataType Invalid data type, do not use.  <a href="#a686d476d7ecb21651a52b817137cadb5">More...</a><br /></td></tr>
+<tr class="memdesc:a686d476d7ecb21651a52b817137cadb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invalid data type, do not use.  <a href="#a686d476d7ecb21651a52b817137cadb5">More...</a><br /></td></tr>
 <tr class="separator:a686d476d7ecb21651a52b817137cadb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8f6c77f86c26225ae61a6e07ded41f8"><td class="memItemLeft" align="right" valign="top">static const uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="datatypes_8h.xhtml#ad8f6c77f86c26225ae61a6e07ded41f8">AllDataTypes</a> = 0xffffffff</td></tr>
-<tr class="memdesc:ad8f6c77f86c26225ae61a6e07ded41f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">AllDataTypes A convenience value used to specify all data types.  <a href="#ad8f6c77f86c26225ae61a6e07ded41f8">More...</a><br /></td></tr>
+<tr class="memdesc:ad8f6c77f86c26225ae61a6e07ded41f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">A convenience value used to specify all data types.  <a href="#ad8f6c77f86c26225ae61a6e07ded41f8">More...</a><br /></td></tr>
 <tr class="separator:ad8f6c77f86c26225ae61a6e07ded41f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -194,7 +195,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>AllDataTypes A convenience value used to specify all data types. </p>
+<p>A convenience value used to specify all data types. </p>
 
 </div>
 </div>
@@ -209,7 +210,10 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">    BasebandApDataType             = 1 &lt;&lt; 0,</div><div class="line">    BasebandIqDataType             = 1 &lt;&lt; 1,</div><div class="line">    SleepDataType                  = 1 &lt;&lt; 2,</div><div class="line">    RespirationDataType            = 1 &lt;&lt; 3,</div><div class="line">    PerformanceStatusType          = 1 &lt;&lt; 4,</div><div class="line">    StringDataType                 = 1 &lt;&lt; 5,</div><div class="line">    PulseDopplerFloatDataType      = 1 &lt;&lt; 6,</div><div class="line">    PulseDopplerByteDataType       = 1 &lt;&lt; 7,</div><div class="line">    NoiseMapFloatDataType          = 1 &lt;&lt; 8,</div><div class="line">    NoiseMapByteDataType           = 1 &lt;&lt; 9,</div><div class="line">    FloatDataType                  = 1 &lt;&lt; 10,</div><div class="line">    ByteDataType                   = 1 &lt;&lt; 11,</div><div class="line">    PresenceSingleDataType         = 1 &lt;&lt; 12,</div><div class="line">    PresenceMovingListDataType     = 1 &lt;&lt; 13,</div><div class="line">}</div></div><!-- fragment -->
+<b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">    BasebandApDataType             = 1 &lt;&lt; 0,</div><div class="line">    BasebandIqDataType             = 1 &lt;&lt; 1,</div><div class="line">    SleepDataType                  = 1 &lt;&lt; 2,</div><div class="line">    RespirationDataType            = 1 &lt;&lt; 3,</div><div class="line">    PerformanceStatusType          = 1 &lt;&lt; 4,</div><div class="line">    StringDataType                 = 1 &lt;&lt; 5,</div><div class="line">    PulseDopplerFloatDataType      = 1 &lt;&lt; 6,</div><div class="line">    PulseDopplerByteDataType       = 1 &lt;&lt; 7,</div><div class="line">    NoiseMapFloatDataType          = 1 &lt;&lt; 8,</div><div class="line">    NoiseMapByteDataType           = 1 &lt;&lt; 9,</div><div class="line">    FloatDataType                  = 1 &lt;&lt; 10,</div><div class="line">    ByteDataType                   = 1 &lt;&lt; 11,</div><div class="line">    PresenceSingleDataType         = 1 &lt;&lt; 12,</div><div class="line">    PresenceMovingListDataType     = 1 &lt;&lt; 13,</div><div class="line">    RespirationDetectionListDataType = 1 &lt;&lt; 14,</div><div class="line">    RespirationMovingListDataType  = 1 &lt;&lt; 15,</div><div class="line">}</div></div><!-- fragment -->
+<p>This enum type is used to specify which data type to record from the module. </p>
+<dl class="section see"><dt>See also</dt><dd>DataRecorder </dd></dl>
+
 </div>
 </div>
 <a id="a686d476d7ecb21651a52b817137cadb5"></a>
@@ -232,7 +236,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>InvalidDataType Invalid data type, do not use. </p>
+<p>Invalid data type, do not use. </p>
 
 </div>
 </div>

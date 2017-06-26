@@ -19,6 +19,7 @@ class NotSupported;
 class Transport;
 class AbstractLoggerIo;
 class DataRecorder;
+class DataPlayer;
 class ModuleConnectorImpl;
 
 /**
@@ -52,7 +53,7 @@ public:
      *
      * The constructor will open the device file or COM port given.
      *
-     * @param a_device_name Name of the device file for example /dev/ttyACM0 or COM4
+     * @param device_name Name of the device file for example /dev/ttyACM0 or COM4
      *
      */
     ModuleConnector(const std::string & device_name);
@@ -62,11 +63,62 @@ public:
      *
      * The constructor will open the device file or COM port given.
      *
-     * @param a_device_name Name of the device file for example /dev/ttyACM0 or COM4
+     * @param device_name Name of the device file for example /dev/ttyACM0 or COM4
      * @param log_level     The log level to use during operation
      *
      */
     ModuleConnector(const std::string & device_name, int log_level);
+
+    /**
+     * Constructor
+     *
+     * When constructing ModuleConnector with a \ref DataPlayer object, ModuleConnector will
+     * read data from a recording via the \a player reference and convert disk data into
+     * binary packets as one would normally receive from a physical XeThru Device.
+     *
+     * Moreover, it is possible to control the output via functions such as
+     * \ref DataPlayer::play, DataPlayer::pause, DataPlayer::set_filter, DataPlayer::set_playback_rate.
+     *
+     * @param player        DataPlayer reference
+     * @param log_level     The log level to use during operation
+     * @param logger_io     The logging io implementation to use
+     *
+     * @see DataPlayer
+     */
+    ModuleConnector(DataPlayer &player, int log_level, AbstractLoggerIo *logger_io);
+
+    /**
+     * Constructor
+     *
+     * When constructing ModuleConnector with a \ref DataPlayer object, ModuleConnector will
+     * read data from a recording via the \a player reference and convert disk data into
+     * binary packets as one would normally receive from a physical XeThru Device.
+     *
+     * Moreover, it is possible to control the output via functions such as
+     * \ref DataPlayer::play, DataPlayer::pause, DataPlayer::set_filter, DataPlayer::set_playback_rate.
+     *
+     * @param player        DataPlayer reference
+     * @param log_level     The log level to use during operation
+     *
+     * @see DataPlayer
+     */
+    ModuleConnector(DataPlayer &player, int log_level);
+
+    /**
+     * Constructor
+     *
+     * When constructing ModuleConnector with a \ref DataPlayer object, ModuleConnector will
+     * read data from a recording via the \a player reference and convert disk data into
+     * binary packets as one would normally receive from a physical XeThru Device.
+     *
+     * Moreover, it is possible to control the output via functions such as
+     * \ref DataPlayer::play, DataPlayer::pause, DataPlayer::set_filter, DataPlayer::set_playback_rate.
+     *
+     * @param player        DataPlayer reference
+     *
+     * @see DataPlayer
+     */
+    ModuleConnector(DataPlayer &player);
 
     /**
      * Destructor
@@ -80,7 +132,7 @@ public:
     /**
      * Opens a new connection to a module via some serial device
      *
-     * @param device Name of the device file for example /dev/ttyACM0 or COM4
+     * @param device_name Name of the device file for example /dev/ttyACM0 or COM4
      */
     int open(const std::string device_name);
 
@@ -90,6 +142,7 @@ public:
      * @return 0 on success, otherwise return 1
      */
     void close();
+
 
     /**
      * Provides the git sha of the ModuleConnector repository
@@ -151,6 +204,7 @@ public:
      *
      */
     X4M300 & get_x4m300();
+
 
     /**
      * Not supported

@@ -10,8 +10,11 @@ extern "C" {
 #define XTS_ID_APP_PRESENCE         0x00288912
 #define XTS_ID_APP_RESP             0x1423a2d6
 #define XTS_ID_APP_SLEEP            0x00f17b17
+#define XTS_ID_APP_RESPIRATION_2    0x064e57ad
+#define XTS_ID_APP_RESPIRATION_3    0x47fabeba
 #define XTS_ID_APP_DECIM            0x9bb3a2c6
 #define XTS_ID_APP_PRESENCE_2       0x014d4ab8
+#define XTS_ID_APP_RADAR            0x57dabf09
 
 // Profile data and feature IDs
 #define XTS_ID_DETECTION_ZONE                           0x96a10a1c
@@ -21,8 +24,8 @@ extern "C" {
 #define XTS_ID_RESP_STATUS                              0x2375fe26
 #define XTS_ID_RESP_STATUS_EXT                          0x2375a16b
 #define XTS_ID_SLEEP_STATUS                             0x2375a16c
-#define XTS_ID_PRESENCE_SINGLE                        0x723bfa1e
-#define XTS_ID_PRESENCE_MOVINGLIST                    0x723bfa1f
+#define XTS_ID_PRESENCE_SINGLE                          0x723bfa1e
+#define XTS_ID_PRESENCE_MOVINGLIST                      0x723bfa1f
 #define XTS_ID_PROFILE_PARAMETERFILE                    0x32ba7623
 #define XTS_ID_BASEBAND_IQ                              0x0000000c
 #define XTS_ID_BASEBAND_AMPLITUDE_PHASE                 0x0000000d
@@ -31,6 +34,8 @@ extern "C" {
 #define XTS_ID_PULSEDOPPLER_BYTE                        0x00000011
 #define XTS_ID_NOISEMAP_FLOAT                           0x00000012
 #define XTS_ID_NOISEMAP_BYTE                            0x00000013
+#define XTS_ID_RESPIRATION_MOVINGLIST                   0x610a3b00
+#define XTS_ID_RESPIRATION_DETECTIONLIST                0x610a3b02
 
 // System Info Code definitions
 #define XTID_SSIC_ITEMNUMBER         (0x00)
@@ -49,14 +54,32 @@ extern "C" {
 #define XTID_SM_STOP                 (0x13)
 
 
+#define XTID_BAUDRATE_9600	     9600
+#define XTID_BAUDRATE_19200	     19200
+#define XTID_BAUDRATE_38400	     38400
+#define XTID_BAUDRATE_115200         115200
+#define XTID_BAUDRATE_230400         230400
+#define XTID_BAUDRATE_460800         460800
+#define XTID_BAUDRATE_500000         500000
+#define XTID_BAUDRATE_576000         576000
+#define XTID_BAUDRATE_921600         921600
+#define XTID_BAUDRATE_1000000        1000000
+#define XTID_BAUDRATE_2000000        2000000
+#define XTID_BAUDRATE_3000000        3000000
+#define XTID_BAUDRATE_4000000        4000000
+
+
 // IOPin definitions
 #define XTID_IOPIN_SETUP_INPUT         (0)
 #define XTID_IOPIN_SETUP_OUTPUT        (1)
+#define XTID_IOPIN_SETUP_PUSH_PULL     (2)
+#define XTID_IOPIN_SETUP_INVERTED      (4)
 
 #define XTID_IOPIN_FEATURE_DISABLE     (0)
 #define XTID_IOPIN_FEATURE_DEFAULT     (1)
 #define XTID_IOPIN_FEATURE_PASSIVE     (2)
-
+#define XTID_IOPIN_FEATURE_PRESENCE    (3)
+#define XTID_IOPIN_FEATURE_LAST        (3)
 
 // Output control
 #define XTID_OUTPUT_CONTROL_DISABLE    (0)

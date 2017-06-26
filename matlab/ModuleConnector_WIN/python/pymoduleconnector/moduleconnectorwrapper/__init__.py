@@ -1501,6 +1501,8 @@ class DataType(_object):
     ByteDataType = _moduleconnectorwrapper.DataType_ByteDataType
     PresenceSingleDataType = _moduleconnectorwrapper.DataType_PresenceSingleDataType
     PresenceMovingListDataType = _moduleconnectorwrapper.DataType_PresenceMovingListDataType
+    RespirationDetectionListDataType = _moduleconnectorwrapper.DataType_RespirationDetectionListDataType
+    RespirationMovingListDataType = _moduleconnectorwrapper.DataType_RespirationMovingListDataType
 
     def __init__(self):
         """__init__(XeThru::DataType self) -> DataType"""
@@ -1667,6 +1669,16 @@ class DataFloat(_object):
         """
         return _moduleconnectorwrapper.DataFloat_get_data(self)
 
+
+    def get_copy(self):
+        """
+        get_copy(DataFloat self) -> FloatVector
+
+
+
+        """
+        return _moduleconnectorwrapper.DataFloat_get_copy(self)
+
     __swig_setmethods__["data"] = _moduleconnectorwrapper.DataFloat_data_set
     __swig_getmethods__["data"] = _moduleconnectorwrapper.DataFloat_data_get
     if _newclass:
@@ -1687,8 +1699,6 @@ DataFloat_swigregister(DataFloat)
 class FrameArea(_object):
     """
 
-
-    FrameArea  
 
     Parameters
     ----------
@@ -1794,6 +1804,25 @@ class DataRecord(_object):
             self.this.append(this)
         except __builtin__.Exception:
             self.this = this
+
+    def get_data(self):
+        """
+        get_data(DataRecord self) -> ucVector
+
+
+
+        Const reference accessor to data.  
+
+        In particular useful from Python to avoid unecessary overhead when read-only
+        access to data is needed.  
+
+        Returns
+        -------
+        a const reference to the data.  
+
+        """
+        return _moduleconnectorwrapper.DataRecord_get_data(self)
+
     __swig_setmethods__["data"] = _moduleconnectorwrapper.DataRecord_data_set
     __swig_getmethods__["data"] = _moduleconnectorwrapper.DataRecord_data_get
     if _newclass:
@@ -2492,6 +2521,190 @@ class PresenceMovingListData(_object):
 PresenceMovingListData_swigregister = _moduleconnectorwrapper.PresenceMovingListData_swigregister
 PresenceMovingListData_swigregister(PresenceMovingListData)
 
+class RespirationMovingListData(_object):
+    """
+
+
+    Attributes
+    ----------
+    * `counter` : `uint32_t`  
+
+    * `movement_slow_items` : `std::vector< float >`  
+
+    * `movement_fast_items` : `std::vector< float >`  
+
+    C++ includes: Data.hpp
+
+    """
+
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, RespirationMovingListData, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, RespirationMovingListData, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["counter"] = _moduleconnectorwrapper.RespirationMovingListData_counter_set
+    __swig_getmethods__["counter"] = _moduleconnectorwrapper.RespirationMovingListData_counter_get
+    if _newclass:
+        counter = _swig_property(_moduleconnectorwrapper.RespirationMovingListData_counter_get, _moduleconnectorwrapper.RespirationMovingListData_counter_set)
+    __swig_setmethods__["movement_slow_items"] = _moduleconnectorwrapper.RespirationMovingListData_movement_slow_items_set
+    __swig_getmethods__["movement_slow_items"] = _moduleconnectorwrapper.RespirationMovingListData_movement_slow_items_get
+    if _newclass:
+        movement_slow_items = _swig_property(_moduleconnectorwrapper.RespirationMovingListData_movement_slow_items_get, _moduleconnectorwrapper.RespirationMovingListData_movement_slow_items_set)
+    __swig_setmethods__["movement_fast_items"] = _moduleconnectorwrapper.RespirationMovingListData_movement_fast_items_set
+    __swig_getmethods__["movement_fast_items"] = _moduleconnectorwrapper.RespirationMovingListData_movement_fast_items_get
+    if _newclass:
+        movement_fast_items = _swig_property(_moduleconnectorwrapper.RespirationMovingListData_movement_fast_items_get, _moduleconnectorwrapper.RespirationMovingListData_movement_fast_items_set)
+
+    def get_movement_slow_items(self):
+        """
+        get_movement_slow_items(RespirationMovingListData self) -> FloatVector
+
+
+
+        """
+        return _moduleconnectorwrapper.RespirationMovingListData_get_movement_slow_items(self)
+
+
+    def get_movement_fast_items(self):
+        """
+        get_movement_fast_items(RespirationMovingListData self) -> FloatVector
+
+
+
+        """
+        return _moduleconnectorwrapper.RespirationMovingListData_get_movement_fast_items(self)
+
+
+    def __init__(self):
+        """__init__(XeThru::RespirationMovingListData self) -> RespirationMovingListData"""
+        this = _moduleconnectorwrapper.new_RespirationMovingListData()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _moduleconnectorwrapper.delete_RespirationMovingListData
+    __del__ = lambda self: None
+RespirationMovingListData_swigregister = _moduleconnectorwrapper.RespirationMovingListData_swigregister
+RespirationMovingListData_swigregister(RespirationMovingListData)
+
+class RespirationDetectionListData(_object):
+    """
+
+
+    Attributes
+    ----------
+    * `counter` : `uint32_t`  
+
+    * `detection_count` : `uint32_t`  
+
+    * `detection_distance_items` : `std::vector< float >`  
+
+    * `detection_radar_cross_section_items` : `std::vector< float >`  
+
+    * `detection_velocity_items` : `std::vector< float >`  
+
+    C++ includes: Data.hpp
+
+    """
+
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, RespirationDetectionListData, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, RespirationDetectionListData, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["counter"] = _moduleconnectorwrapper.RespirationDetectionListData_counter_set
+    __swig_getmethods__["counter"] = _moduleconnectorwrapper.RespirationDetectionListData_counter_get
+    if _newclass:
+        counter = _swig_property(_moduleconnectorwrapper.RespirationDetectionListData_counter_get, _moduleconnectorwrapper.RespirationDetectionListData_counter_set)
+    __swig_setmethods__["detection_count"] = _moduleconnectorwrapper.RespirationDetectionListData_detection_count_set
+    __swig_getmethods__["detection_count"] = _moduleconnectorwrapper.RespirationDetectionListData_detection_count_get
+    if _newclass:
+        detection_count = _swig_property(_moduleconnectorwrapper.RespirationDetectionListData_detection_count_get, _moduleconnectorwrapper.RespirationDetectionListData_detection_count_set)
+    __swig_setmethods__["detection_distance_items"] = _moduleconnectorwrapper.RespirationDetectionListData_detection_distance_items_set
+    __swig_getmethods__["detection_distance_items"] = _moduleconnectorwrapper.RespirationDetectionListData_detection_distance_items_get
+    if _newclass:
+        detection_distance_items = _swig_property(_moduleconnectorwrapper.RespirationDetectionListData_detection_distance_items_get, _moduleconnectorwrapper.RespirationDetectionListData_detection_distance_items_set)
+    __swig_setmethods__["detection_radar_cross_section_items"] = _moduleconnectorwrapper.RespirationDetectionListData_detection_radar_cross_section_items_set
+    __swig_getmethods__["detection_radar_cross_section_items"] = _moduleconnectorwrapper.RespirationDetectionListData_detection_radar_cross_section_items_get
+    if _newclass:
+        detection_radar_cross_section_items = _swig_property(_moduleconnectorwrapper.RespirationDetectionListData_detection_radar_cross_section_items_get, _moduleconnectorwrapper.RespirationDetectionListData_detection_radar_cross_section_items_set)
+    __swig_setmethods__["detection_velocity_items"] = _moduleconnectorwrapper.RespirationDetectionListData_detection_velocity_items_set
+    __swig_getmethods__["detection_velocity_items"] = _moduleconnectorwrapper.RespirationDetectionListData_detection_velocity_items_get
+    if _newclass:
+        detection_velocity_items = _swig_property(_moduleconnectorwrapper.RespirationDetectionListData_detection_velocity_items_get, _moduleconnectorwrapper.RespirationDetectionListData_detection_velocity_items_set)
+
+    def __init__(self):
+        """__init__(XeThru::RespirationDetectionListData self) -> RespirationDetectionListData"""
+        this = _moduleconnectorwrapper.new_RespirationDetectionListData()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _moduleconnectorwrapper.delete_RespirationDetectionListData
+    __del__ = lambda self: None
+RespirationDetectionListData_swigregister = _moduleconnectorwrapper.RespirationDetectionListData_swigregister
+RespirationDetectionListData_swigregister(RespirationDetectionListData)
+
+class Files(_object):
+    """
+
+
+    Attributes
+    ----------
+    * `file_type_items` : `std::vector< int32_t >`  
+
+    * `file_identifier_items` : `std::vector< int32_t >`  
+
+    C++ includes: Data.hpp
+
+    """
+
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Files, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Files, name)
+    __repr__ = _swig_repr
+    __swig_setmethods__["file_type_items"] = _moduleconnectorwrapper.Files_file_type_items_set
+    __swig_getmethods__["file_type_items"] = _moduleconnectorwrapper.Files_file_type_items_get
+    if _newclass:
+        file_type_items = _swig_property(_moduleconnectorwrapper.Files_file_type_items_get, _moduleconnectorwrapper.Files_file_type_items_set)
+    __swig_setmethods__["file_identifier_items"] = _moduleconnectorwrapper.Files_file_identifier_items_set
+    __swig_getmethods__["file_identifier_items"] = _moduleconnectorwrapper.Files_file_identifier_items_get
+    if _newclass:
+        file_identifier_items = _swig_property(_moduleconnectorwrapper.Files_file_identifier_items_get, _moduleconnectorwrapper.Files_file_identifier_items_set)
+
+    def get_file_type_items(self):
+        """
+        get_file_type_items(Files self) -> iVector
+
+
+
+        """
+        return _moduleconnectorwrapper.Files_get_file_type_items(self)
+
+
+    def get_file_identifier_items(self):
+        """
+        get_file_identifier_items(Files self) -> iVector
+
+
+
+        """
+        return _moduleconnectorwrapper.Files_get_file_identifier_items(self)
+
+
+    def __init__(self):
+        """__init__(XeThru::Files self) -> Files"""
+        this = _moduleconnectorwrapper.new_Files()
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _moduleconnectorwrapper.delete_Files
+    __del__ = lambda self: None
+Files_swigregister = _moduleconnectorwrapper.Files_swigregister
+Files_swigregister(Files)
+
 class PreferredSplitSize(_object):
     """
 
@@ -2897,17 +3110,28 @@ class PythonModuleConnector(_object):
         """
         __init__(XeThru::PythonModuleConnector self, int log_level) -> PythonModuleConnector
         __init__(XeThru::PythonModuleConnector self, std::string const & device_name, int log_level) -> PythonModuleConnector
+        __init__(XeThru::PythonModuleConnector self, PyDataPlayer player, int log_level) -> PythonModuleConnector
 
 
 
         Constructor.  
 
+        When constructing ModuleConnector with a PyDataPlayer object, ModuleConnector
+        will read data from a recording via the *player* reference and convert disk data
+        into binary packets as one would normally receive from a physical XeThru Device.  
+
+        Moreover, it is possible to control the output via functions such as
+        PyDataPlayer::play, PyDataPlayer::pause, PyDataPlayer::set_filter,
+        PyDataPlayer::set_playback_rate.  
+
         Parameters
         ----------
-        * `device_name` :  
-            Name of the device file, for examlpe /dev/ttyACM0 or COM4  
+        * `player` :  
+            DataPlayer reference  
         * `log_level` :  
-            The log level to use during operation. Affects output and log file contents.  
+            The log level to use during operation  
+
+        See also: DataPlayer  
 
         """
         this = _moduleconnectorwrapper.new_PythonModuleConnector(*args)
@@ -3154,10 +3378,15 @@ class NotSupported(_object):
     __setattr__ = lambda self, name, value: _swig_setattr(self, NotSupported, name, value)
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, NotSupported, name)
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, radar_interface):
+        """__init__(XeThru::NotSupported self, LockedRadarInterfacePtr & radar_interface) -> NotSupported"""
+        this = _moduleconnectorwrapper.new_NotSupported(radar_interface)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
     __swig_destroy__ = _moduleconnectorwrapper.delete_NotSupported
     __del__ = lambda self: None
 
@@ -3224,14 +3453,24 @@ class NotSupported(_object):
         return _moduleconnectorwrapper.NotSupported_subscribe_to_data_float(self, *args)
 
 
-    def peak_message_data_float(self, name):
-        """peak_message_data_float(NotSupported self, std::string const & name) -> int"""
-        return _moduleconnectorwrapper.NotSupported_peak_message_data_float(self, name)
+    def peek_message_data_float(self, name):
+        """peek_message_data_float(NotSupported self, std::string const & name) -> int"""
+        return _moduleconnectorwrapper.NotSupported_peek_message_data_float(self, name)
 
 
     def read_message_data_float(self, data_float):
         """read_message_data_float(NotSupported self, DataFloat data_float) -> int"""
         return _moduleconnectorwrapper.NotSupported_read_message_data_float(self, data_float)
+
+
+    def peek_message_pulsedoppler_float(self):
+        """peek_message_pulsedoppler_float(NotSupported self) -> int"""
+        return _moduleconnectorwrapper.NotSupported_peek_message_pulsedoppler_float(self)
+
+
+    def read_message_pulsedoppler_float(self):
+        """read_message_pulsedoppler_float(NotSupported self) -> ucVector"""
+        return _moduleconnectorwrapper.NotSupported_read_message_pulsedoppler_float(self)
 
 
     def get_number_of_packets(self, name):
@@ -3249,14 +3488,14 @@ class NotSupported(_object):
         return _moduleconnectorwrapper.NotSupported_clear(self, name)
 
 
-    def set_profile_parameter_file(self, filename, data):
-        """set_profile_parameter_file(NotSupported self, std::string const & filename, std::string const & data) -> int"""
-        return _moduleconnectorwrapper.NotSupported_set_profile_parameter_file(self, filename, data)
+    def set_parameter_file(self, filename, data):
+        """set_parameter_file(NotSupported self, std::string const & filename, std::string const & data)"""
+        return _moduleconnectorwrapper.NotSupported_set_parameter_file(self, filename, data)
 
 
-    def get_profile_parameter_file(self, filename):
-        """get_profile_parameter_file(NotSupported self, std::string const & filename) -> int"""
-        return _moduleconnectorwrapper.NotSupported_get_profile_parameter_file(self, filename)
+    def get_parameter_file(self, filename):
+        """get_parameter_file(NotSupported self, std::string const & filename) -> std::string"""
+        return _moduleconnectorwrapper.NotSupported_get_parameter_file(self, filename)
 
 
     def load_profile(self, profile_id):
@@ -3291,10 +3530,15 @@ class Transport(_object):
     __setattr__ = lambda self, name, value: _swig_setattr(self, Transport, name, value)
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, Transport, name)
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, radar_interface):
+        """__init__(XeThru::Transport self, LockedRadarInterfacePtr & radar_interface) -> Transport"""
+        this = _moduleconnectorwrapper.new_Transport(radar_interface)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
     __swig_destroy__ = _moduleconnectorwrapper.delete_Transport
     __del__ = lambda self: None
 
@@ -3480,13 +3724,13 @@ class PyX2M200(_object):
 
     def __init__(self, radar_interface):
         """
-        __init__(XeThru::PyX2M200 self, RadarInterface & radar_interface) -> PyX2M200
+        __init__(XeThru::PyX2M200 self, LockedRadarInterfacePtr & radar_interface) -> PyX2M200
 
 
 
         Constructor.  
 
-        Initialized by ModuleConnector.get_x2m200  
+        Initialized by PythonModuleConnector::get_x2m200  
 
         Parameters
         ----------
@@ -3782,6 +4026,18 @@ class PyX2M200(_object):
         return _moduleconnectorwrapper.PyX2M200_enable_baseband_ap(self)
 
 
+    def disable_baseband_ap(self):
+        """
+        disable_baseband_ap(PyX2M200 self)
+
+
+
+        Disables amplitude/phase baseband output.  
+
+        """
+        return _moduleconnectorwrapper.PyX2M200_disable_baseband_ap(self)
+
+
     def enable_baseband_iq(self):
         """
         enable_baseband_iq(PyX2M200 self)
@@ -3794,6 +4050,18 @@ class PyX2M200(_object):
 
         """
         return _moduleconnectorwrapper.PyX2M200_enable_baseband_iq(self)
+
+
+    def disable_baseband_iq(self):
+        """
+        disable_baseband_iq(PyX2M200 self)
+
+
+
+        Disables I/Q baseband output.  
+
+        """
+        return _moduleconnectorwrapper.PyX2M200_disable_baseband_iq(self)
 
 
     def set_detection_zone(self, start, end):
@@ -4133,15 +4401,18 @@ class PyXEP(_object):
 
     def __init__(self, radar_interface):
         """
-        __init__(XeThru::PyXEP self, RadarInterface & radar_interface) -> PyXEP
+        __init__(XeThru::PyXEP self, LockedRadarInterfacePtr & radar_interface) -> PyXEP
 
 
 
-        XEP constructor.  
+        Constructor.  
 
-        Returns
-        -------
-        instance  
+        Initialized by PythonModuleConnector::get_xep  
+
+        Parameters
+        ----------
+        * `radar_interface` :  
+            a reference to the internal radar interface  
 
         """
         this = _moduleconnectorwrapper.new_PyXEP(radar_interface)
@@ -4152,13 +4423,31 @@ class PyXEP(_object):
     __swig_destroy__ = _moduleconnectorwrapper.delete_PyXEP
     __del__ = lambda self: None
 
+    def set_baudrate(self, baudrate):
+        """
+        set_baudrate(PyXEP self, uint32_t baudrate)
+
+
+
+        Sets the baudrate to use for serial communication during ModuleConnector
+        operation.  
+
+        Parameters
+        ----------
+        * `baudrate` :  
+            enum representing the baudrate, defined in xtid.h  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_set_baudrate(self, baudrate)
+
+
     def module_reset(self):
         """
         module_reset(PyXEP self)
 
 
 
-        Resets module.  
+        Resets the module.  
 
         """
         return _moduleconnectorwrapper.PyXEP_module_reset(self)
@@ -4170,14 +4459,20 @@ class PyXEP(_object):
 
 
 
-        Returns a string containing system information given by infocode:
-        XTS_SSIC_FIRMWAREID = 0x02 -> Returns the installed Firmware ID, "XEP"
-        XTS_SSIC_VERSION = 0x03 -> Returns the installed Firmware Version.  
+        Parameters
+        ----------
+        * `info_code` :  
+            Specifies the info code.  
 
-        As viewed from the "highest" level of the software. XTS_SSIC_BUILD = 0x04 ->
-        Returns information of the SW Build installed on the device XTS_SSIC_VERSIONLIST
-        = 0x07 -> Returns ID and version of all components. Calls all components and
-        compound a string. E.g. "XEP:2.3.4.5;X4C51:1.0.0.0"  
+        Returns
+        -------
+        a string containing system information given by infocode: XTS_SSIC_FIRMWAREID =
+        0x02 -> Returns the installed Firmware ID, "XEP" XTS_SSIC_VERSION = 0x03 ->
+        Returns the installed Firmware Version. As viewed from the "highest" level of
+        the software. XTS_SSIC_BUILD = 0x04 -> Returns information of the SW Build
+        installed on the device XTS_SSIC_VERSIONLIST = 0x07 -> Returns ID and version of
+        all components. Calls all components and compound a string. E.g.
+        "XEP:2.3.4.5;X4C51:1.0.0.0"  
 
         """
         return _moduleconnectorwrapper.PyXEP_get_system_info(self, info_code)
@@ -4193,7 +4488,7 @@ class PyXEP(_object):
 
         Returns
         -------
-        pong:  
+        the pong value  
 
         """
         return _moduleconnectorwrapper.PyXEP_ping(self)
@@ -4207,6 +4502,11 @@ class PyXEP(_object):
 
         Sets frame rate for frame streaming.  
 
+        Parameters
+        ----------
+        * `fps` :  
+            Specifies the fps  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_fps(self, fps)
 
@@ -4217,11 +4517,9 @@ class PyXEP(_object):
 
 
 
-        Gets configured FPS.  
-
         Returns
         -------
-        fps:  
+        the configured FPS  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_get_fps(self)
@@ -4235,6 +4533,11 @@ class PyXEP(_object):
 
         Set enable for X4 enable pin.  
 
+        Parameters
+        ----------
+        * `value` :  
+            Specifies the value  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_enable(self, value)
 
@@ -4245,8 +4548,8 @@ class PyXEP(_object):
 
 
 
-        Will make sure that enable is set, 8051 SRAM is programmed, ldos are enabled,
-        and that the external oscillator has been enabled.  
+        Ensures that enable is set, 8051 SRAM is programmed, ldos are enabled, and that
+        the external oscillator has been enabled.  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_init(self)
@@ -4260,6 +4563,11 @@ class PyXEP(_object):
 
         Sets Iterations.  
 
+        Parameters
+        ----------
+        * `iterations` :  
+            specifies the iterations value  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_iterations(self, iterations)
 
@@ -4271,6 +4579,11 @@ class PyXEP(_object):
 
 
         Sets pulses per step.  
+
+        Parameters
+        ----------
+        * `pps` :  
+            Specifies the pulses per step value  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_pulses_per_step(self, pps)
@@ -4284,6 +4597,11 @@ class PyXEP(_object):
 
         Sets X4 dac step.  
 
+        Parameters
+        ----------
+        * `dac_step` :  
+            Specifies the dac step value  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_dac_step(self, dac_step)
 
@@ -4296,6 +4614,11 @@ class PyXEP(_object):
 
         Sets dac min.  
 
+        Parameters
+        ----------
+        * `dac_min` :  
+            Specifies the dac min value  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_dac_min(self, dac_min)
 
@@ -4307,6 +4630,11 @@ class PyXEP(_object):
 
 
         Sets dac max.  
+
+        Parameters
+        ----------
+        * `dac_max` :  
+            Specifies the dac max value  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_dac_max(self, dac_max)
@@ -4322,6 +4650,11 @@ class PyXEP(_object):
 
         0 = transmitter off. See datasheet for valid values.  
 
+        Parameters
+        ----------
+        * `tx_power` :  
+            Specifies the transmitter power  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_tx_power(self, tx_power)
 
@@ -4334,7 +4667,11 @@ class PyXEP(_object):
 
         Sets downconversion.  
 
-        0=no downconversion, i.e. rf data. 1=downconversion.  
+        Parameters
+        ----------
+        * `enable` :  
+            Specifies downconversion, 0=no downconversion, i.e. rf data.
+            1=downconversion.  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_downconversion(self, enable)
@@ -4349,6 +4686,13 @@ class PyXEP(_object):
         Set frame area zone Assume air as transmitter medium.  
 
         Start and end in meter.  
+
+        Parameters
+        ----------
+        * `start` :  
+            Specifies the start  
+        * `end` :  
+            Specifies the end  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_frame_area(self, start, end)
@@ -4378,6 +4722,11 @@ class PyXEP(_object):
 
         Offset to adjust frame area reference depending on module product.  
 
+        Parameters
+        ----------
+        * `offset` :  
+            Specifies the offset  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_frame_area_offset(self, offset)
 
@@ -4392,7 +4741,7 @@ class PyXEP(_object):
 
         Returns
         -------
-        offset: frame area offset  
+        the frame area offset  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_get_frame_area_offset(self)
@@ -4406,6 +4755,11 @@ class PyXEP(_object):
 
         Set radar TX center frequency.  
 
+        Parameters
+        ----------
+        * `tx_frequency` :  
+            Specifies the frequency  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_tx_center_frequency(self, tx_frequency)
 
@@ -4418,6 +4772,13 @@ class PyXEP(_object):
 
         Set spi register on radar chip.  
 
+        Parameters
+        ----------
+        * `address` :  
+            Specifies the address  
+        * `value` :  
+            Specifies the value  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_spi_register(self, address, value)
 
@@ -4428,11 +4789,14 @@ class PyXEP(_object):
 
 
 
-        Get spi register on radar chip.  
+        Parameters
+        ----------
+        * `address` :  
+            Specifies the address  
 
         Returns
         -------
-        register: register value  
+        the SPI register at the specified address  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_get_spi_register(self, address)
@@ -4446,6 +4810,13 @@ class PyXEP(_object):
 
         Sets PIF register value.  
 
+        Parameters
+        ----------
+        * `address` :  
+            Specifies the address  
+        * `value` :  
+            Specifies the value  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_pif_register(self, address, value)
 
@@ -4456,11 +4827,14 @@ class PyXEP(_object):
 
 
 
-        Gets PIF register value.  
+        Parameters
+        ----------
+        * `address` :  
+            Specifies the address  
 
         Returns
         -------
-        register: register value  
+        the PIF register at the specified address  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_get_pif_register(self, address)
@@ -4474,6 +4848,13 @@ class PyXEP(_object):
 
         Sets XIF register value.  
 
+        Parameters
+        ----------
+        * `address` :  
+            Specifies the address  
+        * `value` :  
+            Specifies the value  
+
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_xif_register(self, address, value)
 
@@ -4484,11 +4865,14 @@ class PyXEP(_object):
 
 
 
-        Gets XIF register value.  
+        Parameters
+        ----------
+        * `address` :  
+            Specifies the address  
 
         Returns
         -------
-        register: register value  
+        the XIF register value at the specified address  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_get_xif_register(self, address)
@@ -4501,6 +4885,11 @@ class PyXEP(_object):
 
 
         Sets Pulse Repetition Frequency(PRF) divider.  
+
+        Parameters
+        ----------
+        * `prf_div` :  
+            Specifies the PRF  
 
         """
         return _moduleconnectorwrapper.PyXEP_x4driver_set_prf_div(self, prf_div)
@@ -4596,7 +4985,7 @@ class PyXEP(_object):
 
         Returns
         -------
-        data: data float message  
+        the data float message  
 
         """
         return _moduleconnectorwrapper.PyXEP_read_message_data_float(self)
@@ -4612,7 +5001,7 @@ class PyXEP(_object):
 
         Returns
         -------
-        Returns number of data string packets in internal queue.  
+        the number of data string packets in internal queue.  
 
         """
         return _moduleconnectorwrapper.PyXEP_peek_message_data_string(self)
@@ -4644,7 +5033,7 @@ class PyXEP(_object):
 
         Returns
         -------
-        Returns number of system packets in internal queue  
+        the number of system packets in internal queue  
 
         """
         return _moduleconnectorwrapper.PyXEP_peek_message_system(self)
@@ -4665,6 +5054,220 @@ class PyXEP(_object):
         """
         return _moduleconnectorwrapper.PyXEP_read_message_system(self)
 
+
+    def search_for_file_by_type(self, type):
+        """
+        search_for_file_by_type(PyXEP self, uint32_t type) -> iVector
+
+
+
+        Searches for and returns a list of identifiers for all files of the specified
+        type.  
+
+        Parameters
+        ----------
+        * `type` :  
+            The type of file.  
+
+        Returns
+        -------
+        vector of file identifiers are copied here as result.  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_search_for_file_by_type(self, type)
+
+
+    def find_all_files(self):
+        """
+        find_all_files(PyXEP self) -> Files
+
+
+
+        Finds all files and stores the type and identifier of each file in the given
+        buffers.  
+
+        Returns
+        -------
+        The result from the search. A map of file (type identifiers)  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_find_all_files(self)
+
+
+    def create_file(self, file_type, identifier, length):
+        """
+        create_file(PyXEP self, uint32_t file_type, uint32_t identifier, uint32_t length)
+
+
+
+        Creates and opens a new file with given type, identifiers and length.  
+
+        Parameters
+        ----------
+        * `type` :  
+            The type of file.  
+        * `identifier` :  
+            The identifer of the file.  
+        * `length` :  
+            length of the file to create  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_create_file(self, file_type, identifier, length)
+
+
+    def open_file(self, file_type, identifier):
+        """
+        open_file(PyXEP self, uint32_t file_type, uint32_t identifier)
+
+
+
+        Opens a file with given type and identifiers.  
+
+        Parameters
+        ----------
+        * `type` :  
+            The type of file.  
+        * `identifier` :  
+            The identifer of the file.  
+        * `length` :  
+            length of the file to create  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_open_file(self, file_type, identifier)
+
+
+    def set_file_data(self, type, identifier, offset, data):
+        """
+        set_file_data(PyXEP self, uint32_t type, uint32_t identifier, uint32_t offset, ucVector data)
+
+
+
+        Writes data at offset to the file.  
+
+        Parameters
+        ----------
+        * `type` :  
+            The type of file.  
+        * `identifier` :  
+            The identifer of the file.  
+        * `offset` :  
+            Offset where to write the data to.  
+        * `data` :  
+            The data to write.  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_set_file_data(self, type, identifier, offset, data)
+
+
+    def close_file(self, type, identifier, commit):
+        """
+        close_file(PyXEP self, uint32_t type, uint32_t identifier, bool commit)
+
+
+
+        Close the file.  
+
+        Parameters
+        ----------
+        * `type` :  
+            The type of file.  
+        * `identifier` :  
+            The identifer of the file.  
+        * `commit` :  
+            wether to commit changes to the file to close  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_close_file(self, type, identifier, commit)
+
+
+    def get_file_length(self, type, identifier):
+        """
+        get_file_length(PyXEP self, uint32_t type, uint32_t identifier) -> uint32_t
+
+
+
+        Gets the length of a file.  
+
+        Parameters
+        ----------
+        * `type` :  
+            The type of file.  
+        * `identifier` :  
+            The identifer of the file.  
+
+        Returns
+        -------
+        The length of the file.  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_get_file_length(self, type, identifier)
+
+
+    def delete_file(self, type, identifier):
+        """
+        delete_file(PyXEP self, uint32_t type, uint32_t identifier)
+
+
+
+        Deletes a file.  
+
+        Parameters
+        ----------
+        * `type` :  
+            The type of file.  
+        * `identifier` :  
+            The identifer of the file.  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_delete_file(self, type, identifier)
+
+
+    def get_file_data(self, type, identifier, offset, length):
+        """
+        get_file_data(PyXEP self, uint32_t type, uint32_t identifier, uint32_t offset, uint32_t length) -> ucVector
+
+
+
+        Reads length number of bytes of the file from the offset.  
+
+        Parameters
+        ----------
+        * `type` :  
+            The type of file.  
+        * `identifier` :  
+            The identifer of the file.  
+        * `offset` :  
+            The offset to read from.  
+        * `length` :  
+            Number of bytes to read.  
+
+        Returns
+        -------
+        The result as a vector of bytes.  
+
+        """
+        return _moduleconnectorwrapper.PyXEP_get_file_data(self, type, identifier, offset, length)
+
+
+    def set_file(self, type, identifier, data):
+        """
+        set_file(PyXEP self, uint32_t type, uint32_t identifier, ucVector data)
+
+
+
+        """
+        return _moduleconnectorwrapper.PyXEP_set_file(self, type, identifier, data)
+
+
+    def get_file(self, type, identifier):
+        """
+        get_file(PyXEP self, uint32_t type, uint32_t identifier) -> ucVector
+
+
+
+        """
+        return _moduleconnectorwrapper.PyXEP_get_file(self, type, identifier)
+
 PyXEP_swigregister = _moduleconnectorwrapper.PyXEP_swigregister
 PyXEP_swigregister(PyXEP)
 
@@ -4684,7 +5287,7 @@ class PyX4M300(_object):
 
     def __init__(self, radar_interface):
         """
-        __init__(XeThru::PyX4M300 self, RadarInterface & radar_interface) -> PyX4M300
+        __init__(XeThru::PyX4M300 self, LockedRadarInterfacePtr & radar_interface) -> PyX4M300
 
 
 
@@ -4692,8 +5295,8 @@ class PyX4M300(_object):
 
         Parameters
         ----------
-        * `internale` :  
-            object used to interface the radar  
+        * `radar_interface` :  
+            internal object used to interface the radar  
 
         """
         this = _moduleconnectorwrapper.new_PyX4M300(radar_interface)
@@ -4703,6 +5306,23 @@ class PyX4M300(_object):
             self.this = this
     __swig_destroy__ = _moduleconnectorwrapper.delete_PyX4M300
     __del__ = lambda self: None
+
+    def set_baudrate(self, baudrate):
+        """
+        set_baudrate(PyX4M300 self, uint32_t baudrate)
+
+
+
+        Set baudrate for serial communication during ModuleConnector operation.  
+
+        Parameters
+        ----------
+        * `baudrate` :  
+            enum representing the baudrate, defined in xtid.h  
+
+        """
+        return _moduleconnectorwrapper.PyX4M300_set_baudrate(self, baudrate)
+
 
     def set_debug_level(self, level):
         """
@@ -4743,19 +5363,18 @@ class PyX4M300(_object):
 
 
 
-        Returns a string containing system information given by infocode:
-        XTID_SSIC_ITEMNUMBER = 0x00 -> Returns the internal Novelda PCBA Item Number,
-        including revision.  
+        Returns a string containing system information given by infocode:  
 
-        This is programmed in Flash during manufacturing XTID_SSIC_ORDERCODE = 0x01 ->
-        Returns the PCBA / PCBA stack order code. XTID_SSIC_FIRMWAREID = 0x02 -> Returns
-        the installed Firmware ID. As viewed from the "highest" level of the software,
-        "X4M300". XTID_SSIC_VERSION = 0x03 -> Returns the installed Firmware Version.
-        As viewed from the "highest" level of the software. XTID_SSIC_BUILD = 0x04 ->
-        Returns information of the SW Build installed on the device
-        XTID_SSIC_SERIALNUMBER = 0x06 -> Returns the PCBA serial number
-        XTID_SSIC_VERSIONLIST = 0x07 -> Returns ID and version of all components. Calls
-        all components and compound a string. E.g.
+        XTID_SSIC_ITEMNUMBER = 0x00 -> Returns the internal Novelda PCBA Item Number,
+        including revision. This is programmed in Flash during manufacturing
+        XTID_SSIC_ORDERCODE = 0x01 -> Returns the PCBA / PCBA stack order code.
+        XTID_SSIC_FIRMWAREID = 0x02 -> Returns the installed Firmware ID. As viewed from
+        the "highest" level of the software, "X4M300". XTID_SSIC_VERSION = 0x03 ->
+        Returns the installed Firmware Version. As viewed from the "highest" level of
+        the software. XTID_SSIC_BUILD = 0x04 -> Returns information of the SW Build
+        installed on the device XTID_SSIC_SERIALNUMBER = 0x06 -> Returns the PCBA serial
+        number XTID_SSIC_VERSIONLIST = 0x07 -> Returns ID and version of all components.
+        Calls all components and compound a string. E.g.
         "X4M300:1.0.0.3;XEP:2.3.4.5;X4C51:1.0.0.0;DSP:1.1.1.1"  
 
         """
@@ -4789,6 +5408,18 @@ class PyX4M300(_object):
 
         """
         return _moduleconnectorwrapper.PyX4M300_reset(self)
+
+
+    def reset_to_factory_preset(self):
+        """
+        reset_to_factory_preset(PyX4M300 self)
+
+
+
+        Resets all parameters in the module to factory presets.  
+
+        """
+        return _moduleconnectorwrapper.PyX4M300_reset_to_factory_preset(self)
 
 
     def start_bootloader(self):
@@ -4850,17 +5481,21 @@ class PyX4M300(_object):
 
 
 
-        Modes: Run - Run profile application Idle - Halts profile application, can be
-        Run again.  
-
-        Stop - Stop profile application Manual - Interact directly with XDriver, i.e.
-        allow streaming directly to host Param: Not used, ignored, can be 0.  
+        Control the execution mode of the sensor.  
 
         Parameters
         ----------
         * `mode` :  
+            see xtid.h for profileid values.  
+             Run - 0x01: Start profile execution  
+             Idle - 0x11: Halts profile execution. Can be resumed by setting mode to
+            Run.  
+             Stop - 0x13: Stops profile execution. Must do load_profile to continue.  
+             Manual - 0x12: Routes X4 radar data directly to host rather than to profile
+            execution. Can then interact directly with XEP / X4Driver. Will disrupt
+            profile performance.  
         * `param` :  
-            ignored  
+            Not used, ignored, can be 0.  
 
         """
         return _moduleconnectorwrapper.PyX4M300_set_sensor_mode(self, mode, param)
@@ -5154,7 +5789,7 @@ class PyDataRecorder(_object):
 
     def __init__(self, radar_interface):
         """
-        __init__(XeThru::PyDataRecorder self, RadarInterface & radar_interface) -> PyDataRecorder
+        __init__(XeThru::PyDataRecorder self, LockedRadarInterfacePtr & radar_interface) -> PyDataRecorder
 
 
 
@@ -5888,11 +6523,319 @@ class PyDataReader(_object):
 PyDataReader_swigregister = _moduleconnectorwrapper.PyDataReader_swigregister
 PyDataReader_swigregister(PyDataReader)
 
+class PyDataPlayer(_object):
+    """
+
+
+    The DataPlayer class allows playback of telegrams / binary packets from a
+    recording generated by PyDataRecorder.  
+
+    The DataPlayer class is a high level data playback class. It provides the user
+    with the ability to playback recorded data as if it was coming from a physical
+    device. So rather than initialising PythonModuleConnector with a physical device
+    (serial port), it is possible to construct PythonModuleConnector with a
+    DataPlayer object and receive telegrams / binary packets as one would normally
+    receive from a physical XeThru device. For example, CSV data on disk is
+    converted back to its original telegram / binary format before it is dispatched
+    via ModuleConnector.  
+
+    Moreover, it is possible to control the playback via functions such as play,
+    pause, stop, set_playback_rate, set_filter.  
+
+    @snippet read_recording.py Typical usage  
+
+    This class uses the PyDataReader class to read records from disk before it
+    converts them into telegrams / binary packets.  
+
+    See also: PythonModuleConnector, PyDataRecorder, PyDataReader  
+
+    C++ includes: PyDataPlayer.hpp
+
+    """
+
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, PyDataPlayer, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, PyDataPlayer, name)
+    __repr__ = _swig_repr
+
+    def __init__(self, meta_filename, depth=-1):
+        """
+        __init__(XeThru::PyDataPlayer self, std::string const & meta_filename, int depth=-1) -> PyDataPlayer
+        __init__(XeThru::PyDataPlayer self, std::string const & meta_filename) -> PyDataPlayer
+
+
+
+        Constructs the player and opens the recording specified by the given meta
+        filename.  
+
+        One recording may contain several meta files, for example as a result of
+        file/directory splitting. The meta file contains information about which files
+        and data types were written to disk during a recording session. Common for all
+        use cases is that *xethru_recording_meta.dat* is always present in the output
+        folder generated by *DataRecorder*. Use that file as input argument to this
+        constructor.  
+
+        Parameters
+        ----------
+        * `meta_filename` :  
+            Specifies which recording (*xethru_recording_meta.dat*) to open.  
+        * `depth` :  
+            Specifies the number of meta files to open in 'chained mode'. By default,
+            this parameter is -1 (automatically open all files, i.e. the entire
+            recording).  
+
+        Constructor throws an runtime exception if the recording could not be opened.  
+
+        """
+        this = _moduleconnectorwrapper.new_PyDataPlayer(meta_filename, depth)
+        try:
+            self.this.append(this)
+        except __builtin__.Exception:
+            self.this = this
+    __swig_destroy__ = _moduleconnectorwrapper.delete_PyDataPlayer
+    __del__ = lambda self: None
+
+    def play(self):
+        """
+        play(PyDataPlayer self)
+
+
+
+        Start or resume playback.  
+
+        Convenience function, equivalent to set_state(DataPlayer::PlayingState).  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_play(self)
+
+
+    def pause(self):
+        """
+        pause(PyDataPlayer self)
+
+
+
+        Pause playback.  
+
+        Convenience function, equivalent to set_state(DataPlayer::PausedState).  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_pause(self)
+
+
+    def stop(self):
+        """
+        stop(PyDataPlayer self)
+
+
+
+        Stop playback and reset the play position to the beginning.  
+
+        Convenience function, equivalent to set_state(DataPlayer::StoppedState).  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_stop(self)
+
+
+    def set_filter(self, data_types):
+        """
+        set_filter(PyDataPlayer self, uint32_t data_types) -> int
+
+
+
+        Specifies which data types to play.  
+
+        By default, the filter is set to all data types.  
+
+        Parameters
+        ----------
+        * `data_types` :  
+            Specifies the filter as a bitmask that consists of a combination of DataType
+            flags. These flags can be combined with the bitwise OR operator (|). For
+            example: BasebandIqDataType | SleepDataType. A convenience value
+            AllDataTypes can also be specified.  
+
+        Returns
+        -------
+        0 success, otherwise returns 1  
+
+        See also: play  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_set_filter(self, data_types)
+
+
+    def get_filter(self):
+        """
+        get_filter(PyDataPlayer self) -> uint32_t
+
+
+
+        Returns
+        -------
+        the filter used to specify which data types to play. By default this value is
+        all data types.  
+
+        See also: set_filter  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_get_filter(self)
+
+
+    def set_playback_rate(self, rate):
+        """
+        set_playback_rate(PyDataPlayer self, float rate)
+
+
+
+        Sets the playback rate specified as a multiplier.  
+
+        By default, this value is 1.0 indicating that the player is playing at the
+        standard pace. Values higher than 1.0 will increase the pace, whereas a lower
+        value will decrease the pace. Values less than zero indicate the player should
+        play as fast as possible. Value zero is essentially the same as paused state.  
+
+        Parameters
+        ----------
+        * `rate` :  
+            Specifies the multiplier for the playback rate.  
+
+        See also: play  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_set_playback_rate(self, rate)
+
+
+    def get_playback_rate(self):
+        """
+        get_playback_rate(PyDataPlayer self) -> float
+
+
+
+        Returns
+        -------
+        the multiplayer used for the playback rate. By default, this value is 1.0.  
+
+        See also: set_playback_rate  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_get_playback_rate(self)
+
+
+    def set_loop_mode_enabled(self, enabled):
+        """
+        set_loop_mode_enabled(PyDataPlayer self, bool enabled)
+
+
+
+        Enables or disables loop mode as specified.  
+
+        When loop mode is enabled the, the player's position is reset to the beginning
+        when the player reaches the end. This allows for playback forever.  
+
+        Parameters
+        ----------
+        * `enabled` :  
+            Specifies if loop mode is enabled or disabled. By default, loop mode is
+            disabled (i.e. false).  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_set_loop_mode_enabled(self, enabled)
+
+
+    def get_loop_mode_enabled(self):
+        """
+        get_loop_mode_enabled(PyDataPlayer self) -> bool
+
+
+
+        Returns
+        -------
+        true if loop mode is enabled, otherwise returns false. By default, this value is
+        false.  
+
+        See also: set_loop_mode_enabled  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_get_loop_mode_enabled(self)
+
+
+    def set_position(self, position):
+        """
+        set_position(PyDataPlayer self, int64_t position) -> int
+
+
+
+        Sets the current position (ms) as specified.  
+
+        The value must be in range [0, get_duration()].  
+
+        Parameters
+        ----------
+        * `position` :  
+            Specifies the position as number of milliseconds (ms).  
+
+        Returns
+        -------
+        0 on success, otherwise returns 1  
+
+        See also: get_duration  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_set_position(self, position)
+
+
+    def get_position(self):
+        """
+        get_position(PyDataPlayer self) -> int64_t
+
+
+
+        Returns
+        -------
+        the player's current position specified as number of milliseconds (ms).  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_get_position(self)
+
+
+    def get_duration(self):
+        """
+        get_duration(PyDataPlayer self) -> int64_t
+
+
+
+        Returns
+        -------
+        the total duration of the recording specified as number of milliseconds (ms).  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_get_duration(self)
+
+
+    def meta_filename(self):
+        """
+        meta_filename(PyDataPlayer self) -> std::string
+
+
+
+        Returns
+        -------
+        the meta filename used when constructing this class.  
+
+        """
+        return _moduleconnectorwrapper.PyDataPlayer_meta_filename(self)
+
+PyDataPlayer_swigregister = _moduleconnectorwrapper.PyDataPlayer_swigregister
+PyDataPlayer_swigregister(PyDataPlayer)
+
 DEPRECATED_XTS_SPR_APPDATA_FAST = _moduleconnectorwrapper.DEPRECATED_XTS_SPR_APPDATA_FAST
 XTS_DEF_ENTER_BOOTLOADER_KEY = _moduleconnectorwrapper.XTS_DEF_ENTER_BOOTLOADER_KEY
 XTS_DEF_PINGVAL = _moduleconnectorwrapper.XTS_DEF_PINGVAL
 XTS_DEF_PONGVAL_READY = _moduleconnectorwrapper.XTS_DEF_PONGVAL_READY
 XTS_DEF_PONGVAL_NOTREADY = _moduleconnectorwrapper.XTS_DEF_PONGVAL_NOTREADY
+XTS_DEF_ENTER_BOOTLOADER_KEY_2 = _moduleconnectorwrapper.XTS_DEF_ENTER_BOOTLOADER_KEY_2
 XTS_SPA_VSDM_GET_STATUS = _moduleconnectorwrapper.XTS_SPA_VSDM_GET_STATUS
 XTS_SPA_COMMON_GET_SPECTRUM = _moduleconnectorwrapper.XTS_SPA_COMMON_GET_SPECTRUM
 XTS_USER_CONTENTID_COMFIGMSG = _moduleconnectorwrapper.XTS_USER_CONTENTID_COMFIGMSG
@@ -5917,6 +6860,10 @@ XTS_SPC_BOOTLOADER = _moduleconnectorwrapper.XTS_SPC_BOOTLOADER
 XTS_SPCA_RESERVED = _moduleconnectorwrapper.XTS_SPCA_RESERVED
 XTS_SPCA_SET = _moduleconnectorwrapper.XTS_SPCA_SET
 XTS_SPCA_GET = _moduleconnectorwrapper.XTS_SPCA_GET
+XTS_SPCA_FACTORY_PRESET = _moduleconnectorwrapper.XTS_SPCA_FACTORY_PRESET
+XTS_SPCA_STORE_NOISEMAP = _moduleconnectorwrapper.XTS_SPCA_STORE_NOISEMAP
+XTS_SPCA_LOAD_NOISEMAP = _moduleconnectorwrapper.XTS_SPCA_LOAD_NOISEMAP
+XTS_SPCA_GET_PARAMETER_FILE = _moduleconnectorwrapper.XTS_SPCA_GET_PARAMETER_FILE
 XTS_SPCA_POLL = _moduleconnectorwrapper.XTS_SPCA_POLL
 XTS_SPCB_GET_DEVICE_INFO = _moduleconnectorwrapper.XTS_SPCB_GET_DEVICE_INFO
 XTS_SPCB_WRITE_PAGE = _moduleconnectorwrapper.XTS_SPCB_WRITE_PAGE
@@ -5933,7 +6880,9 @@ XTS_SPR_DATA = _moduleconnectorwrapper.XTS_SPR_DATA
 XTS_SPRE_RESERVED = _moduleconnectorwrapper.XTS_SPRE_RESERVED
 XTS_SPRE_NOT_RECOGNIZED = _moduleconnectorwrapper.XTS_SPRE_NOT_RECOGNIZED
 XTS_SPRE_CRC_FAILED = _moduleconnectorwrapper.XTS_SPRE_CRC_FAILED
+XTS_SPRE_BUSY = _moduleconnectorwrapper.XTS_SPRE_BUSY
 XTS_SPRE_APP_INVALID = _moduleconnectorwrapper.XTS_SPRE_APP_INVALID
+XTS_SPRE_COMMAND_FAILED = _moduleconnectorwrapper.XTS_SPRE_COMMAND_FAILED
 XTS_SPRE_USER = _moduleconnectorwrapper.XTS_SPRE_USER
 XTS_SPRS_RESERVED = _moduleconnectorwrapper.XTS_SPRS_RESERVED
 XTS_SPRS_BOOTING = _moduleconnectorwrapper.XTS_SPRS_BOOTING
@@ -5951,7 +6900,6 @@ XTS_SDC_RADLIB_GETFRAMEFLOAT = _moduleconnectorwrapper.XTS_SDC_RADLIB_GETFRAMEFL
 XTS_SDC_RADLIB_GETFRAMERAW = _moduleconnectorwrapper.XTS_SDC_RADLIB_GETFRAMERAW
 XTS_SDC_RADLIB_GETCHIPID = _moduleconnectorwrapper.XTS_SDC_RADLIB_GETCHIPID
 XTS_SDC_RADLIB_TIMINGMEASUREMENT = _moduleconnectorwrapper.XTS_SDC_RADLIB_TIMINGMEASUREMENT
-XTS_SDC_STIGS_COMMAND = _moduleconnectorwrapper.XTS_SDC_STIGS_COMMAND
 XTS_SDC_RADHW_RESET = _moduleconnectorwrapper.XTS_SDC_RADHW_RESET
 XTS_SDC_RADHW_CLOCK = _moduleconnectorwrapper.XTS_SDC_RADHW_CLOCK
 XTS_SDC_RADMSC_DOFRAMETOFLASH = _moduleconnectorwrapper.XTS_SDC_RADMSC_DOFRAMETOFLASH
@@ -5967,6 +6915,19 @@ XTS_SDC_SYSTEM_GET_BUILD = _moduleconnectorwrapper.XTS_SDC_SYSTEM_GET_BUILD
 XTS_SDC_SYSTEM_GET_PRODUCT = _moduleconnectorwrapper.XTS_SDC_SYSTEM_GET_PRODUCT
 XTS_SDC_SYSTEM_GET_INFO = _moduleconnectorwrapper.XTS_SDC_SYSTEM_GET_INFO
 XTS_SDC_SYSTEM_GET_DEBUG_DATA = _moduleconnectorwrapper.XTS_SDC_SYSTEM_GET_DEBUG_DATA
+XTS_SDC_GET_PARAMETER_FILE = _moduleconnectorwrapper.XTS_SDC_GET_PARAMETER_FILE
+XTS_SDC_GET_CRASH_DUMP_LENGTH = _moduleconnectorwrapper.XTS_SDC_GET_CRASH_DUMP_LENGTH
+XTS_SDC_CLEAR_CRASH_DUMP = _moduleconnectorwrapper.XTS_SDC_CLEAR_CRASH_DUMP
+XTS_SDC_GET_CRASH_DUMP = _moduleconnectorwrapper.XTS_SDC_GET_CRASH_DUMP
+XTS_SDC_SEARCH_FILE_TYPE = _moduleconnectorwrapper.XTS_SDC_SEARCH_FILE_TYPE
+XTS_SDC_FIND_ALL_FILES = _moduleconnectorwrapper.XTS_SDC_FIND_ALL_FILES
+XTS_SDC_CREATE_NEW_FILE = _moduleconnectorwrapper.XTS_SDC_CREATE_NEW_FILE
+XTS_SDC_SET_FILE_DATA = _moduleconnectorwrapper.XTS_SDC_SET_FILE_DATA
+XTS_SDC_CLOSE_FILE = _moduleconnectorwrapper.XTS_SDC_CLOSE_FILE
+XTS_SDC_GET_FILE_LENGTH = _moduleconnectorwrapper.XTS_SDC_GET_FILE_LENGTH
+XTS_SDC_DELETE_FILE = _moduleconnectorwrapper.XTS_SDC_DELETE_FILE
+XTS_SDC_GET_FILE_DATA = _moduleconnectorwrapper.XTS_SDC_GET_FILE_DATA
+XTS_SDC_OPEN_FILE = _moduleconnectorwrapper.XTS_SDC_OPEN_FILE
 XTS_SDC_SYSTEM_LAST = _moduleconnectorwrapper.XTS_SDC_SYSTEM_LAST
 XTS_SDC_APP_FIRST = _moduleconnectorwrapper.XTS_SDC_APP_FIRST
 XTS_SDC_APP_SETFLOAT = _moduleconnectorwrapper.XTS_SDC_APP_SETFLOAT
@@ -5987,6 +6948,7 @@ XTS_SPCX_RESERVED = _moduleconnectorwrapper.XTS_SPCX_RESERVED
 XTS_SPCX_SET = _moduleconnectorwrapper.XTS_SPCX_SET
 XTS_SPCX_GET = _moduleconnectorwrapper.XTS_SPCX_GET
 XTS_SPCX_INIT = _moduleconnectorwrapper.XTS_SPCX_INIT
+XTS_SPCX_ALLOCATE_BUFFER = _moduleconnectorwrapper.XTS_SPCX_ALLOCATE_BUFFER
 XTS_SPCXI_RESERVED = _moduleconnectorwrapper.XTS_SPCXI_RESERVED
 XTS_SPCXI_FPS = _moduleconnectorwrapper.XTS_SPCXI_FPS
 XTS_SPCXI_PULSESPERSTEP = _moduleconnectorwrapper.XTS_SPCXI_PULSESPERSTEP
@@ -6153,6 +7115,7 @@ CRC_ERROR = _moduleconnectorwrapper.CRC_ERROR
 LOST_BYTES = _moduleconnectorwrapper.LOST_BYTES
 INCOMPLETE_PACKET = _moduleconnectorwrapper.INCOMPLETE_PACKET
 OUT_OF_BUFFER = _moduleconnectorwrapper.OUT_OF_BUFFER
+COMMAND_TIMEOUT = _moduleconnectorwrapper.COMMAND_TIMEOUT
 class xtsUserVsdmStatus(_object):
     """Proxy of C++ xtsUserVsdmStatus class."""
 

@@ -4,41 +4,41 @@
 % a function of the resulting movement of the radar with respect to
 % frequency
 
-% Global radar settings
-FPS = 60;
-
-% Start the radar
+% Paths
+addpath('../ModuleConnector_WIN/matlab');
+addpath('../ModuleConnector_WIN/lib');
+addpath('../ModuleConnector_WIN/include');
 Lib = ModuleConnector.Library;
 Lib.libfunctions
+
+% Global radar settings
+global FPS Duration PPS DACmin DACmax Iterations FrameStart FrameStop COM dataType radar;
+FPS = 20;
+Duration = 1;
+PPS = 26;
+DACmin = 949;
+DACmax = 1100;
+Iterations = 16;
+FrameStart = 0.0; % meters.
+FrameStop = 9.9; % meters.
 COM = char(seriallist);
+dataType = 'rf';
+
+depth = 'towel-';
+
+%% Using BasicRadarClassX4
 radar = BasicRadarClassX4(COM,FPS,dataType);
 radar.open();
+radar.init();
 
 % Sweep frequencies
-for i=1:2
-   % Some radar settings 
-   
+for freq=0:7
+    data = acquire_radar_data(FPS, Duration, freq);
+    rf_data = data(20,:);
+    % Averaging frames
+    filename = strcat('../data/frequency_sweep_water/', depth, num2str((freq + 2) * 1.455), 'ghz.mat');
+    save(char(filename), 'rf_data');
 end
 
-function [radarData] = collect_radar_data(Duration)
-    radar.start();
-    tstart = tic;
-
-    radarData = zeros(FPS * Duration, 186);
-
-    while ishandle(fh) && i < FPS * Duration
-        % Peek message data float
-        numPackets = radar.bufferSize();
-        if numPackets > 0
-            i = i+1;
-            
-            % Get frame (uses read_message_data_float)
-            [frame, ctr] = radar.GetFrameNormalized();
-            frame = frame(1:end/2) + 1i*frame(end/2 + 1:end);
-            radarData(i,:) = frame;
-        end
-    end
-
-    radar.stop();
-    radar.close();
-end
+radar.close();
+clear

@@ -1,6 +1,9 @@
-COMPORT = 'COM6';
-FPS = 20;
-dataType = 'bb';
+% Add PATHs
+addpath('../matlab/');
+addpath('../../include/');
+addpath('../../lib/');
+
+COMPORT = 'COM3';
 
 % Load the library
 Lib = ModuleConnector.Library;

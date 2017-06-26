@@ -21,7 +21,7 @@
     <div class="page-title-bar container-fluid">
       <div id="projectalign" class="row">
         <div id="projectname" class="col-sm-12">ModuleConnector
-          &#160;<span id="projectnumber">1.1.5</span>
+          &#160;<span id="projectnumber">1.1.8</span>
         </div>
         <div id="projectbrief" class="col-sm-12">Project brief</div>
       </div>
@@ -82,24 +82,27 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>TODO.  
+<p>Interface to the Xethru <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="Interface to the Xethru X4M300 Application module This interface is used to control the XeThru X4M300...">X4M300</a> Application module This interface is used to control the <a class="el" href="namespace_xe_thru.xhtml">XeThru</a> <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="Interface to the Xethru X4M300 Application module This interface is used to control the XeThru X4M300...">X4M300</a> module.  
  <a href="class_xe_thru_1_1_x4_m300.xhtml#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_x4_m300_8hpp_source.xhtml">X4M300.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:adff040a6a76fd6a2e8cf7b9261fa51fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#adff040a6a76fd6a2e8cf7b9261fa51fe">X4M300</a> (RadarInterface &amp;radar_interface)</td></tr>
-<tr class="memdesc:adff040a6a76fd6a2e8cf7b9261fa51fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#adff040a6a76fd6a2e8cf7b9261fa51fe">More...</a><br /></td></tr>
-<tr class="separator:adff040a6a76fd6a2e8cf7b9261fa51fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2abdd59addf413ce3fdb565a490779a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#af2abdd59addf413ce3fdb565a490779a">X4M300</a> (LockedRadarInterfacePtr &amp;radar_interface)</td></tr>
+<tr class="memdesc:af2abdd59addf413ce3fdb565a490779a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#af2abdd59addf413ce3fdb565a490779a">More...</a><br /></td></tr>
+<tr class="separator:af2abdd59addf413ce3fdb565a490779a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec679d496f341bafdb5458fde8902e2e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#aec679d496f341bafdb5458fde8902e2e">~X4M300</a> ()</td></tr>
 <tr class="memdesc:aec679d496f341bafdb5458fde8902e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#aec679d496f341bafdb5458fde8902e2e">More...</a><br /></td></tr>
 <tr class="separator:aec679d496f341bafdb5458fde8902e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87ad0d3a96aa7c2bfb3e30c9b40de3bb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#a87ad0d3a96aa7c2bfb3e30c9b40de3bb">set_debug_level</a> (unsigned char level)</td></tr>
 <tr class="memdesc:a87ad0d3a96aa7c2bfb3e30c9b40de3bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets debug level in the Xethru module.  <a href="#a87ad0d3a96aa7c2bfb3e30c9b40de3bb">More...</a><br /></td></tr>
 <tr class="separator:a87ad0d3a96aa7c2bfb3e30c9b40de3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2645687c0047f3548f754d2b93e94e32"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#a2645687c0047f3548f754d2b93e94e32">set_baudrate</a> (uint32_t baudrate)</td></tr>
+<tr class="memdesc:a2645687c0047f3548f754d2b93e94e32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set baudrate for serial communication during <a class="el" href="class_xe_thru_1_1_module_connector.xhtml" title="This class is responsible for establishing contact with the Xethru module. ">ModuleConnector</a> operation.  <a href="#a2645687c0047f3548f754d2b93e94e32">More...</a><br /></td></tr>
+<tr class="separator:a2645687c0047f3548f754d2b93e94e32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac344832954bf56cbc5420ba08fb0514f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#ac344832954bf56cbc5420ba08fb0514f">ping</a> (uint32_t *pong_value)</td></tr>
-<tr class="memdesc:ac344832954bf56cbc5420ba08fb0514f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make sure there is a connection to FW on the Xethru <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="TODO. ">X4M300</a> module.  <a href="#ac344832954bf56cbc5420ba08fb0514f">More...</a><br /></td></tr>
+<tr class="memdesc:ac344832954bf56cbc5420ba08fb0514f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Make sure there is a connection to FW on the Xethru <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="Interface to the Xethru X4M300 Application module This interface is used to control the XeThru X4M300...">X4M300</a> module.  <a href="#ac344832954bf56cbc5420ba08fb0514f">More...</a><br /></td></tr>
 <tr class="separator:ac344832954bf56cbc5420ba08fb0514f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d48a8a575e606e1396973cdba3aa006"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#a9d48a8a575e606e1396973cdba3aa006">get_system_info</a> (const uint8_t info_code, std::string *system_info)</td></tr>
 <tr class="memdesc:a9d48a8a575e606e1396973cdba3aa006"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a string containing system information given by infocode:<br />
@@ -117,6 +120,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9fe225acfe8173ac55393401dfccfe2e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#a9fe225acfe8173ac55393401dfccfe2e">module_reset</a> ()</td></tr>
 <tr class="memdesc:a9fe225acfe8173ac55393401dfccfe2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the module.  <a href="#a9fe225acfe8173ac55393401dfccfe2e">More...</a><br /></td></tr>
 <tr class="separator:a9fe225acfe8173ac55393401dfccfe2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b48c4a8bf8db715de9f72de65520159"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#a3b48c4a8bf8db715de9f72de65520159">reset_to_factory_preset</a> ()</td></tr>
+<tr class="memdesc:a3b48c4a8bf8db715de9f72de65520159"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets all parameters in the module to factory presets.  <a href="#a3b48c4a8bf8db715de9f72de65520159">More...</a><br /></td></tr>
+<tr class="separator:a3b48c4a8bf8db715de9f72de65520159"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af92d0ed6b1e9227a30091554859dd8fa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_xe_thru_1_1_x4_m300.xhtml#af92d0ed6b1e9227a30091554859dd8fa">start_bootloader</a> ()</td></tr>
 <tr class="memdesc:af92d0ed6b1e9227a30091554859dd8fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enters the bootloader for FW upgrades.  <a href="#af92d0ed6b1e9227a30091554859dd8fa">More...</a><br /></td></tr>
 <tr class="separator:af92d0ed6b1e9227a30091554859dd8fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,10 +179,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1b250d4efc01aef19656a0917c92a036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>TODO. </p>
+<div class="textblock"><p>Interface to the Xethru <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="Interface to the Xethru X4M300 Application module This interface is used to control the XeThru X4M300...">X4M300</a> Application module This interface is used to control the <a class="el" href="namespace_xe_thru.xhtml">XeThru</a> <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="Interface to the Xethru X4M300 Application module This interface is used to control the XeThru X4M300...">X4M300</a> module. </p>
+<p>See the data sheet of the <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="Interface to the Xethru X4M300 Application module This interface is used to control the XeThru X4M300...">X4M300</a> module for more information on the <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="Interface to the Xethru X4M300 Application module This interface is used to control the XeThru X4M300...">X4M300</a> module. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="adff040a6a76fd6a2e8cf7b9261fa51fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adff040a6a76fd6a2e8cf7b9261fa51fe">&sect;&nbsp;</a></span>X4M300()</h2>
+<a id="af2abdd59addf413ce3fdb565a490779a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2abdd59addf413ce3fdb565a490779a">&sect;&nbsp;</a></span>X4M300()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -184,7 +191,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">XeThru::X4M300::X4M300 </td>
           <td>(</td>
-          <td class="paramtype">RadarInterface &amp;&#160;</td>
+          <td class="paramtype">LockedRadarInterfacePtr &amp;&#160;</td>
           <td class="paramname"><em>radar_interface</em></td><td>)</td>
           <td></td>
         </tr>
@@ -194,7 +201,7 @@ Public Member Functions</h2></td></tr>
 <p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">internale</td><td>object used to interface the radar </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">radar_interface</td><td>internal object used to interface the radar </td></tr>
   </table>
   </dd>
 </dl>
@@ -488,7 +495,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Make sure there is a connection to FW on the Xethru <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="TODO. ">X4M300</a> module. </p>
+<p>Make sure there is a connection to FW on the Xethru <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="Interface to the Xethru X4M300 Application module This interface is used to control the XeThru X4M300...">X4M300</a> module. </p>
 <dl class="section return"><dt>Returns</dt><dd>status : success in case of 0 / failure in any other case </dd></dl>
 
 </div>
@@ -626,6 +633,52 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a3b48c4a8bf8db715de9f72de65520159"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b48c4a8bf8db715de9f72de65520159">&sect;&nbsp;</a></span>reset_to_factory_preset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int XeThru::X4M300::reset_to_factory_preset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resets all parameters in the module to factory presets. </p>
+<dl class="section return"><dt>Returns</dt><dd>status : success in case of 0 / failure in any other case </dd></dl>
+
+</div>
+</div>
+<a id="a2645687c0047f3548f754d2b93e94e32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2645687c0047f3548f754d2b93e94e32">&sect;&nbsp;</a></span>set_baudrate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int XeThru::X4M300::set_baudrate </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>baudrate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set baudrate for serial communication during <a class="el" href="class_xe_thru_1_1_module_connector.xhtml" title="This class is responsible for establishing contact with the Xethru module. ">ModuleConnector</a> operation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">baudrate</td><td>enum representing the baudrate, defined in xtid.h </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a87ad0d3a96aa7c2bfb3e30c9b40de3bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a87ad0d3a96aa7c2bfb3e30c9b40de3bb">&sect;&nbsp;</a></span>set_debug_level()</h2>
 
@@ -680,7 +733,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sets the current detection zone. </p>
-<p>Rules: See <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="TODO. ">X4M300</a> datasheet. The actual detection zone is determined by profile configuration. Use the get_detection_zone command to get the actual values</p>
+<p>Rules: See <a class="el" href="class_xe_thru_1_1_x4_m300.xhtml" title="Interface to the Xethru X4M300 Application module This interface is used to control the XeThru X4M300...">X4M300</a> datasheet. The actual detection zone is determined by profile configuration. Use the get_detection_zone command to get the actual values</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">start</td><td>start of detection zone in meters </td></tr>
@@ -836,10 +889,10 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">mode</td><td>see xtid.h for profileid values.<br />
- Run - Start profile execution<br />
- Idle - Halts profile execution. Can be resumed by setting mode to Run.<br />
- Stop - Stops profile execution. Must do load_profile to continue.<br />
- Manual - Routes X4 radar data directly to host rather than to profile execution. Can then interact directly with <a class="el" href="class_xe_thru_1_1_x_e_p.xhtml" title="XEP class gives access to XEP functionality on target via module connector. ">XEP</a> / X4Driver. Will disrupt profile performance.<br />
+ Run - 0x01: Start profile execution<br />
+ Idle - 0x11: Halts profile execution. Can be resumed by setting mode to Run.<br />
+ Stop - 0x13: Stops profile execution. Must do load_profile to continue.<br />
+ Manual - 0x12: Routes X4 radar data directly to host rather than to profile execution. Can then interact directly with <a class="el" href="class_xe_thru_1_1_x_e_p.xhtml" title="XEP class gives access to XEP functionality on target via module connector. ">XEP</a> / X4Driver. Will disrupt profile performance.<br />
  </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">param</td><td>Not used, ignored, can be 0. </td></tr>
   </table>

@@ -8,7 +8,6 @@ classdef XEP
     % TRANSPORT, X4M300
     
     properties (SetAccess = private)
-        xep_instance     % libpointer to C/C++ library instance
         x2_instance      % libpointer to C/C++ library instance
         radarInterface; % Layer one wrapper class
     end
@@ -93,35 +92,35 @@ classdef XEP
         function status = x4driver_set_fps( this, fps)
             %X4DRIVER_SET_FPS Sets frame rate for frame streaming.
             %   status = X4DRIVER_SET_FPS( this, fps)
-            status = this.radarInterface.xep_x4driver_set_fps(this.xep_instance, fps );
+            status = this.radarInterface.xep_x4driver_set_fps(this.x2_instance, fps );
         end
         
         function [fps,status] = x4driver_get_fps( this )
             %X4DRIVER_GET_FPS Gets configured fps.
             %   status = X4DRIVER_GET_FPS( this )
             fpsPtr = libpointer('singlePtr',0);
-            status = this.radarInterface.xep_x4driver_get_fps(this.xep_instance,fpsPtr );
+            status = this.radarInterface.xep_x4driver_get_fps(this.x2_instance,fpsPtr );
             fps = double(fpsPtr.Value); clear fpsPtr
         end
         
         function status = x4driver_set_iterations( this, iterations)
             %X4DRIVER_SET_ITERATIONS Sets Iterations.
             %   status = X4DRIVER_SET_ITERATIONS( this, iterations)
-            status = this.radarInterface.xep_x4driver_set_iterations(this.xep_instance, iterations );
+            status = this.radarInterface.xep_x4driver_set_iterations(this.x2_instance, iterations );
         end
         
 %         function [iterations,status] = x4driver_get_iterations( this )
 %         %X4DRIVER_GET_ITERATIONS Sets Iterations.
 %         % status = X4DRIVER_GET_ITERATIONS( this, iterations)
 %             itPtr = libpointer('uint32',0);
-% 		    status = this.radarInterface.xep_x4driver_get_iterations(this.xep_instance, itPtr );
+% 		    status = this.radarInterface.xep_x4driver_get_iterations(this.x2_instance, itPtr );
 %             iterations = double(itPtr.Value); clear itPtr
 %         end
         
         function status = x4driver_set_pulsesperstep( this, pulsesperstep)
             %X4DRIVER_SET_PULSESPERSTEP Sets pulses per step.
             %   status = X4DRIVER_SET_PULSESPERSTEP( this, pulsesperstep)
-            status = this.radarInterface.xep_x4driver_set_pulsesperstep(this.xep_instance, pulsesperstep );
+            status = this.radarInterface.xep_x4driver_set_pulsesperstep(this.x2_instance, pulsesperstep );
         end
         
         function status = x4driver_set_downconversion( this, downconversion)
@@ -129,7 +128,7 @@ classdef XEP
             %   status = X4DRIVER_SET_DOWNCONVERSION( this, downconversion)
             %   downconversion  0 = no downconversion, i.e. rf data.
             %                   1 = downconversion, i.e. bb data.
-            status = this.radarInterface.xep_x4driver_set_downconversion(this.xep_instance, downconversion );
+            status = this.radarInterface.xep_x4driver_set_downconversion(this.x2_instance, downconversion );
         end
         
         function status = x4driver_set_frame_area( this, start, stop)
@@ -137,13 +136,13 @@ classdef XEP
             %   status = X4DRIVER_SET_FRAME_AREA( this, start, stop)
             %
             %   See also X4DRIVER_GET_FRAME_AREA
-            status = this.radarInterface.xep_x4driver_set_frame_area(this.xep_instance, start, stop );
+            status = this.radarInterface.xep_x4driver_set_frame_area(this.x2_instance, start, stop );
         end
         
         function status = x4driver_init( this )
             %X4DRIVER_INIT Will make sure that enable is set, 8051 SRAM is programmed, ldos are enabled, and that the external oscillator has been enabled.
             %   status = X4DRIVER_INIT( this )
-            status = this.radarInterface.xep_x4driver_init(this.xep_instance );
+            status = this.radarInterface.xep_x4driver_init(this.x2_instance );
         end
         
         function status = x4driver_set_tx_center_frequency( this, frequency)
@@ -151,25 +150,25 @@ classdef XEP
             %   status = X4DRIVER_SET_TX_CENTER_FREQUENCY( this, frequency)
             %   frequency_band = 3 : 6.0 to 8.5 Ghz range (default mode)
             %   frequency_band = 4 : 7.2 to 10.2 GHz range
-            status = this.radarInterface.xep_x4driver_set_tx_center_frequency(this.xep_instance, frequency );
+            status = this.radarInterface.xep_x4driver_set_tx_center_frequency(this.x2_instance, frequency );
         end
         
         function status = x4driver_set_dac_step( this, dac_step)
             %X4DRIVER_SET_DAC_STEP  Sets X4 dac step.
             %   status = X4DRIVER_SET_DAC_STEP( this, dac_step)
-            status = this.radarInterface.xep_x4driver_set_dac_step(this.xep_instance, dac_step );
+            status = this.radarInterface.xep_x4driver_set_dac_step(this.x2_instance, dac_step );
         end
         
         function status = x4driver_set_dac_min( this, dac_min)
             %X4DRIVER_SET_DAC_MIN Sets dac min.
             %   status = X4DRIVER_SET_DAC_MIN( this, dac_min)
-            status = this.radarInterface.xep_x4driver_set_dac_min(this.xep_instance, dac_min );
+            status = this.radarInterface.xep_x4driver_set_dac_min(this.x2_instance, dac_min );
         end
         
         function status = x4driver_set_dac_max( this, dac_max)
             %X4DRIVER_SET_DAC_MAX Sets dac max.
             %   status = X4DRIVER_SET_DAC_MAX( this, dac_max)
-            status = this.radarInterface.xep_x4driver_set_dac_max(this.xep_instance, dac_max );
+            status = this.radarInterface.xep_x4driver_set_dac_max(this.x2_instance, dac_max );
         end
         
         function status = x4driver_set_frame_area_offset( this, offset)
@@ -177,20 +176,20 @@ classdef XEP
             %   status = X4DRIVER_SET_FRAME_AREA_OFFSET( this, offset)
             %
             %   See also X4DRIVER_GET_FRAME_AREA_OFFSET
-            status = this.radarInterface.xep_x4driver_set_frame_area_offset(this.xep_instance, offset );
+            status = this.radarInterface.xep_x4driver_set_frame_area_offset(this.x2_instance, offset );
         end
         
         function status = x4driver_set_enable( this, enable)
             %X4DRIVER_SET_ENABLE Set enable for X4 enable pin.
             %   status = X4DRIVER_SET_ENABLE( this, enable)
-            status = this.radarInterface.xep_x4driver_set_enable(this.xep_instance, enable );
+            status = this.radarInterface.xep_x4driver_set_enable(this.x2_instance, enable );
         end
         
         function status = x4driver_set_tx_power( this, tx_power)
             %X4DRIVER_SET_TX_POWER Set the radar transmitter power.
             %   status = X4DRIVER_SET_TX_POWER( this, tx_power)
             %   tx_power    0 = transmitter off. See datasheet for valid values.
-            status = this.radarInterface.xep_x4driver_set_tx_power(this.xep_instance, tx_power );
+            status = this.radarInterface.xep_x4driver_set_tx_power(this.x2_instance, tx_power );
         end
         
         function [frame_start, frame_stop, status] = x4driver_get_frame_area( this )
@@ -203,7 +202,7 @@ classdef XEP
             %   See also X4DRIVER_SET_FRAME_AREA
             startPtr = libpointer('singlePtr',0);
             stopPtr = libpointer('singlePtr',0);
-            status = this.radarInterface.xep_x4driver_get_frame_area(this.xep_instance, startPtr, stopPtr);
+            status = this.radarInterface.xep_x4driver_get_frame_area(this.x2_instance, startPtr, stopPtr);
             frame_start = double(startPtr.Value);
             frame_stop = double(stopPtr.Value);
             clear startPtr stopPtr
@@ -215,7 +214,7 @@ classdef XEP
             % 	frame_area_offset 	distance to the start of the frame in meters
             % 	status 				call status; 0 if success, error code otherwise
             offsetPtr = libpointer('singlePtr',0);
-            status = this.radarInterface.xep_x4driver_get_frame_area_offset(this.xep_instance, offsetPtr);
+            status = this.radarInterface.xep_x4driver_get_frame_area_offset(this.x2_instance, offsetPtr);
             frame_area_offset = double(offsetPtr.Value);
             clear offsetPtr
         end
@@ -237,7 +236,7 @@ classdef XEP
             %       0 = Disable all iopin features
             %       1 = Configure according to datasheet default
             %       2 = Passive - Set and get iopin level from host
-            status = this.radarInterface.xep_set_iopin_control(this.xep_instance, pinId, pinSetup, pinFeature);
+            status = this.radarInterface.xep_set_iopin_control(this.x2_instance, pinId, pinSetup, pinFeature);
         end
         
         function status = set_iopin_value( this , pinId, pinValue)
@@ -245,7 +244,7 @@ classdef XEP
             %   status = SET_IOPIN_VALUE( this , pinId, pinValue)
             %
             % See also SET_IOPIN_CONTROL
-            status = this.radarInterface.xep_set_iopin_value(this.xep_instance, pinId, pinValue);
+            status = this.radarInterface.xep_set_iopin_value(this.x2_instance, pinId, pinValue);
         end
         
         function [pinValue, status] = get_iopin_value( this , pinId)
@@ -254,7 +253,7 @@ classdef XEP
             % 	pinValue 	the value of pin PINID
             % 	status		call status; 0 if success, error code otherwise
             pinValuePtr = libpointer('uint32Ptr',0);
-            status = this.radarInterface.xep_get_iopin_value(this.xep_instance, pinId, pinValuePtr);
+            status = this.radarInterface.xep_get_iopin_value(this.x2_instance, pinId, pinValuePtr);
             pinValue = double(pinValuePtr.Value);
             clear pinValuePtr
         end
@@ -262,7 +261,7 @@ classdef XEP
         function queuesize = peek_message_data_string( this )
             %PEEK_MESSAGE_DATA_STRING Returns queue size of data string messages
             % queuesize = PEEK_MESSAGE_DATA_STRING( this )
-            queuesize = double(this.radarInterface.xep_peek_message_data_string(this.xep_instance));
+            queuesize = double(this.radarInterface.xep_peek_message_data_string(this.x2_instance));
         end
         
         function [contentID, length, info, data, status] = read_message_data_string( this )
@@ -311,68 +310,68 @@ classdef XEP
 %         function status = set_max_message_buffer_count_data_float( this, newsize )
 % 		%SET_MAX_MESSAGE_BUFFER_COUNT_DATA_FLOAT
 % 		% status = SET_MAX_MESSAGE_BUFFER_COUNT_DATA_FLOAT( this, newsize )
-%             status = this.radarInterface.set_max_message_buffer_count_data_float(this.xep_instance, newsize);
+%             status = this.radarInterface.set_max_message_buffer_count_data_float(this.x2_instance, newsize);
 %         end
 %
 %         function status = set_max_message_buffer_count_data_string( this, newsize )
 % 		%SET_MAX_MESSAGE_BUFFER_COUNT_DATA_STRING
 % 		%	status = SET_MAX_MESSAGE_BUFFER_COUNT_DATA_STRING( this, newsize )
-%             status = this.radarInterface.set_max_message_buffer_count_data_string(this.xep_instance, newsize);
+%             status = this.radarInterface.set_max_message_buffer_count_data_string(this.x2_instance, newsize);
 %         end
         
         function status = x4driver_set_spi_register( this, address, value )
             %X4DRIVER_SET_SPI_REGISTER Set spi register on radar chip.
             %	status = X4DRIVER_SET_SPI_REGISTER( this, address, value )
-            status = this.radarInterface.xep_x4driver_set_spi_register(this.xep_instance, address, value );
+            status = this.radarInterface.xep_x4driver_set_spi_register(this.x2_instance, address, value );
         end
         %
         function [value,status] = x4driver_get_spi_register( this,address )
             %X4DRIVER_GET_SPI_REGISTER Get spi register on radar chip.
             %	[value,status] = X4DRIVER_GET_SPI_REGISTER( this,address )
             valuePtr = libpointer('uint8Ptr',0);
-            status = this.radarInterface.xep_x4driver_get_spi_register(this.xep_instance, address,valuePtr );
+            status = this.radarInterface.xep_x4driver_get_spi_register(this.x2_instance, address,valuePtr );
             value = valuePtr.Value; clear valuePtr
         end
         %
         function status = x4driver_set_pif_register( this,address,value )
             %X4DRIVER_SET_PIF_REGISTER Sets PIF register value.
             %	status = X4DRIVER_SET_PIF_REGISTER( this,address,value )
-            status = this.radarInterface.xep_x4driver_set_pif_register(this.xep_instance,address,value);
+            status = this.radarInterface.xep_x4driver_set_pif_register(this.x2_instance,address,value);
         end
         %
         function [value,status] = x4driver_get_pif_register( this,address )
             %X4DRIVER_GET_PIF_REGISTER Gets PIF register value.
             %	[value,status] = X4DRIVER_GET_PIF_REGISTER( this,address )
             valuePtr = libpointer('uint8Ptr',0);
-            status = this.radarInterface.xep_x4driver_get_pif_register(this.xep_instance,address ,valuePtr);
+            status = this.radarInterface.xep_x4driver_get_pif_register(this.x2_instance,address ,valuePtr);
             value = valuePtr.Value; clear valuePtr
         end
         %
         function status = x4driver_set_xif_register( this,address,value )
             %X4DRIVER_SET_XIF_REGISTER Sets XIF register value.
             %	status = X4DRIVER_SET_XIF_REGISTER( this,address,value )
-            status = this.radarInterface.xep_x4driver_set_xif_register(this.xep_instance,address,value);
+            status = this.radarInterface.xep_x4driver_set_xif_register(this.x2_instance,address,value);
         end
         %
         function [value,status] = x4driver_get_xif_register( this,address )
             %X4DRIVER_GET_XIF_REGISTER Gets XIF register value.
             %	[value,status] = X4DRIVER_GET_XIF_REGISTER( this,address )
             valuePtr = libpointer('uint8Ptr',0);
-            status = this.radarInterface.xep_x4driver_get_xif_register(this.xep_instance, address,valuePtr);
+            status = this.radarInterface.xep_x4driver_get_xif_register(this.x2_instance, address,valuePtr);
             value = valuePtr.Value; clear valuePtr
         end
         %
         function status = x4driver_set_prf_div( this,prf_div )
             %X4DRIVER_SET_PRF_DIV Sets Pulse Repetition Frequency(PRF) divider
             %	status = X4DRIVER_SET_PRF_DIV( this,prf_div )
-            status = this.radarInterface.xep_x4driver_set_prf_div(this.xep_instance, prf_div);
+            status = this.radarInterface.xep_x4driver_set_prf_div(this.x2_instance, prf_div);
         end
         %
         function [prf_div,status] = x4driver_get_prf_div( this )
             %X4DRIVER_GET_PRF_DIV Gets Pulse Repetition Frequency(PRF) divider
             %	status = X4DRIVER_GET_PRF_DIV( this )
             prf_divPtr = libpointer('uint8Ptr',0);
-            status = this.radarInterface.xep_x4driver_get_prf_div(this.xep_instance, prf_divPtr);
+            status = this.radarInterface.xep_x4driver_get_prf_div(this.x2_instance, prf_divPtr);
             prf_div = prf_divPtr.Value; clear prf_divPtr
         end
         
@@ -386,8 +385,6 @@ classdef XEP
         function x4 = XEP(mc)
             % Constructor
             x4.radarInterface = mc.radarInterface;
-            x4.xep_instance = calllib(mc.lib_name,'nva_get_xep',mc.mcInstance);
-            assert(~x4.xep_instance.isNull, 'create xethru failed check the logs');
             x4.x2_instance = calllib(mc.lib_name,'nva_get_x2',mc.mcInstance);
             assert(~x4.x2_instance.isNull, 'create xethru failed check the logs');
         end
@@ -396,10 +393,8 @@ classdef XEP
         function delete( this )
             % Destructor
             clear this.dataSringPtr this.dataFloatPtr
-            calllib(this.radarInterface.lib_name,'nva_destroy_XEP_interface',this.xep_instance);
             calllib(this.radarInterface.lib_name,'nva_destroy_X2_interface',this.x2_instance);
             clear('this.radarInterface')
-            clear('this.xep_instance')
             clear('this.x2_instance')
         end
     end

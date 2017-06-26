@@ -21,7 +21,7 @@
     <div class="page-title-bar container-fluid">
       <div id="projectalign" class="row">
         <div id="projectname" class="col-sm-12">pymoduleconnector
-          &#160;<span id="projectnumber">1.1.5</span>
+          &#160;<span id="projectnumber">1.1.8</span>
         </div>
         <div id="projectbrief" class="col-sm-12">A Python wrapper for XeThru ModuleConnector</div>
       </div>
@@ -87,6 +87,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpymoduleconnector_1_1moduleconnector_1_1_data_player.xhtml">DataPlayer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inherits <a class="el" href="classpymoduleconnector_1_1moduleconnectorwrapper_1_1_py_data_player.xhtml">pymoduleconnector.moduleconnectorwrapper.PyDataPlayer</a>.  <a href="classpymoduleconnector_1_1moduleconnector_1_1_data_player.xhtml#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpymoduleconnector_1_1moduleconnector_1_1_data_reader.xhtml">DataReader</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inherits <a class="el" href="classpymoduleconnector_1_1moduleconnectorwrapper_1_1_py_data_reader.xhtml" title="The PyDataReader class allows reading of xethru data records from a recording. ">pymoduleconnector.moduleconnectorwrapper.PyDataReader</a>.  <a href="classpymoduleconnector_1_1moduleconnector_1_1_data_reader.xhtml#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -135,7 +138,7 @@ Functions</h2></td></tr>
 <p>Initiate a context managed <a class="el" href="classpymoduleconnector_1_1moduleconnector_1_1_module_connector.xhtml" title="Inherits pymoduleconnector.moduleconnectorwrapper.PythonModuleConnector. ">ModuleConnector</a> object. </p>
 <p>Convenience function to get a context managed <a class="el" href="classpymoduleconnector_1_1moduleconnector_1_1_module_connector.xhtml" title="Inherits pymoduleconnector.moduleconnectorwrapper.PythonModuleConnector. ">ModuleConnector</a> object.</p>
 <p>All references to the object is deleted, thus the serial port connection is closed.</p>
-<p><b>Examples</b> </p><div class="fragment"><div class="line">&gt;&gt;&gt; <span class="keyword">from</span> pymoduleconnector <span class="keyword">import</span> open_mc</div><div class="line">&gt;&gt;&gt; with open_mc(<span class="stringliteral">&#39;com11&#39;</span>) <span class="keyword">as</span> mc:</div><div class="line">&gt;&gt;&gt;     print(hex(mc.get_x2m200().ping()))</div><div class="line">0xaaeeaeeaL</div></div><!-- fragment --> 
+<p><b>Examples</b> </p><div class="fragment"><div class="line">&gt;&gt;&gt; <span class="keyword">from</span> pymoduleconnector <span class="keyword">import</span> create_mc</div><div class="line">&gt;&gt;&gt; with create_mc(<span class="stringliteral">&#39;com11&#39;</span>) <span class="keyword">as</span> mc:</div><div class="line">&gt;&gt;&gt;     print(hex(mc.get_x2m200().ping()))</div><div class="line">0xaaeeaeeaL</div></div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

@@ -1,7 +1,7 @@
 % This example demonstrates the use of ModuleConnector.DataRecorder to
 % record the data_float message from XEP.
 
-COMPORT = 'COM6';
+COMPORT = 'COM3';
 
 % Load the library
 Lib = ModuleConnector.Library;

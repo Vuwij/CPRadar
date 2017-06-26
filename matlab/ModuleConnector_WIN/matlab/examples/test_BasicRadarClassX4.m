@@ -1,21 +1,26 @@
+% Include paths
+addpath('../../lib/');
+addpath('../../include/');
+addpath('../');
+
 % Load the library
 Lib = ModuleConnector.Library;
 Lib.libfunctions
 
 % Input parameters
 COM = char(seriallist);
-FPS = 30;
-dataType = 'bb';
+FPS = 20;
+dataType = 'rf';
 
 % Chip settings
-PPS = 64; %26
-DACmin = 949; %949
+PPS = 26;
+DACmin = 949;
 DACmax = 1100;
-Iterations = 32;
+Iterations = 16;
 FrameStart = 0.0; % meters.
-FrameStop = 9.75; % meters.
+FrameStop = 9.9; % meters.
 
-% Using BasicRadarClassX4
+%% Using BasicRadarClassX4
 radar = BasicRadarClassX4(COM,FPS,dataType);
 
 % Open radar.
@@ -29,18 +34,22 @@ radar.radarInstance.x4driver_set_pulsesperstep(PPS);
 radar.radarInstance.x4driver_set_dac_min(DACmin);
 radar.radarInstance.x4driver_set_dac_max(DACmax);
 radar.radarInstance.x4driver_set_iterations(Iterations);
-radar.radarInstance.x4driver_set_iterations(Iterations);
-radar.radarInstance.x4driver_set_tx_center_frequency (3);
-
-regs = zeros(128, 1);
-for i=1:127
-    regs(i, 1) = radar.radarInstance.x4driver_get_pif_register (i);
-end
-radar.radarInstance.x4driver_set_pif_register (24,255);
-ans1 = radar.radarInstance.x4driver_get_pif_register (24);
+radar.radarInstance.x4driver_set_tx_center_frequency(3);
+radar.radarInstance.x4driver_set_pif_register(101, 0); %Frequency Register
+% Frequency Registers
+% 0 - 2.9 Ghz
+% 16 - 4.314 Ghz
+% 32 - 5.832 Ghz
+% 48 - 7.29 Ghz
+% 64 - 8.748 Ghz
+% 80 - 10.206 Ghz
+% 96 - 11.664 Ghz
+% 112 - 13.122 Ghz
 
 % Configure frame area
 radar.radarInstance.x4driver_set_frame_area(FrameStart,FrameStop);
+% Read back actual set frame area
+[frameStart, frameStop] = radar.radarInstance.x4driver_get_frame_area();
 
 % Start streaming and subscribe to message_data_float.
 radar.start();
@@ -50,6 +59,9 @@ tstart = tic;
 fh = figure(5);
 clf(fh);
 ph = plot(0);
+ylabel('Normalized amplitude');
+xlabel('Range [m]');
+
 th = title('');
 grid on;
 
@@ -63,6 +75,16 @@ while ishandle(fh)
         % Get frame (uses read_message_data_float)
         [frame, ctr] = radar.GetFrameNormalized();
         
+        if i == 1
+            numBins = length(frame);
+            if strcmp('bb', dataType)
+                numBins = numBins/2;
+            end
+            binLength = (frameStop-frameStart)/(numBins-1);
+            rangeVec = (0:numBins-1)*binLength + frameStart;
+            ph.XData = rangeVec;
+        end
+        
         switch dataType
             
             case 'rf'
@@ -74,13 +96,17 @@ while ishandle(fh)
                 ylim([-0.1 2]);
         end
         
+            
+        
         th.String = ['FrameNo: ' num2str(i) ' - Length: ' num2str(length(frame)) ' - FrameCtr: ' num2str(ctr)];
         
         drawnow;
         if mod(i,100)==0
             disp(['Packets available: ' num2str(radar.bufferSize())]);
-        end 
+        end
+        
     end
+        
 end
 
 radar.stop();

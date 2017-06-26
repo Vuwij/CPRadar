@@ -4,21 +4,23 @@
 
 #include "NotSupportedData.hpp"
 #include "RecordingOptions.hpp"
+#include "LockedRadarForward.hpp"
 
-struct RadarInterface;
-class Logger;
+struct Logger;
 
 namespace XeThru {
 
+class ModuleConnectorImpl;
 /**
  * @class DataRecorder
  *
- * The DataRecorder class allows recording of xethru data types.
+ * The DataRecorder class allows recording of xethru data types to disk.
  *
  * The DataRecorder class is a high level recorder class. It can be used to record all data types
  * sent by a xethru device over serial port or similar. All low-level I/O is handled by the recorder
  * itself with no setup required. Data is stored on disk as specified by the XeThru File Formats document
- * and can be easily read back using the \a DataReader class.
+ * and can be easily read back using the \ref DataReader class (read disk records) or
+ * \ref DataPlayer class (playback disk records as binary packets).
  *
  * @snippet record.cpp Typical usage
  *
@@ -29,7 +31,7 @@ namespace XeThru {
  *
  * DataRecorder also supports more advance \a RecordingOptions such as splitting of files and directories.
  *
- * @see start_recording RecordingOptions DataReader.
+ * @see start_recording, RecordingOptions, DataReader, DataPlayer
  */
 class DataRecorderPrivate;
 class DataRecorder
@@ -73,6 +75,12 @@ public:
      * Constructs recorder.
      */
     DataRecorder();
+
+    /**
+     * Constructs recorder. Only useful for internal use.
+     * @internal
+     */
+    DataRecorder(LockedRadarInterfacePtr &radar_interface);
 
     /**
      * Constructs recorder initialized with a logger.
@@ -233,14 +241,14 @@ public:
      */
     static std::string data_type_to_string(XeThru::DataType data_type);
 
+
 private:
-    DataRecorder(RadarInterface &radar_interface);
     DataRecorder(const DataRecorder &other) = delete;
     DataRecorder(DataRecorder &&other) = delete;
     DataRecorder& operator= (const DataRecorder &other) = delete;
     DataRecorder& operator= (DataRecorder &&other) = delete;
 
-    friend struct ::RadarInterface;
+    friend RadarInterface;
     DataRecorderPrivate *d_ptr;
 };
 

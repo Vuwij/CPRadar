@@ -4,11 +4,13 @@
 #include "Bytes.hpp"
 #include "Data.hpp"
 #include "RecordingOptions.hpp"
+#include "LockedRadarForward.hpp"
 
 #include <memory>
 #include <functional>
 
-struct RadarInterface;
+
+
 
 namespace XeThru {
 
@@ -30,7 +32,7 @@ public:
      * Constructor
      * @param[in]  a_radar_interface a reference to the internal radar interface
      */
-    X2M200(RadarInterface & a_radar_interface);
+    X2M200(LockedRadarInterfacePtr & a_radar_interface);
 
     /**
      * Sets debug level in the Xethru module.
@@ -197,6 +199,13 @@ public:
     int enable_baseband_ap();
 
     /**
+     * Disables amplitude/phase baseband output.
+     *
+     * @return 0 on success, otherwise returns 1.
+     */
+    int disable_baseband_ap();
+
+    /**
      * Enable I/Q baseband output.
      *
      * For all supported profiles it is possible to turn on IQ baseband output.
@@ -206,6 +215,13 @@ public:
      * @return status : success in case of 0 / failure in any other case
      */
     int enable_baseband_iq();
+
+    /**
+     * Disables I/Q baseband output.
+     *
+     * @return 0 on success, otherwise returns 1.
+     */
+    int disable_baseband_iq();
 
     /**
      * Set the desired detection zone.
