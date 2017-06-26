@@ -73,6 +73,12 @@ int presence_single(const std::string & device_name)
     std::cout << "direction:      " << static_cast<unsigned int>(presence_single.direction) << std::endl;
     std::cout << "signal_quality: " << presence_single.signal_quality << std::endl;
 
+
+    std::cout << "Set the module in STOP state" << std::endl;
+    if (x4m300.set_sensor_mode(XTID_SM_STOP, 0)) {
+        return handle_error("set output controll failed");
+    }
+
     return 0;
 }
 

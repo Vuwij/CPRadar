@@ -86,15 +86,15 @@ classdef NotSupported
         end
         %
         % TODO:
-        function int = set_profile_parameter_file( this )
-            %int nva_set_profile_parameter_file(X2 * instance,const char * filename,const char * data);
-            %int = calllib(this.lib_name,'nva_set_profile_parameter_file', X2_interface,
+        function int = set_parameter_file( this )
+            %int nva_set_parameter_file(X2 * instance,const char * filename,const char * data);
+            %int = calllib(this.lib_name,'nva_set_parameter_file', X2_interface,
         end
         %
         % TODO:
-        function int = get_profile_parameter_file( this )
+        function int = get_parameter_file( this )
             %int nva_get_profile_parameter_file(X2 * instance,const char * filename);
-            %int = calllib(this.lib_name,'nva_get_profile_parameter_file', X2_interface,
+            %int = calllib(this.lib_name,'nva_get_parameter_file', X2_interface,
         end
         %
         % TODO

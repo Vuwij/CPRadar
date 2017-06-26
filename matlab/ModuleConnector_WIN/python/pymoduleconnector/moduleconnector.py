@@ -2,8 +2,8 @@
 
 Entrypoint functionality.
 """
-from pymoduleconnector.moduleconnectorwrapper import \
-        PythonModuleConnector, PyDataRecorder, PyDataReader
+from .moduleconnectorwrapper import \
+        PythonModuleConnector, PyDataRecorder, PyDataReader, PyDataPlayer
 
 class ModuleConnector(PythonModuleConnector):
     """ Inherits pymoduleconnector.moduleconnectorwrapper.PythonModuleConnector
@@ -33,6 +33,11 @@ class DataReader(PyDataReader):
     """
     pass
 
+class DataPlayer(PyDataPlayer):
+    """ Inherits pymoduleconnector.moduleconnectorwrapper.PyDataPlayer
+    """
+    pass
+
 from contextlib import contextmanager
 import weakref
 
@@ -46,8 +51,8 @@ def create_mc(*args, **kwargs):
     closed.
 
     Examples:
-        >>> from pymoduleconnector import open_mc
-        >>> with open_mc('com11') as mc:
+        >>> from pymoduleconnector import create_mc
+        >>> with create_mc('com11') as mc:
         >>>     print(hex(mc.get_x2m200().ping()))
         0xaaeeaeeaL
     """

@@ -127,7 +127,71 @@ classdef DataRecorderInterface
         function clear_basename_for_data_types(this, dataRecorder_instance, data_type)
             calllib(this.lib_name, 'nva_clear_basename_for_data_types', dataRecorder_instance, uint32(data_type));
         end
-        
+        %
+        %% Data reader
+        function status = data_reader_open(this, dataReader_instance, meta_filename, length_of_meta_filename, depth)
+            status = calllib(this.lib_name, 'data_reader_open', dataReader_instance, meta_filename, uint32(length_of_meta_filename), int32(depth));
+        end
+        %
+        function data_reader_close(this, dataReader_instance)
+            calllib(this.lib_name, 'data_reader_close', dataReader_instance);
+        end
+        %
+        function ret = data_reader_is_open(this, dataReader_instance)
+            ret = calllib(this.lib_name, 'data_reader_is_open', dataReader_instance);
+        end
+        %
+        function ret = data_reader_at_end(this, dataReader_instance)
+            ret = calllib(this.lib_name, 'data_reader_at_end', dataReader_instance);
+        end
+        %
+        function status = data_reader_read_record(this, dataReader_instance, dataPtr, maxSize, sizePtr, dataTypePtr, epochPtr, isUserHeaderPtr)
+            status = calllib(this.lib_name, 'data_reader_read_record', dataReader_instance, dataPtr, sizePtr, uint32(maxSize), dataTypePtr, epochPtr, isUserHeaderPtr);
+        end
+        %
+        function status = data_reader_peek_record(this, dataReader_instance, dataPtr, maxSize, sizePtr, dataTypePtr, epochPtr, isUserHeaderPtr)
+            status = calllib(this.lib_name, 'data_reader_peek_record', dataReader_instance, dataPtr, sizePtr, uint32(maxSize), dataTypePtr, epochPtr, isUserHeaderPtr);
+        end
+        %
+        function status = data_reader_seek_ms(this, dataReader_instance, position)
+            status = calllib(this.lib_name, 'data_reader_seek_ms', dataReader_instance, int64(position));
+        end
+        %
+        function status = data_reader_seek_byte(this, dataReader_instance, position)
+            status = calllib(this.lib_name, 'data_reader_seek_byte', dataReader_instance, int64(position));
+        end
+        %
+        function status = data_reader_set_filter(this, dataReader_instance, data_type)
+            status = calllib(this.lib_name, 'data_reader_set_filter', dataReader_instance, uint32(data_type));
+        end
+        %
+        function status = data_reader_get_filter(this, dataReader_instance, dataTypesPtr)
+            status = calllib(this.lib_name, 'data_reader_get_filter', dataReader_instance, dataTypesPtr);
+        end
+        %
+        function status = data_reader_get_start_epoch(this, dataReader_instance, startEpochPtr)
+            status = calllib(this.lib_name, 'data_reader_get_start_epoch', dataReader_instance, startEpochPtr);
+        end
+        %
+        function status = data_reader_get_duration(this, dataReader_instance, durPtr)
+            status = calllib(this.lib_name, 'data_reader_get_duration', dataReader_instance, durPtr);
+        end
+        %
+        function status = data_reader_get_size(this, dataReader_instance, sizePtr)
+            status = calllib(this.lib_name, 'data_reader_get_size', dataReader_instance, sizePtr);
+        end
+        %
+        function status = data_reader_get_data_types(this, dataReader_instance, dataTypesPtr)
+            status = calllib(this.lib_name, 'data_reader_get_data_types', dataReader_instance, dataTypesPtr);
+        end
+        %
+        function status = data_reader_get_max_record_size(this, dataReader_instance, maxRecSizePtr)
+            status = calllib(this.lib_name, 'data_reader_get_max_record_size', dataReader_instance, maxRecSizePtr);
+        end
+        %
+        function status = data_reader_get_session_id(this, dataReader_instance, sessionIdPtr, sizePtr, maxLength)
+            status = calllib(this.lib_name, 'data_reader_get_session_id', dataReader_instance, sessionIdPtr, sizePtr, uint32(maxLength));
+        end
     end
     
 end

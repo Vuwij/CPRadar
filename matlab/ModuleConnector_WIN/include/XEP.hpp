@@ -2,6 +2,8 @@
 #define XEP_INTERFACE_H
 
 #include "RecordingOptions.hpp"
+#include "LockedRadarForward.hpp"
+#include "Data.hpp"
 
 #include <cinttypes>
 #include <string>
@@ -30,7 +32,7 @@ public:
     *
     * @return instance
     */
-    XEP(RadarInterface &radar_interface);
+    XEP(LockedRadarInterfacePtr & radar_interface);
 
    /**
     * @brief XEP destructor
@@ -45,6 +47,14 @@ public:
     * @return execution status.
     */
     int module_reset();
+
+
+    /**
+     * Set baudrate for serial communication during ModuleConnector operation.
+     *
+     * @param baudrate: enum representing the baudrate, defined in xtid.h
+     */
+    int set_baudrate(uint32_t baudrate);
 
     /**
     * @brief Returns a string containing system information given by infocode:
@@ -65,6 +75,7 @@ public:
     * @return execution status
     */
     int ping(uint32_t *pong_value);
+
 
     /**
     * @brief Sets frame rate for frame streaming.
@@ -314,8 +325,110 @@ public:
     *
     * @return execution status
     */
-   int read_message_system(uint32_t *responsecode);
+    int read_message_system(uint32_t *responsecode);
 
+    /**
+     * @brief Searches for and returns a list of identifiers for all files of the specified type.
+     *
+     * @param type: The type of file.
+     * @param result: vector of file identifiers are copied here as result.
+     *
+     * @return execution status
+     */
+    int search_for_file_by_type(uint32_t type, std::vector<int32_t> & result);
+
+    /**
+     * @brief Finds all files and stores the type and identifier of each file in the given buffers.
+     *
+     * @param result: The result from the search is copied into the result parameter.
+     *
+     * @return execution status
+     */
+    int  find_all_files(XeThru::Files & result);
+
+    /**
+     * @brief Creates and opens a new file with given type, identifiers and length.
+     *
+     * @param type: The type of file.
+     * @param identifier: The identifer of the file.
+     * @param length: length of the file to create
+     *
+     * @return execution status
+     */
+    int create_file(uint32_t file_type, uint32_t identifier, uint32_t length);
+
+    /**
+     * @brief Opens the file with given type band identifiers.
+     *
+     * @param type: The type of file.
+     * @param identifier: The identifer of the file.
+     *
+     * @return execution status
+     */
+    int open_file(uint32_t file_type, uint32_t identifier);
+
+    /**
+     * @brief Writes data at offset to the file.
+     *
+     * @param type: The type of file.
+     * @param identifier: The identifer of the file.
+     * @param offset: Offset where to write the data to.
+     * @param data: The data to write.
+     *
+     * @return execution status
+     */
+    int set_file_data(
+        uint32_t type,
+        uint32_t identifier,
+        uint32_t offset,
+        const Bytes & data);
+
+    /**
+     * @brief Close the file.
+     *
+     * @param type: The type of file.
+     * @param identifier: The identifer of the file.
+     * @param commit: wheter to save changes made to the file closing.
+     *
+     * @return execution status
+     */
+    int close_file(uint32_t type, uint32_t identifier, bool commit);
+
+    /**
+     * @brief Gets the length of a file.
+     *
+     * @param type: The type of file.
+     * @param identifier: The identifer of the file.
+     *
+     * @return execution status
+     */
+    int get_file_length(uint32_t type, uint32_t identifier, uint32_t & result);
+
+    /**
+     * @brief Deletes a file
+     *
+     * @param type: The type of file.
+     * @param identifier: The identifer of the file.
+     *
+     * @return execution status
+     */
+    int delete_file(uint32_t type, uint32_t identifier);
+
+    /**
+     * @brief Reads a subsection of the file at an offset.
+     *
+     * @param type: The type of file.
+     * @param identifier: The identifer of the file.
+     * @param offset: The offset to read from.
+     * @param length: Number of bytes to read.
+     * @param result: The resuling data is compied into this parameter.
+     *
+     * @return execution status
+     */
+    int get_file_data(uint32_t type, uint32_t identifier, uint32_t offset, uint32_t length, Bytes & result);
+
+    int set_file(uint32_t type, uint32_t identifier, const Bytes & data);
+    int get_file(uint32_t type, uint32_t identifier, Bytes * result);
 private:
     std::unique_ptr<XEPPrivate> d_ptr;
 };

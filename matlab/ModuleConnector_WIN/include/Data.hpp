@@ -40,15 +40,20 @@ struct DataFloat
 {
     uint32_t content_id;
     uint32_t info;
-    std::vector<float> & get_data() {
+    const std::vector<float> & get_data() {
         return data;
     }
+
+    std::vector<float> get_copy() {
+        return data;
+    }
+
     std::vector<float> data;
 };
 
 
 /**
- * @struc FrameArea
+ * @struct FrameArea
  *
  * @param start: the start of the frame area.
  * @param end: the end of the frame area.
@@ -80,6 +85,14 @@ struct FrameArea
 struct DataRecord
 {
     DataRecord() : is_valid(false) {}
+
+    /**
+     * Const reference accessor to data. In particular useful from Python to avoid unecessary
+     * overhead when read-only access to data is needed.
+     * @return a const reference to the data.
+     */
+    const Bytes &get_data() { return data; }
+
     Bytes data;
     uint32_t data_type;
     int64_t epoch;
@@ -405,11 +418,40 @@ public:
     std::vector<float> radar_cross_section_items;
     std::vector<float> detection_velocity_items;
 
-    std::vector<float> get_movement_slow_items() { return movement_slow_items; }
-    std::vector<float> get_movement_fast_items() { return movement_fast_items; }
-    std::vector<float> get_detection_distance_items() { return detection_distance_items; }
-    std::vector<float> get_radar_cross_section() { return radar_cross_section_items; }
-    std::vector<float> get_detection_velocity_items(){ return detection_velocity_items;}
+    const std::vector<float> &get_movement_slow_items() { return movement_slow_items; }
+    const std::vector<float> &get_movement_fast_items() { return movement_fast_items; }
+    const std::vector<float> &get_detection_distance_items() { return detection_distance_items; }
+    const std::vector<float> &get_radar_cross_section() { return radar_cross_section_items; }
+    const std::vector<float> &get_detection_velocity_items(){ return detection_velocity_items;}
+};
+
+
+struct RespirationMovingListData
+{
+    uint32_t counter;
+    std::vector<float> movement_slow_items;
+    std::vector<float> movement_fast_items;
+    const std::vector<float> & get_movement_slow_items() { return movement_slow_items; }
+    const std::vector<float> & get_movement_fast_items() { return movement_fast_items; }
+};
+
+
+struct RespirationDetectionListData
+{
+    uint32_t counter;
+    uint32_t detection_count;
+    std::vector<float> detection_distance_items;
+    std::vector<float> detection_radar_cross_section_items;
+    std::vector<float> detection_velocity_items;
+};
+
+
+struct Files
+{
+    std::vector<int32_t> file_type_items;
+    std::vector<int32_t> file_identifier_items;
+    std::vector<int32_t> get_file_type_items() { return file_type_items; }
+    std::vector<int32_t> get_file_identifier_items() { return file_identifier_items; }
 };
 
 

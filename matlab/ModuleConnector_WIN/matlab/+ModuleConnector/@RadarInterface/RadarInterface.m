@@ -322,18 +322,18 @@ classdef RadarInterface
             assert(status==0,'xep_read_message_data_float:libraryStatusFailed',strcat('Call returns status=',num2str(status)));
         end
         %
-        function status = xep_x4driver_set_fps( this, xep_instance, fps)
-            status = calllib(this.lib_name,'xep_x4driver_set_fps', xep_instance, single(fps));
+        function status = xep_x4driver_set_fps( this, x2_instance, fps)
+            status = calllib(this.lib_name,'xep_x4driver_set_fps', x2_instance, single(fps));
             assert(status==0,'xep_x4driver_set_fps:libraryStatusFailed',strcat('Call returns status=',num2str(status)));
         end
         %
-        function status = xep_x4driver_get_fps( this, xep_instance, fpsPtr )
-            status = calllib(this.lib_name,'xep_x4driver_get_fps', xep_instance, fpsPtr);
+        function status = xep_x4driver_get_fps( this, x2_instance, fpsPtr )
+            status = calllib(this.lib_name,'xep_x4driver_get_fps', x2_instance, fpsPtr);
             assert(status==0,'xep_x4driver_get_fps:libraryStatusFailed',strcat('Call returns status=',num2str(status)));
         end
         %
-        function status = xep_x4driver_set_iterations( this, xep_instance, iterations)
-            status = calllib(this.lib_name,'xep_x4driver_set_iterations', xep_instance, uint32(iterations));
+        function status = xep_x4driver_set_iterations( this, x2_instance, iterations)
+            status = calllib(this.lib_name,'xep_x4driver_set_iterations', x2_instance, uint32(iterations));
             assert(status==0,'xep_x4driver_set_iterations:libraryStatusFailed',strcat('Call returns status=',num2str(status)));
         end
         %
@@ -537,14 +537,14 @@ classdef RadarInterface
         end
         %
         % TODO:
-        function status = set_profile_parameter_file( this, x2_instance)
+        function status = set_parameter_file( this, x2_instance)
             status=1;
             %int nva_set_profile_parameter_file(X2 * instance,const char * filename,const char * data);
-            %int = calllib(this.lib_name,'nva_set_profile_parameter_file', x2_instance,
+            %int = calllib(this.lib_name,'nva_set_parameter_file', x2_instance,
         end
         %
         % TODO:
-        function status = get_profile_parameter_file( this, x2_instance)
+        function status = get_parameter_file( this, x2_instance)
             status=1;
             %int nva_get_profile_parameter_file(X2 * instance,const char * filename);
             %int = calllib(this.lib_name,'nva_get_profile_parameter_file', x2_instance,
@@ -588,7 +588,7 @@ classdef RadarInterface
         end
          
     %% =================================================================================
-    %    X4M300 interface / X4M200 interface API 
+    %    X4M300 interface
     %===================================================================================
 
         % Defined by X2M200; 1.1.0 / 1.0.0
@@ -616,9 +616,10 @@ classdef RadarInterface
         end
         % 1.0.0 / 1.0.0
         function status = module_reset(this, xep_instance)
-        %   Resets and restart the module.
-            status=calllib(this.lib_name,'nva_reset',xep_instance);
+        %   Resets the module.
+            status=calllib(this.lib_name,'nva_module_reset',xep_instance);
         end
+
         % 1.0.0 / 1.0.0
         function status = load_profile( this, X4M_instance, profile_id)
         %   Set the debug level of the profile.
@@ -808,45 +809,7 @@ classdef RadarInterface
         %        %int read_message_iopin(uint8_t pin_id, uint32_t pin_feature, uint32_t value)
         %   end
         
-        
-        %===================================================================================
-        %   X4M200 interface API 
-        %===================================================================================
-
-        % TODO: 1.0.0
-        function int = peek_message_respiration_legacy(this, X4M200_instance)
-            int = calllib(this.lib_name,'nva_peek_message_respiration_legacy',X4M200_instance);
-            %int peek_message_respiration_legacy()
-        end
-        % TODO: 1.0.0
-        function int = read_message_respiration_legacy(this, X4M200_instance, frame_counterPtr, sensor_statePtr, respiration_ratePtr, distancePtr, movementPtr, signal_qualityPtr)
-            % Binary compatible with X2M200 RESP message.
-            %int = this.get_respiration_data(this, X4M200_instance, name, frame_counterPtr, sensor_statePtr, respiration_ratePtr, distancePtr, movementPtr, signal_qualityPtr);
-            int = calllib(this.lib_name,'nva_read_message_respiration_legacy',X4M200_instance,frame_counterPtr, sensor_statePtr, respiration_ratePtr, distancePtr, movementPtr, signal_qualityPtr);
-            %int read_message_respiration_legacy(uint32_t * counter, uint32_t * stateCode, uint32_t * stateData, float * distance, float * movement, uint32_t * signalQuality)
-        end
-        % TODO: 1.0.0
-        function int = peek_message_respiration_sleep(this, X4M200_instance)
-            int = calllib(this.lib_name,'nva_peek_message_respiration_sleep',X4M200_instance);
-            %int peek_message_respiration_sleep()
-        end
-        % TODO: 1.0.0
-        function status = read_message_respiration_sleep(this, X4M200_instance, frame_counterPtr, sensor_statePtr, respiration_ratePtr, distancePtr, signal_qualityPtr,movement_slowPtr, movement_fastPtr)
-            % Binary compatible with X2M200 SLEEP message.
-            %int = this.get_sleep_data(this, X4M200_instance, name, frame_counterPtr, sensor_statePtr, respiration_ratePtr, distancePtr, signal_qualityPtr,movement_slowPtr, movement_fastPtr)
-            status = calllib(this.lib_name,'nva_read_message_respiration_sleep', X4M200_instance,frame_counterPtr, sensor_statePtr, respiration_ratePtr, distancePtr, signal_qualityPtr,movement_slowPtr, movement_fastPtr);
-            %int read_message_respiration_sleep(uint32_t * counter, uint32_t * respirationState, float * rpm, float * distance, uint32_t * signalQuality, float * movementSlow, float * movementFast)
-        end
-        % 1.0.0 
-        function int = peek_message_respiration_movinglist(this, X4M200_instance)
-            % Return number of messages available.
-            int = calllib(this.lib_name,'nva_peek_message_respiration_movinglist', X4M200_instance);
-        end
-        % 1.0.0
-        function status = read_message_respiration_movinglist(this, X4M200_instance, counterPtr, sensor_statePtr, movementIntervalCountPtr, detectionCountPtr, movementSlowItemPtr, movementFastItemPtr, detectionDistancePtr, detectionRadarCrossSectionPtr, detectionVelocityPtr)
-            status = calllib(this.lib_name,'nva_read_message_respiration_movinglist', X4M200_instance, counterPtr, sensor_statePtr, movementIntervalCountPtr, detectionCountPtr, movementSlowItemPtr, movementFastItemPtr, detectionDistancePtr, detectionRadarCrossSectionPtr, detectionVelocityPtr);
-        end    
-        
+                
         %===================================================================================
         %   X4M300 interface API 
         %===================================================================================

@@ -20,8 +20,6 @@ namespace XeThru {
 #endif
 
 /**
- * @enum DataType
- *
  * This enum type is used to specify which data type to record from the module.
  *
  * @see DataRecorder
@@ -41,6 +39,8 @@ ENUM_BEGIN(DataType) {
     ByteDataType                   = 1 << 11,
     PresenceSingleDataType         = 1 << 12,
     PresenceMovingListDataType     = 1 << 13,
+    RespirationDetectionListDataType = 1 << 14,
+    RespirationMovingListDataType  = 1 << 15,
 }; ENUM_END
 
 /**
@@ -53,13 +53,11 @@ ENUM_BEGIN(DataType) {
 typedef uint32_t DataTypes;
 
 /**
- * @value InvalidDataType
  * Invalid data type, do not use.
  */
 static const uint32_t InvalidDataType = 0;
 
 /**
- * @value AllDataTypes
  * A convenience value used to specify all data types.
  */
 static const uint32_t AllDataTypes = 0xffffffff;

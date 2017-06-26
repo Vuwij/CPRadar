@@ -38,11 +38,16 @@ setup(name='pymoduleconnector',
       author_email='support@xethru.com',
       #TODO: license
       #license='MIT',
-      packages=['pymoduleconnector', 'pymoduleconnector.moduleconnectorwrapper',
-                    'pymoduleconnector.examples', 'pymoduleconnector.doc'
+      packages=[
+          'pymoduleconnector', 'pymoduleconnector.moduleconnectorwrapper',
+          'pymoduleconnector.examples', 'pymoduleconnector.extras',
+          'pymoduleconnector.doc'
       ],
       install_requires=[
       ],
+      extras_require={
+          'auto': ['pyserial']
+      },
       entry_points={
           'console_scripts': ['xt_x2m200resp=pymoduleconnector.examples.x2m200_respiration_example:main'],
       },

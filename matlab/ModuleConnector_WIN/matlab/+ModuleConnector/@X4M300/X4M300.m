@@ -94,7 +94,12 @@ classdef X4M300
             %MODULE_RESET Resets and restart the module.
             status = this.radarInterface.module_reset(this.X4M300_instance);
         end
-        
+
+        function status = reset_to_factory_preset(this)
+            %RESET_TO_FACTORY_PRESET Resets the module to factory preset settings.
+            status = this.radarInterface.reset_to_factory_preset(this.X4M300_instance);
+        end
+
         function status = set_debug_level(this, debug_level)
             %SET_DEBUG_LEVEL Set the debug level of the profile.
             status = this.radarInterface.set_debug_level(this.X4M300_instance, debug_level);
@@ -303,9 +308,9 @@ classdef X4M300
             header.sample_frequency  = double(this.pIQ_sample_frequency.Value);
             header.carrier_frequency = double(this.pIQ_carrier_frequency.Value);
             header.range_offset      = double(this.pIQ_range_offset.Value);
-            i_data    = double(this.pIQ_amplitude.Value(1:header.num_bins));
-            q_data    = double(this.pIQ_phase.Value(1:header.num_bins));
-            iq_data   = complex(i_data,q_data);
+            i_data                   = double(this.pIQ_amplitude.Value(1:header.num_bins));
+            q_data                   = double(this.pIQ_phase.Value(1:header.num_bins));
+            iq_data                  = complex(i_data,q_data);
         end
         
         function [amplitude,phase,header,status] = read_message_baseband_ap( this )
@@ -328,12 +333,12 @@ classdef X4M300
             header.sample_frequency  = double(this.pAP_sample_frequency.Value);
             header.carrier_frequency = double(this.pAP_carrier_frequency.Value);
             header.range_offset      = double(this.pAP_range_offset.Value);
-            amplitude = double(this.pAP_amplitude.Value(1:header.num_bins));
-            phase     = double(this.pAP_phase.Value(1:header.num_bins));
+            amplitude                = double(this.pAP_amplitude.Value(1:header.num_bins));
+            phase                    = double(this.pAP_phase.Value(1:header.num_bins));
         end
         
         function clear( this, name )
-            % CLEAR Clears the in-buffer of the named subscription.
+            %CLEAR Clears the in-buffer of the named subscription.
             %
             % @param[in]
             %	name Subscription identification
@@ -354,11 +359,12 @@ classdef X4M300
         % Destructor
         function delete( this )
             % Destructor
+            clear this.AP_framePtr this.IQ_framePtr;
             clear this.pR_frame_counter this.pR_sensor_state this.pR_distance this.pR_direction this.pR_signal_quality
             clear this.pM_frame_counter this.pM_sensor_state this.pM_movementIntervalCount this.pM_detectionCount this.pM_movementSlowItem this.pM_movementFastItem this.pM_detectionDistance this.pM_detectionRadarCrossSection this.pM_detectionVelocity
             clear this.pAP_frame_counter this.pAP_num_bins this.pAP_bin_length this.pAP_sample_frequency this.pAP_carrier_frequency this.pAP_range_offset this.pAP_amplitude this.pAP_phase
             clear this.pIQ_frame_counter this.pIQ_num_bins this.pIQ_bin_length this.pIQ_sample_frequency this.pIQ_carrier_frequency this.pIQ_range_offset this.pIQ_i_data this.pIQ_q_data
-            calllib(this.radarInterface.lib_name,'nva_destroy_XEP_interface',this.X4M300_instance);
+            calllib(this.radarInterface.lib_name,'nva_destroy_X2_interface',this.X4M300_instance);
             clear('this.radarInterface')
             clear('this.X4M300_instance')
         end

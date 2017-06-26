@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['recordingoptions',['RecordingOptions',['../classpymoduleconnector_1_1moduleconnectorwrapper_1_1_recording_options.xhtml',1,'pymoduleconnector::moduleconnectorwrapper']]],
-  ['respirationdata',['RespirationData',['../classpymoduleconnector_1_1moduleconnectorwrapper_1_1_respiration_data.xhtml',1,'pymoduleconnector::moduleconnectorwrapper']]]
+  ['gpioin',['GpioIn',['../classpymoduleconnector_1_1extras_1_1x4__regmap__autogen_1_1_gpio_in.xhtml',1,'pymoduleconnector::extras::x4_regmap_autogen']]],
+  ['gpiooe',['GpioOe',['../classpymoduleconnector_1_1extras_1_1x4__regmap__autogen_1_1_gpio_oe.xhtml',1,'pymoduleconnector::extras::x4_regmap_autogen']]],
+  ['gpioout',['GpioOut',['../classpymoduleconnector_1_1extras_1_1x4__regmap__autogen_1_1_gpio_out.xhtml',1,'pymoduleconnector::extras::x4_regmap_autogen']]]
 ];

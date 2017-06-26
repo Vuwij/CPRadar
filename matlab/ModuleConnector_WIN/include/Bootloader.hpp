@@ -4,7 +4,7 @@
 #include "Bytes.hpp"
 #include <memory>
 
-class Logger;
+struct Logger;
 
 namespace XeThru {
 class AbstractLoggerIo;

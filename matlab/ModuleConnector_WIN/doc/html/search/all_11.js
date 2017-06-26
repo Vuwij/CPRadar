@@ -1,7 +1,7 @@
 var searchData=
 [
   ['x2m200',['X2M200',['../class_xe_thru_1_1_x2_m200.xhtml',1,'XeThru']]],
-  ['x2m200',['X2M200',['../class_xe_thru_1_1_x2_m200.xhtml#a383581c5c5b578a443c9de7a3984f95e',1,'XeThru::X2M200']]],
+  ['x2m200',['X2M200',['../class_xe_thru_1_1_x2_m200.xhtml#a2fa7922f611073bb4968befd80fe2435',1,'XeThru::X2M200']]],
   ['x2m200_2ehpp',['X2M200.hpp',['../_x2_m200_8hpp.xhtml',1,'']]],
   ['x2m200_5fcpp_2emd',['x2m200_cpp.md',['../x2m200__cpp_8md.xhtml',1,'']]],
   ['x4driver_5fget_5ffps',['x4driver_get_fps',['../class_xe_thru_1_1_x_e_p.xhtml#a57fde2b290f81e4c4ed7ed57e3a61e2b',1,'XeThru::XEP']]],
@@ -29,10 +29,10 @@ var searchData=
   ['x4driver_5fset_5ftx_5fpower',['x4driver_set_tx_power',['../class_xe_thru_1_1_x_e_p.xhtml#a46536ace6a802bba0109db8703713936',1,'XeThru::XEP']]],
   ['x4driver_5fset_5fxif_5fregister',['x4driver_set_xif_register',['../class_xe_thru_1_1_x_e_p.xhtml#a9857ebb7691edbac35d765037a6f689a',1,'XeThru::XEP']]],
   ['x4m300',['X4M300',['../class_xe_thru_1_1_x4_m300.xhtml',1,'XeThru']]],
-  ['x4m300',['X4M300',['../class_xe_thru_1_1_x4_m300.xhtml#adff040a6a76fd6a2e8cf7b9261fa51fe',1,'XeThru::X4M300']]],
+  ['x4m300',['X4M300',['../class_xe_thru_1_1_x4_m300.xhtml#af2abdd59addf413ce3fdb565a490779a',1,'XeThru::X4M300']]],
   ['x4m300_2ehpp',['X4M300.hpp',['../_x4_m300_8hpp.xhtml',1,'']]],
   ['x4m300_5fcpp_2emd',['x4m300_cpp.md',['../x4m300__cpp_8md.xhtml',1,'']]],
-  ['xep',['XEP',['../class_xe_thru_1_1_x_e_p.xhtml#a4829ed87a91c100703ec0cef89c0c487',1,'XeThru::XEP']]],
+  ['xep',['XEP',['../class_xe_thru_1_1_x_e_p.xhtml#a11f91e334a06585e07f1b1334aa9ea1a',1,'XeThru::XEP']]],
   ['xep',['XEP',['../class_xe_thru_1_1_x_e_p.xhtml',1,'XeThru']]],
   ['xep_2ehpp',['XEP.hpp',['../_x_e_p_8hpp.xhtml',1,'']]],
   ['xep_5fcpp_2emd',['xep_cpp.md',['../xep__cpp_8md.xhtml',1,'']]],

@@ -1,13 +1,14 @@
 from __future__ import division, absolute_import, print_function
-from pymoduleconnector.moduleconnector import DataReader
-from pymoduleconnector.moduleconnector import DataRecorder
-from pymoduleconnector.moduleconnector import ModuleConnector
-from pymoduleconnector.moduleconnector import create_mc
-from pymoduleconnector.moduleconnectorwrapper import AllDataTypes
-from pymoduleconnector.moduleconnectorwrapper import Bootloader
-from pymoduleconnector.moduleconnectorwrapper import DataRecord
-from pymoduleconnector.moduleconnectorwrapper import DataType
-from pymoduleconnector.moduleconnectorwrapper import PreferredSplitSize
-from pymoduleconnector.moduleconnectorwrapper import RecordingOptions
-from pymoduleconnector.version import version as __version__
-from pymoduleconnector import doc
+from .moduleconnector import DataReader
+from .moduleconnector import DataRecorder
+from .moduleconnector import DataPlayer
+from .moduleconnector import ModuleConnector
+from .moduleconnector import create_mc
+from .moduleconnectorwrapper import AllDataTypes
+from .moduleconnectorwrapper import Bootloader
+from .moduleconnectorwrapper import DataRecord
+from .moduleconnectorwrapper import DataType
+from .moduleconnectorwrapper import PreferredSplitSize
+from .moduleconnectorwrapper import RecordingOptions
+from .version import version as __version__
+from . import doc

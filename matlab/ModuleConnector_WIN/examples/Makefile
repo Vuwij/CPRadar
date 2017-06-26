@@ -14,7 +14,7 @@ else # Windows
 endif
 
 .PHONY: all
-all: ping ping_x4m300 record read_recording presence_single
+all: ping ping_x4m300 record read_recording playback_recording presence_single
 	echo "done"
 
 ping_x4m300: ping_x4m300.cpp ${MODULE_CONNECTOR_LIB}
@@ -39,4 +39,10 @@ read_recording: read_recording.o ${MODULE_CONNECTOR_LIB}
 	g++ $^ -o $@
 
 read_recording.o: read_recording.cpp
+	g++ ${GXX_FLAGS} -I../include -c $< -o $@
+
+playback_recording: playback_recording.o ${MODULE_CONNECTOR_LIB}
+	g++ $^ -o $@
+
+playback_recording.o: playback_recording.cpp
 	g++ ${GXX_FLAGS} -I../include -c $< -o $@

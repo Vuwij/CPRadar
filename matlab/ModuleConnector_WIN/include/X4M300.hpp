@@ -4,6 +4,7 @@
 #include "NotSupportedData.hpp"
 #include "Data.hpp"
 #include "Bytes.hpp"
+#include "LockedRadarForward.hpp"
 
 #include <cinttypes>
 #include <string>
@@ -19,7 +20,9 @@ class X4M300Private;
 /**
  * @class X4M300
  *
- * TODO
+ * Interface to the Xethru X4M300 Application module
+ * This interface is used to control the XeThru X4M300 module.
+ * See the data sheet of the X4M300 module for more information on the X4M300 module.
  *
  */
 class X4M300
@@ -28,9 +31,9 @@ public:
     /**
      * Constructor
      *
-     * @param[in] internale object used to interface the radar
+     * @param[in] radar_interface internal object used to interface the radar
      */
-    X4M300(RadarInterface &radar_interface);
+    X4M300(LockedRadarInterfacePtr & radar_interface);
 
     /**
      * Destructor
@@ -46,6 +49,13 @@ public:
      * @return status : success in case of 0 / failure in any other case
      */
     int set_debug_level(unsigned char level);
+
+    /**
+     * Set baudrate for serial communication during ModuleConnector operation.
+     *
+     * @param baudrate: enum representing the baudrate, defined in xtid.h
+     */
+    int set_baudrate(uint32_t baudrate);
 
     /**
      * Make sure there is a connection to FW on the Xethru X4M300  module
@@ -84,6 +94,13 @@ public:
     int module_reset();
 
     /**
+     * Resets all parameters in the module to factory presets.
+     *
+     * @return status : success in case of 0 / failure in any other case
+     */
+    int reset_to_factory_preset();
+
+    /**
      * Enters the bootloader for FW upgrades
      *
      * @return status : success in case of 0 / failure in any other case
@@ -113,10 +130,10 @@ public:
      * Control the execution mode of the sensor.
      *
      * @param[in] mode: see xtid.h for profileid values.<br>
-     * Run - Start profile execution<br>
-     * Idle - Halts profile execution. Can be resumed by setting mode to Run.<br>
-     * Stop - Stops profile execution. Must do load_profile to continue.<br>
-     * Manual - Routes X4 radar data directly to host rather than to profile execution. Can then interact directly with XEP / X4Driver. Will disrupt profile performance.<br>
+     * Run     - 0x01: Start profile execution<br>
+     * Idle    - 0x11: Halts profile execution. Can be resumed by setting mode to Run.<br>
+     * Stop    - 0x13: Stops profile execution. Must do load_profile to continue.<br>
+     * Manual  - 0x12: Routes X4 radar data directly to host rather than to profile execution. Can then interact directly with XEP / X4Driver. Will disrupt profile performance.<br>
      * @param[in] param: Not used, ignored, can be 0.
      * @return status : success in case of 0 / failure in any other case
      */
@@ -247,6 +264,7 @@ public:
      * @return status : success in case of 0 / failure in any other case
      */
     int read_message_baseband_iq(BasebandIqData * baseband_iq);
+
 
 private:
     std::unique_ptr<X4M300Private> d_ptr;

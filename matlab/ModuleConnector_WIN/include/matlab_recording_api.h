@@ -11,6 +11,7 @@ typedef struct PreferredSplitSize PreferredSplitSize;
 typedef struct RecordingOptions RecordingOptions;
 typedef struct DataRecorder DataRecorder;
 typedef struct DataReader DataReader;
+typedef struct DataPlayer DataPlayer;
 
 struct PreferredSplitSize
 {
@@ -28,6 +29,11 @@ struct DataRecorder
 };
 
 struct DataReader
+{
+    void *priv;
+};
+
+struct DataPlayer
 {
     void *priv;
 };
@@ -53,7 +59,7 @@ extern void nva_destroy_recording_options(RecordingOptions *instance);
 
 // DataRecorder
 extern DataRecorder *nva_create_data_recorder();
-extern DataRecorder *internal_nva_create_data_recorder(void *radar_interface);
+extern DataRecorder *internal_nva_create_data_recorder(void *locked_radar_interface);
 extern void nva_destroy_data_recorder(DataRecorder *recorder);
 extern int nva_start_recording(DataRecorder *recorder, uint32_t data_types,
                                const char *directory, uint32_t length,
@@ -86,6 +92,25 @@ extern int data_reader_get_size(DataReader *reader, int64_t *size);
 extern int data_reader_get_data_types(DataReader *reader, uint32_t *data_types);
 extern int data_reader_get_max_record_size(DataReader *reader, unsigned int *max_record_size);
 extern int data_reader_get_session_id(DataReader *reader, char *result, uint32_t *length, uint32_t max_length);
+
+// DataPlayer
+extern DataPlayer *data_player_create(const char *meta_filename, uint32_t length, int depth);
+extern void data_player_destroy(DataPlayer *player);
+extern int data_player_play(DataPlayer *player); // Convenience, equivalent to set_state(DataPlayer::PlayingState).
+extern int data_player_pause(DataPlayer *player); // Convenience, equivalent to set_state(DataPlayer::PausedState).
+extern int data_player_stop(DataPlayer *player); // Convenience, equivalent to set_state(DataPlayer::StoppedState).
+extern int data_player_set_state(DataPlayer *player, uint32_t state);
+extern int data_player_get_state(DataPlayer *player, uint32_t *state);
+extern int data_player_set_filter(DataPlayer *player, uint32_t data_types);
+extern int data_player_get_filter(DataPlayer *player, uint32_t *data_types);
+extern int data_player_set_position(DataPlayer *player, int64_t position);
+extern int data_player_get_position(DataPlayer *player, int64_t *position);
+extern int data_player_set_playback_rate(DataPlayer *player, float rate);
+extern int data_player_get_playback_rate(DataPlayer *player, float *rate);
+extern int data_player_set_loop_mode_enabled(DataPlayer *player, uint32_t enabled);
+extern int data_player_get_loop_mode_enabled(DataPlayer *player, uint32_t *enabled);
+extern int data_player_get_duration(DataPlayer *player, int64_t *duration);
+extern int data_player_get_meta_filename(DataPlayer *player, char *meta_filename, uint32_t *length, uint32_t max_length);
 
 #ifdef __cplusplus
 } // extern C
