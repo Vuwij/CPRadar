@@ -12,16 +12,17 @@ function[y] = calculate_dielectric_values(material_index, temperature, ang_vel_m
     % Convert angular velocities to frequencies
     f = x*(1/(2*pi));
     
-    p1=calculate_episilon_s(T); % ?_s
-    p2=calculate_epsilon_1(T); % ?_1
-    p3=calculate_v_1(T); % ?_1
-    p4=calculate_epsilon_2(T); % ?_inf
-    p5=calculate_v_2(T); % ?_2
+    p1=calculate_episilon_s(T);
+    p2=calculate_epsilon_1(T);
+    p3=calculate_v_1(T);
+    p4=calculate_epsilon_2(T);
+    p5=calculate_v_2(T);
     
     y=(p1-p2)/(1+1i*f/p3)+(p2-p4)/(1+1i*f/p5)+p4;
     
-     
-    plot(f,y);
+
+    
+    
     
     % Finds values in the Material Dieletric Properties Table found in materials/MaterialData and return a graph
     load('../materials/MaterialData');
