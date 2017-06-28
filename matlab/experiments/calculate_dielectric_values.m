@@ -4,21 +4,27 @@
 % To test, enter the variables in the command window for the function and
 % press play
 
-%Angular velocity is in rad/s
-function[y] = calculate_dielectric_values(material_index, temp, ang_vel_min, ang_vel_max, precision)
-    x = ang_vel_min:precision:ang_vel_max; % Vector of angular velocities 
-    f = x * ( 1 / (2 * pi)); % Convert angular velocities to frequencies
+% Material name is a string of the name found in materialdata
+% tem = Temperature
+% Angular velocity is in rad/s
+function[e_ts] = calculate_dielectric_values(material_name, tem, ang_vel_min, ang_vel_max)
+    e_0 = 8.85e12;
+
+    x = linspace(ang_vel_min, ang_vel_max); % Vector of angular velocities 
+    f = x / (2 * pi); % Convert angular velocities to frequencies
     
     % Finds values in the Material Dieletric Properties Table found in materials/MaterialData and return a graph
-    load('../materials/MaterialData');
-    a = MaterialData.MaterialDielectricProperties{material_index,:};
+    load('../data/materials/MaterialData');
     
-    p1 = (3.70886 * (10^4) - 8.2168 * 10 * T) / (4.21854 * 100 + temp);
-    p2 = a(0) + a(1) * temp + a(2) * temp .^ 2
-    p3 = (45 + T)/(a(3) + a(4) * T + a(5) * T .^ 2);
-    p4 = a(6) + a(7) * T
-    p5 = (45 + T)/( a(8) +a(9) * T + a(10) * T .^ 2);
-    y = (p1 - p2) / ( 1 + 1i * f / p3) + (p2 - p4)/(1 + 1i * f / p5) + p4;
+    m = MaterialDielectricProperties(material_name, :);
+    cond = MaterialProperties(material_name, :).Conductivity{1}; % conductivity
     
-    plot(f,y);
+    e_s = (3.70886e4 - 8.2168e1 * tem) / (4.21854e2 + tem);
+    e_1 = m.a0 + m.a1 * tem + m.a2 * tem ^ 2;
+    v_1 = (45 + tem) / (m.a3 + m.a4 * tem + m.a5 * tem ^ 2);
+    e_inf = m.a6 + m.a7 * tem;
+    v_2 = (45 + tem) / (m.a8 + m.a9 * tem + m.a10 * tem ^ 2);
+    e_ts = (e_s - e_1) ./ ( 1 + 1i * f ./ v_1) + (e_1 - e_inf) ./ (1 + 1i * f ./ v_2) + e_inf - 1i * cond ./ (2 * pi * e_0 * f);
+    
+    plot(f,e_ts);
 end
