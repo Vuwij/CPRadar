@@ -29,17 +29,14 @@ xlabel('Range [m]');
 
 figure;
 hold on;
-maxfreq = zeros(1,8);
 for i=[3,4,5,6]
     hrfft = fft(sweeps(i).rf_data);
     hrfft = abs(hrfft/L);
     hrfft = hrfft(1:L/2+1);
     f = Fs*(0:(L/2))/L;
     plot(f,hrfft);
-    [~, maxfreq(i)] = max(hrfft);
-    maxfreq(i) = f(maxfreq(i));
 end
-
+[] = max(f);
 hold off;
 title('Single-Sided Amplitude Spectrum of X(t)')
 xlabel('f (Hz)')
@@ -52,18 +49,16 @@ window = hamming(floor(length(rf_data.')/10));
 figure; pwelch(rf_data.',window,[],[],Fs,'centered')
 title('Spectrum of baseband signal x')
 hold on;
-
 %% Downconvert signal
-decfactor = 2;
 dwnConv = dsp.DigitalDownConverter(...
   'SampleRate',23.328e9,...
-  'DecimationFactor',decfactor,...
+  'DecimationFactor',2,...
   'Bandwidth',5.0e9,...
   'PassbandRipple',0.05,...
   'StopbandAttenuation',60,...
   'StopbandFrequencySource', 'Property',...
   'StopbandFrequency',5.0e9,...
-  'CenterFrequency',maxfreq(5));
+  'CenterFrequency',8.73e9);
 
 xDown = dwnConv(rf_data.'); % down convert
 window = hamming(floor(length(xDown)/10));
@@ -71,8 +66,8 @@ figure; pwelch(xDown,window,[],[],Fs,'centered')
 title('Spectrum of down converted signal xDown')
 
 %% Draw signal again
-binLength = (frameStop-frameStart)/(L/decfactor-1);
-rangeVec = ((0:L/decfactor-1)*binLength + frameStart);
+binLength = (frameStop-frameStart)/(L/2-1);
+rangeVec = ((0:L/2-1)*binLength + frameStart);
 ph = plot(rangeVec, real(xDown).');
 title('Downconverted Signal');
 ylabel('Normalized amplitude');
