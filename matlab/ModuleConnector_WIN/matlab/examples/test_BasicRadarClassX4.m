@@ -10,15 +10,15 @@ Lib.libfunctions
 % Input parameters
 COM = char(seriallist);
 FPS = 20;
-dataType = 'rf';
+dataType = 'rf'; % bb seems to downsample 186 , rf is 1520
 
 % Chip settings
 PPS = 26;
-DACmin = 949;
-DACmax = 1100;
-Iterations = 16;
-FrameStart = 0.0; % meters.
-FrameStop = 9.9; % meters.
+DACmin = 950;%949
+DACmax = 1500;%1100
+Iterations = 16;%16Avergaging?
+FrameStart = 0.1; % meters.
+FrameStop = 1; % meters.
 
 %% Using BasicRadarClassX4
 radar = BasicRadarClassX4(COM,FPS,dataType);
@@ -35,7 +35,7 @@ radar.radarInstance.x4driver_set_dac_min(DACmin);
 radar.radarInstance.x4driver_set_dac_max(DACmax);
 radar.radarInstance.x4driver_set_iterations(Iterations);
 radar.radarInstance.x4driver_set_tx_center_frequency(3);
-radar.radarInstance.x4driver_set_pif_register(101, 0); %Frequency Register
+radar.radarInstance.x4driver_set_pif_register(101, 48); %Frequency Register
 % Frequency Registers
 % 0 - 2.9 Ghz
 % 16 - 4.314 Ghz

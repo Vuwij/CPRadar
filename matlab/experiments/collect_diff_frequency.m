@@ -24,7 +24,7 @@ FrameStop = 9.9; % meters.
 COM = char(seriallist);
 dataType = 'rf';
 
-depth = '2.5_hf-';
+depth = 'zero2-';
 
 %% Using BasicRadarClassX4
 radar = BasicRadarClassX4(COM,FPS,dataType);
