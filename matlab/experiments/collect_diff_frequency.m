@@ -36,7 +36,7 @@ for freq=0:7
     data = acquire_radar_data(FPS, Duration, freq);
     rf_data = data(20,:);
     % Averaging frames
-    filename = strcat('../data/frequency_sweep_water/', depth, num2str((freq + 2) * 1.455), 'ghz.mat');
+    filename = strcat('../data/frequency_sweeps/', depth, num2str((freq + 2) * 1.455), 'ghz.mat');
     save(char(filename), 'rf_data');
 end
 
