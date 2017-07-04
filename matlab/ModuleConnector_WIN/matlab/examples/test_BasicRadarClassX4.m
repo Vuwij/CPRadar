@@ -10,15 +10,15 @@ Lib.libfunctions
 % Input parameters
 COM = char(seriallist);
 FPS = 20;
-dataType = 'rf'; % bb seems to downsample 186 , rf is 1520
+dataType = 'bb'; % bb seems to downsample 186 , rf is 1520
 
 % Chip settings
 PPS = 26;
 DACmin = 950;%949
 DACmax = 1500;%1100
 Iterations = 16;%16Avergaging?
-FrameStart = 0.1; % meters.
-FrameStop = 1; % meters.
+FrameStart = 0.0; % meters.
+FrameStop = 10; % meters.
 
 %% Using BasicRadarClassX4
 radar = BasicRadarClassX4(COM,FPS,dataType);
