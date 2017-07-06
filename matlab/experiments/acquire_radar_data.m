@@ -71,7 +71,7 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
                     ylim([-0.1 2]);
             end
             
-            radarData(i,:) = frame;
+            radarData(i,:) = frame - rf_data.';
             
             th.String = ['FrameNo: ' num2str(i) ' - Length: ' num2str(length(frame)) ' - FrameCtr: ' num2str(ctr)];
 
