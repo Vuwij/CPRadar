@@ -22,9 +22,9 @@ Iterations = 16;
 FrameStart = 0.0; % meters.
 FrameStop = 9.9; % meters.
 COM = char(seriallist);
-dataType = 'rf';
+dataType = 'bb';
 
-depth = 'zero2-';
+depth = 'test-';
 
 %% Using BasicRadarClassX4
 radar = BasicRadarClassX4(COM,FPS,dataType);

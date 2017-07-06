@@ -3,6 +3,10 @@
 % Frequency - 0 to 8. Range 2.9 to 13.122 Ghz
 function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
     global PPS DACmin DACmax Iterations FrameStart FrameStop dataType radar;
+    if nargin < 3
+        Frequency = 3;
+    end
+    load('../data/frequency_sweeps/zerobb-7.275ghz.mat');
 
     % Configure X4 chip.
     radar.radarInstance.x4driver_set_pulsesperstep(PPS);
@@ -48,16 +52,14 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
             
             if i == 1
                 numBins = length(frame);
-                radarData = zeros(FPS * Duration, numBins);
                 if strcmp('bb', dataType)
                     numBins = numBins/2;
                 end
+                radarData = zeros(FPS * Duration, numBins);
                 binLength = (frameStop-frameStart)/(numBins-1);
                 rangeVec = (0:numBins-1)*binLength + frameStart;
                 ph.XData = rangeVec;
             end
-            
-            radarData(i,:) = frame;
             
             switch dataType
                 case 'rf'
@@ -65,9 +67,11 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
                     ylim([-1.2 1.2]);
                 case 'bb'
                     frame = frame(1:end/2) + 1i*frame(end/2 + 1:end);
-                    ph.YData = abs(frame); 
+                    ph.YData = abs(frame - rf_data.'); 
                     ylim([-0.1 2]);
             end
+            
+            radarData(i,:) = frame;
             
             th.String = ['FrameNo: ' num2str(i) ' - Length: ' num2str(length(frame)) ' - FrameCtr: ' num2str(ctr)];
 

@@ -6,6 +6,7 @@ addpath('../');
 % Load the library
 Lib = ModuleConnector.Library;
 Lib.libfunctions
+load('../../../data/frequency_sweeps/zerobb-7.275ghz.mat');
 
 % Input parameters
 COM = char(seriallist);
@@ -14,11 +15,11 @@ dataType = 'bb'; % bb seems to downsample 186 , rf is 1520
 
 % Chip settings
 PPS = 26;
-DACmin = 950;%949
-DACmax = 1500;%1100
+DACmin = 949;%949
+DACmax = 1100;%1100
 Iterations = 16;%16Avergaging?
 FrameStart = 0.0; % meters.
-FrameStop = 10; % meters.
+FrameStop = 9.9; % meters.
 
 %% Using BasicRadarClassX4
 radar = BasicRadarClassX4(COM,FPS,dataType);
@@ -92,11 +93,9 @@ while ishandle(fh)
                 ylim([-1.2 1.2]);
             case 'bb'
                 frame = frame(1:end/2) + 1i*frame(end/2 + 1:end);
-                ph.YData = abs(frame); 
+                ph.YData = abs(frame - rf_data.');
                 ylim([-0.1 2]);
         end
-        
-            
         
         th.String = ['FrameNo: ' num2str(i) ' - Length: ' num2str(length(frame)) ' - FrameCtr: ' num2str(ctr)];
         
