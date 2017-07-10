@@ -6,8 +6,20 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
     if nargin < 3
         Frequency = 3;
     end
-    load('../data/frequency_sweeps/zerobb-7.275ghz.mat');
-
+    
+    if Frequency == 2
+        load('../data/frequency_sweeps/zerobb-5.82ghz.mat');
+    end
+    if Frequency == 3
+        load('../data/frequency_sweeps/zerobb-7.275ghz.mat');
+    end
+    if Frequency == 4
+        load('../data/frequency_sweeps/zerobb-8.73ghz.mat');
+    end
+    if Frequency == 5
+        load('../data/frequency_sweeps/zerobb-10.185ghz.mat');
+    end
+        
     % Configure X4 chip.
     radar.radarInstance.x4driver_set_pulsesperstep(PPS);
     radar.radarInstance.x4driver_set_dac_min(DACmin);
@@ -42,12 +54,14 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
     grid on;
 
     i = 0;
+    radar.GetFrameNormalized();
     while ishandle(fh) && i < FPS * Duration
         % Peek message data float
         numPackets = radar.bufferSize();
         if numPackets > 0
             i = i+1;
             % Get frame (uses read_message_data_float)
+            clear frame
             [frame, ctr] = radar.GetFrameNormalized();
             
             if i == 1
@@ -65,13 +79,13 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
                 case 'rf'
                     ph.YData = frame;
                     ylim([-1.2 1.2]);
+                    radarData(i,:) = frame;
                 case 'bb'
                     frame = frame(1:end/2) + 1i*frame(end/2 + 1:end);
-                    ph.YData = abs(frame - rf_data.'); 
+                    ph.YData = abs(frame); 
+                    radarData(i,:) = frame;
                     ylim([-0.1 2]);
             end
-            
-            radarData(i,:) = frame - rf_data.';
             
             th.String = ['FrameNo: ' num2str(i) ' - Length: ' num2str(length(frame)) ' - FrameCtr: ' num2str(ctr)];
 
@@ -81,6 +95,5 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
             end 
         end
     end
-
     radar.stop();
 end
