@@ -9,8 +9,8 @@ clear
 
 % Material data
 Folder = '../data/7-11-2017 Protocol1';
-Material = 'baseline';
-Depth = 'test';
+Material = 'screw-2mm-0.8cm';
+Depth = '0cm';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
@@ -29,7 +29,7 @@ FPS = 20;
 Duration = 0.25;
 PPS = 26;
 DACmin = 949;
-DACmax = 1300;
+DACmax = 1400;
 Iterations = 16;
 FrameStart = 0.0; % meters.
 FrameStop = 9.9; % meters.
@@ -55,6 +55,7 @@ for ftype=[0,1]
         dataType = 'bb';
     end
     
+    DACmax = 1400;
     for DACmin = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 949, 1000]
         for freq=[2,3,4,5]
             data = acquire_radar_data(FPS, Duration, freq);
