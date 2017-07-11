@@ -8,9 +8,9 @@
 clear
 
 % Material data
-Folder = '../data/7-11-2017 Protocol1';
+Folder = '../7-11-2017 Protocol1';
 Material = 'chicken5x4x1cm';
-Depth = '-cm';
+Depth = '-10cm';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
@@ -20,6 +20,7 @@ save(FileName);
 addpath('../ModuleConnector_WIN/matlab');
 addpath('../ModuleConnector_WIN/lib');
 addpath('../ModuleConnector_WIN/include');
+addpath('..');
 Lib = ModuleConnector.Library;
 Lib.libfunctions
 
