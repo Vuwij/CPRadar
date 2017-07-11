@@ -10,7 +10,7 @@ clear
 % Material data
 Folder = '../data/7-11-2017 Protocol1';
 Material = 'baseline';
-Depth = 'test';
+Depth = '29.3cm';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
@@ -55,27 +55,17 @@ for ftype=[0,1]
         dataType = 'bb';
     end
     
-    for DACmin = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 949, 1000]
+    for DACmin = [100, 200, 300, 400, 500, 600, 700, 800, 900, 949, 1000]
         for freq=[2,3,4,5]
             data = acquire_radar_data(FPS, Duration, freq);
 
-            varname = strcat(dataType, num2str(DACmin), '_', num2str(DACmax), 'f', num2str(freq));
-            str = [varname,'= data;'];
+            varname = strcat(Depth);
+            str = [Material,'= mtable;'];
             eval(str);
-            save(FileName,varname,'-append');
+            save(Folder,Material,'-append');
+
         end
     end
-    
-    DACmin = 949;
-    DACmax = 1100;
-    for freq = [2,3,4,5]
-        data = acquire_radar_data(FPS, Duration, freq);
-
-        varname = strcat(dataType, num2str(DACmin), '_', num2str(DACmax), 'f', num2str(freq));
-        str = [varname,'= data;'];
-        eval(str);
-        save(FileName,varname,'-append');
-    end 
 end
 
 
