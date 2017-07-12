@@ -9,8 +9,8 @@ clear
 
 % Material data
 Folder = '../7-11-2017 Protocol1';
-Material = 'chicken5x4x1cm';
-Depth = '-11cm';
+Material = 'baseline';
+Depth = 'zero';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
