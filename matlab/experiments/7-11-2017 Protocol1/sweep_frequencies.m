@@ -10,16 +10,16 @@ clear
 % Material data
 Folder = '../7-11-2017 Protocol1';
 Material = 'chicken5x4x1cm';
-Depth = '-10cm';
+Depth = '-11cm';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
 save(FileName);
 
 % Paths
-addpath('../ModuleConnector_WIN/matlab');
-addpath('../ModuleConnector_WIN/lib');
-addpath('../ModuleConnector_WIN/include');
+addpath('../../ModuleConnector_WIN/matlab');
+addpath('../../ModuleConnector_WIN/lib');
+addpath('../../ModuleConnector_WIN/include');
 addpath('..');
 Lib = ModuleConnector.Library;
 Lib.libfunctions
