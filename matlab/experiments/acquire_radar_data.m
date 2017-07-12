@@ -6,19 +6,6 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
     if nargin < 3
         Frequency = 3;
     end
-    
-    if Frequency == 2
-        load('../data/frequency_sweeps/zerobb-5.82ghz.mat');
-    end
-    if Frequency == 3
-        load('../data/frequency_sweeps/zerobb-7.275ghz.mat');
-    end
-    if Frequency == 4
-        load('../data/frequency_sweeps/zerobb-8.73ghz.mat');
-    end
-    if Frequency == 5
-        load('../data/frequency_sweeps/zerobb-10.185ghz.mat');
-    end
         
     % Configure X4 chip.
     radar.radarInstance.x4driver_set_pulsesperstep(PPS);
