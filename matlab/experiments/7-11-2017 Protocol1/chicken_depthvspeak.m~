@@ -1,0 +1,11 @@
+%This script plots the depth of the chicken in the saline vs the amplitude
+%of the peak as well as the depth of the chicken in the saline vs the
+%location of the peak
+peaks=zeros(1,11);
+for i = linspace(-10,0,11)
+    height = strcat(int2str(i),'cm');
+    greatest_peak = obtain_greatest_peak('chicken5x4x1cm',height,'2','0','1400');
+    peaks(i+11)=greatest_peak(2);
+end
+
+plot(linspace(-10,0,11),peaks)

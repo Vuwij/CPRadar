@@ -3,24 +3,24 @@
 % baseline, as well as the baseline subtracted from the radar data
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear variables;
-close all;
+%close all;
 clc;
 %% Choosing a setting
 
 %You need to be in the '7-11-2017 Protocol1' folder
 
 %Folder can be "saline_only" or "chicken5x4x1cm" or "screw-2mm-0.8cm" or "screw-3mm-1.2cm" or "screw-3mm-1.5cm"
-folder = 'saline_only';
-height = '15.5cm';
+folder = 'chicken5x4x1cm';
+height = '-10cm';
 %Frequency can be...
     %2 (5.832 GHz)
     %3 (7.29 GHz))
     %4 (8.748 GHz)
     %5 (10.206 GHz)
-frequency = '2';
+frequency = '5';
 %Specify the dacmin and dacmax values (default: dacmin = 949, dacmax = 1100)
-dacmin = '949';
-dacmax = '1100';
+dacmin = '0';
+dacmax = '1400';
 %Specify whether to plot the baseband or rf data"
 mode = 'bb';
 %Specify which of the 5 fast time sequences
@@ -29,7 +29,7 @@ fts = 1;
 x_units='bins';
 %% Load the data
 data = obtain_data(folder, height, frequency, dacmin, dacmax, mode, fts);
-baseline=obtain_data('baseline','zero',frequency,dacmin,dacmax,mode,fts);
+baseline=obtain_data('zero','baseline',frequency,dacmin,dacmax,mode,fts);
 baseline = [baseline(1:18); zeros(length(baseline)-18,1)];
 %% Uncalibrated range and time vectors
 c = 299792458;
@@ -55,4 +55,10 @@ plot(r_vec_cm,abs(baseline));
 %% Plot the data after subtracting on another subfigure 
 subplot(2,1,2)
 plot(r_vec_cm,abs(data-baseline));
+%% Getting the distance at which the peak occurs
+[x y] = max(abs(data-baseline));
+peak_dist=r_vec_cm(y)
+x
+
+
 
