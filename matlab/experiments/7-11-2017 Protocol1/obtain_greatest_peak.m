@@ -34,8 +34,6 @@ r_vec = r_vec - (ind-1)*r_min;
 r_vec_cm = r_vec * 100;
 %% Obtain the difference signal and plot it
 diff = data-baseline;
-figure;
-plot(r_vec_cm,diff);
 %% Getting the distance at which the peak occurs
 [x y] = max(abs(diff));
 peak_dist=r_vec_cm(y);
