@@ -13,13 +13,13 @@ close all
 % Compares the signal to noise for different DAC parameters for a single object
 
 % Settings
-
 folder = 'chicken5x4x1cm';
 dataType = 'bb';
-dacMIN = 949;
-dacMAX = 1100;
-freq = 4;
+dacMIN = 0;
+dacMAX = 1400;
+freq = 3;
 variableName = strcat(dataType, num2str(dacMIN), '_', num2str(dacMAX), 'f', num2str(freq));
+x = linspace(0.0, 9.9, 186);
 
 % Put the data in a struct
 for i = -10:0
@@ -28,7 +28,7 @@ for i = -10:0
 end
 
 % Show the mean and average of the baseline
-baseline = load(strcat(folder, '/', 'baseline.mat'), variableName);
+baseline = load(strcat(folder, '/', '-10cm.mat'), variableName);
 % baseline = load(strcat('zero/baseline.mat'), variableName);
 baseline = baseline.(variableName);
 [width, length] = size(baseline);
@@ -36,13 +36,63 @@ baseline = baseline.(variableName);
 baseline_mean = mean(baseline);
 baseline_var = var(baseline);
 
-% Plot the original graphs
+%% Plot the original graphs
+figure(1);
 for i = 1:11
    p = objdata(i).(variableName);
-   plot(abs(mean(p) - mean(baseline)));
+   plot(x, abs(mean(p)));
    hold on;
 end
 legend('show')
+hold off;
+
+%% Height of peak vs depth of chicken
+
+for d = 5:10
+    figure(2);
+    depthc = -10:1:0;
+    heightc = -10:1:0;
+    for i = 1:11
+        p = objdata(i).(variableName);
+        heightc(i) = abs(mean(p(:, d)));
+    end
+    plot(depthc, heightc);
+    hold on;
+end
+xlabel('Depth of chicken (cm)');
+ylabel('Amplitude');
+xstr = string(x);
+legend(xstr(5), xstr(6), xstr(7), xstr(8), xstr(9), xstr(10));
+
+
+%% Subtract the one with another
+figure(3);
+p1 = objdata(1).(variableName);
+p2 = objdata(2).(variableName);
+p3 = objdata(3).(variableName);
+p4 = objdata(4).(variableName);
+p5 = objdata(5).(variableName);
+p6 = objdata(6).(variableName);
+p7 = objdata(7).(variableName);
+p8 = objdata(8).(variableName);
+p9 = objdata(9).(variableName);
+p10 = objdata(10).(variableName);
+plot(x, abs(mean(p1)) - abs(baseline(5, :)), 'Marker', 'o');
+hold on;
+plot(x, abs(mean(p2)) - abs(baseline(5, :)));
+plot(x, abs(mean(p3)) - abs(baseline(5, :)));
+plot(x, abs(mean(p4)) - abs(baseline(5, :)));
+plot(x, abs(mean(p5)) - abs(baseline(5, :)));
+plot(x, abs(mean(p6)) - abs(baseline(5, :)));
+plot(x, abs(mean(p7)) - abs(baseline(5, :)));
+plot(x, abs(mean(p8)) - abs(baseline(5, :)));
+plot(x, abs(mean(p9)) - abs(baseline(5, :)));
+plot(x, abs(mean(p10)) - abs(baseline(5, :)));
+legend('-10cm','-9cm','-8cm','-7cm','-6cm','-5cm','-4cm','-3cm','-2cm','-1cm');
+xlim([0.2, 0.8]);
+
+% Draw the change in cm with a single point
+figure(3);
 
 %% Signal Noise Example
 
