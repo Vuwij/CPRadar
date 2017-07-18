@@ -42,7 +42,6 @@ for j = linspace(0,1000,3)
     end
     %4 different plots for each dac setting
     plot_counter=plot_counter+1;
-
 end
 
 %Create the 4th plot with the default dac setting
