@@ -1,6 +1,6 @@
 function [p_inf, p_del, t_const, a, con] = get_material(materialName)
     load('materials/DielectricDatabase.mat');
-    p_inf = DielectricDatabase{materialName,'ef'}; % Permittivity at infinite frequency
+    p_inf = DielectricDatabase{materialName,'ef'}; %#ok<USENS> % Permittivity at infinite frequency
 
     p_del(1) = DielectricDatabase{materialName,'del1'};
     p_del(2) = DielectricDatabase{materialName,'del2'};

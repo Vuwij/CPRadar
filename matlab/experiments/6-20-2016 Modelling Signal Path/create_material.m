@@ -14,8 +14,8 @@ function [e_w] = create_material(p_inf, p_del, t_const, a, con)
         end
     end
     
-    semilogx(freq, real(e_w));
-    title('Frequency Response of Dielectric Constant')
-    xlabel('f/GHz')
-    ylabel('Permittivity (e)')
+%     semilogx(freq, real(e_w));
+%     title('Frequency Response of Dielectric Constant');
+%     xlabel('f/GHz');
+%     ylabel('Permittivity (e)');
 end
