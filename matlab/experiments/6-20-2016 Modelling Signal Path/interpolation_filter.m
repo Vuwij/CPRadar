@@ -2,6 +2,7 @@
 % R = the filter
 function [S_rx, s_rx] = interpolation_filter(S_tx, S_tx_freq, R, R_freq)
     G = spline(R_freq, R, S_tx_freq);
+    
     S_rx = G.*S_tx;
     if(S_tx_freq(1) < 0)
         S_rx(1:length(S_tx)/2) = 0;

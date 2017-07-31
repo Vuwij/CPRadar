@@ -10,7 +10,7 @@ clear
 % Material data
 Folder = '../7-11-2017 Protocol1';
 Material = 'chicken2';
-Depth = 'baseline';
+Depth = '-50mm-3';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
@@ -26,8 +26,8 @@ Lib.libfunctions
 
 % Global radar settings
 global FPS Duration PPS DACmin DACmax Iterations FrameStart FrameStop COM dataType radar;
-FPS = 2;
-Duration = 0.5;
+FPS = 10;
+Duration = 0.1;
 PPS = 26;
 DACmin = 949;
 DACmax = 1400;
