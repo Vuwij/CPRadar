@@ -8,9 +8,9 @@
 clear
 
 % Material data
-Folder = '../7-11-2017 Protocol1';
-Material = 'chicken2';
-Depth = '-50mm-3';
+Folder = '../8-2-2017 Protocol2';
+Material = 'chicken_water';
+Depth = 'baseline-tableonly_3';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
@@ -27,7 +27,7 @@ Lib.libfunctions
 % Global radar settings
 global FPS Duration PPS DACmin DACmax Iterations FrameStart FrameStop COM dataType radar;
 FPS = 10;
-Duration = 10.0;
+Duration = 0.1;
 PPS = 26;
 DACmin = 949;
 DACmax = 1400;
@@ -48,7 +48,7 @@ radar.init();
 % mtablebb(end,1) = {Depth};
 
 % Sweep frequencies
-for ftype=[0]
+for ftype=[0,1]
     radar.radarInstance.x4driver_set_downconversion(ftype);
     if ftype == 0
         dataType = 'rf';
