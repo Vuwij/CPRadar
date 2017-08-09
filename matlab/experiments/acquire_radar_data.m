@@ -49,7 +49,7 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
             i = i+1;
             % Get frame (uses read_message_data_float)
             clear frame
-            [frame, ctr] = radar.GetFrameNormalized();
+            [frame, ~] = radar.GetFrameNormalized();
             
             if i == 1
                 numBins = length(frame);
@@ -71,10 +71,10 @@ function [radarData] = acquire_radar_data(FPS, Duration, Frequency)
                     frame = frame(1:end/2) + 1i*frame(end/2 + 1:end);
                     ph.YData = abs(frame); 
                     radarData(i,:) = frame;
-                    ylim([-0.1 2]);
+                    ylim([-0.1 0.8]);
             end
             
-            th.String = ['FrameNo: ' num2str(i) ' - Length: ' num2str(length(frame)) ' - FrameCtr: ' num2str(ctr)];
+            %th.String = ['FrameNo: ' num2str(i) ' - Length: ' num2str(length(frame)) ' - FrameCtr: ' num2str(ctr)];
 
             drawnow;
             if mod(i,100)==0
