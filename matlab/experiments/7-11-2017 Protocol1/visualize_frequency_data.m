@@ -5,7 +5,7 @@
 %Folder can be "saline_only" or "chicken5x4x1cm" or "screw-2mm-0.8cm" or "screw-3mm-1.2cm" or "screw-3mm-1.5cm"
 folder = 'saline_only';
 
-height = '15.5cm';
+height = '29.6cm';
 
 %Frequency can be...
     %2 (5.832 GHz)
@@ -15,11 +15,11 @@ height = '15.5cm';
 frequency = '3';
 
 %Specify the dacmin and dacmax values (default: dacmin = 949, dacmax = 1100)
-dacmin = '949';
-dacmax = '1100';
+dacmin = '0';
+dacmax = '1400';
 
 %Specify whether to plot the baseband or rf data"
-mode = 'bb';
+mode = 'rf';
 
 %Specify which of the 5 fast time sequences
 fts = 1;
@@ -46,6 +46,7 @@ end
 data = obtain_data(folder, height, frequency, dacmin, dacmax, mode, fts);
 
 %Draw the plots (loop through the folder)
+figure
 if (strcmp(mode,'bb'))
     plot(x,abs(data));
 else
