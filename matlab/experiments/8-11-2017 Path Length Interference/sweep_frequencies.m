@@ -10,7 +10,7 @@ clear
 % Material data
 Folder = '../8-11-2017 Path Length Interference';
 Material = 'metal_plate_45mm';
-Depth = '517mm_1';
+Depth = '465mm_1';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
