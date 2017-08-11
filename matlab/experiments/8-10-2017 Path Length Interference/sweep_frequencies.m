@@ -8,14 +8,9 @@
 clear
 
 % Material data
-Folder = '../7-11-2017 Protocol1';
-<<<<<<< HEAD
-Material = 'Air';
-Depth = 'test';
-=======
-Material = 'chicken2';
-Depth = '-50mm-3';
->>>>>>> ce1bb58702e29abb5109b106f6549eb338407be3
+Folder = '../8-10-2017 Path Length Interference';
+Material = 'metal_plate_45mm';
+Depth = '110mm_1';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
@@ -39,7 +34,7 @@ DACmax = 1400;
 Iterations = 16;
 FrameStart = 0.0; % meters.
 FrameStop = 9.9; % meters.
-COM = 'COM6';
+COM = 'COM5';
 dataType = 'bb';
 
 %% Using BasicRadarClassX4
@@ -62,7 +57,7 @@ for ftype=[0,1]
     end
     
     DACmax = 1400;
-    for DACmin = [0, 500, 1000]
+    for DACmin = [0]
         for freq=[3,4]
             data = acquire_radar_data(FPS, Duration, freq);
 
@@ -72,17 +67,6 @@ for ftype=[0,1]
             save(FileName,varname,'-append');
         end
     end
-    
-    DACmin = 949;
-    DACmax = 1100;
-    for freq = [3,4]
-        data = acquire_radar_data(FPS, Duration, freq);
-
-        varname = strcat(dataType, num2str(DACmin), '_', num2str(DACmax), 'f', num2str(freq));
-        str = [varname,'= data;'];
-        eval(str);
-        save(FileName,varname,'-append');
-    end 
 end
 
 

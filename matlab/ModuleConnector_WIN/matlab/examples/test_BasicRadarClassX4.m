@@ -9,14 +9,14 @@ Lib.libfunctions
 %load('../../../data/frequency_sweeps/zerobb-7.275ghz.mat');
 
 % Input parameters
-COM = char(seriallist);
+COM = 'COM6'; %char(seriallist)
 FPS = 20;
 dataType = 'bb'; % bb seems to downsample 186 , rf is 1520
 
 % Chip settings
 PPS = 26;
 DACmin = 949;%949
-DACmax = 1100;%1100
+DACmax = 1400;%1100
 Iterations = 16;%16Avergaging?
 FrameStart = 0.0; % meters.
 FrameStop = 9.9; % meters.
