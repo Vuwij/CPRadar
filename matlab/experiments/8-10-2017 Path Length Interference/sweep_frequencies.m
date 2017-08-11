@@ -4,13 +4,13 @@
 % a function of the resulting movement of the radar with respect to
 % frequency
 
-% Create stuff
+% Create stuff %24 cm
 clear
 
 % Material data
-Folder = '../7-11-2017 Protocol1';
-Material = 'Air';
-Depth = 'test';
+Folder = '../8-10-2017 Path Length Interference';
+Material = 'metal_plate_45mm';
+Depth = '110mm_1';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
@@ -26,15 +26,15 @@ Lib.libfunctions
 
 % Global radar settings
 global FPS Duration PPS DACmin DACmax Iterations FrameStart FrameStop COM dataType radar;
-FPS = 20;
-Duration = 0.25;
+FPS = 10;
+Duration = 0.1;
 PPS = 26;
 DACmin = 949;
 DACmax = 1400;
 Iterations = 16;
 FrameStart = 0.0; % meters.
 FrameStop = 9.9; % meters.
-COM = 'COM6';
+COM = 'COM5';
 dataType = 'bb';
 
 %% Using BasicRadarClassX4
@@ -57,8 +57,8 @@ for ftype=[0,1]
     end
     
     DACmax = 1400;
-    for DACmin = [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 949, 1000]
-        for freq=[2,3,4,5]
+    for DACmin = [0]
+        for freq=[3,4]
             data = acquire_radar_data(FPS, Duration, freq);
 
             varname = strcat(dataType, num2str(DACmin), '_', num2str(DACmax), 'f', num2str(freq));
@@ -67,17 +67,6 @@ for ftype=[0,1]
             save(FileName,varname,'-append');
         end
     end
-    
-    DACmin = 949;
-    DACmax = 1100;
-    for freq = [2,3,4,5]
-        data = acquire_radar_data(FPS, Duration, freq);
-
-        varname = strcat(dataType, num2str(DACmin), '_', num2str(DACmax), 'f', num2str(freq));
-        str = [varname,'= data;'];
-        eval(str);
-        save(FileName,varname,'-append');
-    end 
 end
 
 
