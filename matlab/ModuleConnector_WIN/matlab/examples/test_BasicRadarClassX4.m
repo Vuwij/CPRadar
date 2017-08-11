@@ -6,7 +6,7 @@ addpath('../');
 % Load the library
 Lib = ModuleConnector.Library;
 Lib.libfunctions
-load('../../../data/frequency_sweeps/zerobb-7.275ghz.mat');
+%load('../../../data/frequency_sweeps/zerobb-7.275ghz.mat');
 
 % Input parameters
 COM = 'COM6'; %char(seriallist)
@@ -93,7 +93,7 @@ while ishandle(fh)
                 ylim([-1.2 1.2]);
             case 'bb'
                 frame = frame(1:end/2) + 1i*frame(end/2 + 1:end);
-                ph.YData = abs(frame - rf_data.');
+                ph.YData = abs(frame);
                 ylim([-0.1 2]);
         end
         
