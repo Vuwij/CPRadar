@@ -1,4 +1,4 @@
-function [s_tx_m] = match_and_downconvert(input_signal, s_tx, center_freq)
+function [s_tx_m, lagDiff] = match_and_downconvert(input_signal, s_tx, Fc)
     [acor,lag] = xcorr(s_tx,input_signal);
     % plot(input_signal);
     % hold on;
@@ -21,9 +21,10 @@ function [s_tx_m] = match_and_downconvert(input_signal, s_tx, center_freq)
       'StopbandAttenuation',60,...
       'StopbandFrequencySource', 'Property',...
       'StopbandFrequency',1.5e9,...
-      'CenterFrequency',center_freq);
+      'CenterFrequency',Fc);
  
     acor = acor(1:3038);
     xDown = dwnConv(acor'); % down convert
     s_tx_m = xDown.';
+    s_tx_m = fliplr(s_tx_m);
 end
