@@ -26,5 +26,5 @@ function [s_tx_m, lagDiff] = match_and_downconvert(input_signal, s_tx, Fc)
     acor = acor(1:3038);
     xDown = dwnConv(acor'); % down convert
     s_tx_m = xDown.';
-    s_tx_m = fliplr(s_tx_m);
+    %s_tx_m = fliplr(s_tx_m);
 end
