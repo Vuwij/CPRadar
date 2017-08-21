@@ -47,6 +47,7 @@ data = obtain_data(folder, height, frequency, dacmin, dacmax, mode, fts);
 
 %Draw the plots (loop through the folder)
 figure
+x=[1:1520]*(1/23.328e9);
 if (strcmp(mode,'bb'))
     plot(x,abs(data));
 else

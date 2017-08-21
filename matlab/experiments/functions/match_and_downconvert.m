@@ -3,6 +3,7 @@ function [s_tx_m, lagDiff] = match_and_downconvert(input_signal, s_tx, Fc)
     % plot(input_signal);
     % hold on;
     % plot(s_tx);
+    %Get index of maximum correlation
     [~,I] = max(abs(acor));
     lagDiff = lag(I);
 
@@ -23,6 +24,7 @@ function [s_tx_m, lagDiff] = match_and_downconvert(input_signal, s_tx, Fc)
       'StopbandFrequency',1.5e9,...
       'CenterFrequency',Fc);
  
+   
     acor = acor(1:3038);
     xDown = dwnConv(acor'); % down convert
     s_tx_m = xDown.';
