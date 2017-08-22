@@ -9,8 +9,8 @@ clear
 
 % Material data
 Folder = '../7-22-2017 Testing Resolution of Distance to Single Target';
-Material = 'baseline';
-Depth = 'zero';
+Material = 'metal_plate_45mm_2';
+Depth = '299mm';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
