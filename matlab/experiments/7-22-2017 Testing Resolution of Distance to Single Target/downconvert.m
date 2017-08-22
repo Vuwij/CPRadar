@@ -23,11 +23,8 @@ function [bb_data] = downconvert(rf_data, Fc)
     basebandImag = (hilbertTransform.* cos(2 * pi *Fc*t))-(rf_data.*sin(2 * pi *Fc * t));
     basebandReal = (rf_data.* cos(2 * pi * Fc * t)) + (hilbertTransform.* sin(2 * pi * Fc * t));
     bb_data=basebandReal+1i*basebandImag;
-%     
-%     figure
-%     plot(t,rf_data);
-%     hold on;
-%     plot(t,abs(bb_data));
+    
+ 
     
 
    
