@@ -1,21 +1,20 @@
-% Include paths
-addpath('../../lib/');
-addpath('../../include/');
-addpath('../');
-
-% Load the library
+% Paths
+addpath('../../ModuleConnector_WIN/matlab');
+addpath('../../ModuleConnector_WIN/lib');
+addpath('../../ModuleConnector_WIN/include');
+addpath('..');
+addpath('../functions');
 Lib = ModuleConnector.Library;
 Lib.libfunctions
-%load('../../../data/frequency_sweeps/zerobb-7.275ghz.mat');
 
 % Input parameters
 COM = 'COM6'; %char(seriallist)
-FPS = 20;
+FPS = 5;
 dataType = 'rf'; % bb seems to downsample 186 , rf is 1520
 
 % Chip settings
 PPS = 26;
-DACmin = 949;%949
+DACmin = 0;%949
 DACmax = 1400;%1100
 Iterations = 16;%16Avergaging?
 FrameStart = 0.0; % meters.
@@ -89,11 +88,15 @@ while ishandle(fh)
         switch dataType
             
             case 'rf'
-             
-                ph.YData = frame;
-                ylim([-1.2 1.2]);
+                frame=downconvert(frame',3);
+                baseline=obtain_baseline_manual_downconversion(3);
+                frame=frame-baseline;
+                ph.YData = abs(frame)';
+                ylim([0 1.2]);
             case 'bb'
                 frame = frame(1:end/2) + 1i*frame(end/2 + 1:end);
+                baseline=obtain_baseline('bb',3)';
+                frame=frame-baseline;
                 ph.YData = abs(frame);
                 ylim([-0.1 2]);
         end
