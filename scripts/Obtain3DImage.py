@@ -3,6 +3,9 @@ from pyqtgraph.Qt import QtGui
 import pyqtgraph as pg
 import numpy as np
 import time
+import matplotlib.pyplot as plt
+import matplotlib
+from mpl_toolkits.mplot3d import Axes3D
 
 '''
 This is a Python script which plots the radio frequency signal received by specified antennas on the Walabot.
@@ -27,7 +30,7 @@ walabot.SetArenaR(1,20,1) #Question: what values can this take on? What is the l
 walabot.SetArenaTheta(-20,20,1)
 walabot.SetArenaPhi(-20,20,1)
 #Set the filter type
-walabot.SetDynamicImageFilter(walabot.FILTER_TYPE_MTI)
+walabot.SetDynamicImageFilter(walabot.FILTER_TYPE_NONE)
 #Set the antenna pair to be used
 scanAntennaPair=walabot.GetAntennaPairs()[0] #Use antenna #1 as tx and antenna #2 as rx (numberings are as specified in the tech spec sheet)
 
@@ -41,32 +44,43 @@ while walabot.GetStatus()[0] == walabot.STATUS_CALIBRATING:
     walabot.Trigger()
 
 
-#Create window for plots
-pg.setConfigOptions(antialias=True) #To make the plot prettier
-app = QtGui.QApplication([])
-win = pg.GraphicsWindow()
-label = pg.LabelItem(justify='right')
-win.addItem(label)
-signalPlot = win.addPlot(row=1, col=0)
+#Create the figure
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+plt.show()
+#matplotlib.interactive(True)
+#Step 5: Scan
+walabot.Trigger()
+
+#Step 6: Get the scan
+image=walabot.GetRawImageSlice()
+rasterImage=image[0]
+sizeX=image[1]
+sizeY=image[2]
+size_tot=sizeX*sizeY
 
 
-#Continuously scanning + recording and getting the processed data
-while True:
-    #Step 5: Scan
-    walabot.Trigger()
+x_list=[]
+y_list=[]
+z_list=np.ndarray.flatten(np.array(rasterImage))
 
-    #Step 6: Get the scan
-    timeDomainSignal=walabot.GetSignal(scanAntennaPair) #Returns the amplitude vector and corresponding time vector for the received signal
-    timeDomainSignalX=timeDomainSignal[1]
-    timeDomainSignalY=timeDomainSignal[0]
-    timeDomainSignalY = np.fft.fftshift(timeDomainSignalY)
-    #Plotting the signal in time domain
-    signalPlot.plot(timeDomainSignalX, timeDomainSignalY, clear=True)
-    signalPlot.setTitle("RF Time Domain Signal")
+#Populate x_list
+for i in range(sizeY):
+    for j in range(sizeX):
+        x_list.append(i)
 
-    app.processEvents()
+#Populate y_list
+for i in range(sizeY):
+    for j in range(sizeX):
+        y_list.append(j)
 
-    time.sleep(0.05)
+
+
+ax.scatter(x_list, y_list, z_list, cmap=plt.hot())
+
+
+plt.draw()
+
 
 #Step 7: Stop and disconnect
 walabot.Stop()

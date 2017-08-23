@@ -4,14 +4,15 @@ import pyqtgraph as pg
 import numpy as np
 from scipy.signal import hilbert
 import time
+import matplotlib.pyplot as plt
 
 '''
 This is a Python script which plots the following...
 -radio frequency signal in time domain
--radio frequency signal in frequency domain
+-radio frequency signal in frequency domain (has a sharp peak at around 7.0-7.2 GHz with a bandwidth of ~1.5 GHz)
 -amplitude of downconverted signal
 -phase of downconverted signal
--instantaneous frequency of time domain signal
+-instantaneous frequency of time domain signal (centered around one frequency which is close to the central frequency of the rf signal)
 -average frequency in slow time
 Parameters:
 -profile type (sensor, sensor narrow, or short range)
@@ -28,7 +29,7 @@ walabot.ConnectAny()
 
 #Step 2: Configurations
 #Set the scan profile as sensor (distance scanner with high resolution and slow update rate)
-walabot.SetProfile(walabot.PROF_SHORT_RANGE_IMAGING)
+walabot.SetProfile(walabot.PROF_SENSOR_NARROW)
 #Set the dimensions of the arena
 walabot.SetArenaR(1,20,1) #Question: what values can this take on? What is the lowest resolution you can set?
 walabot.SetArenaTheta(-20,20,1)
@@ -39,12 +40,14 @@ walabot.SetDynamicImageFilter(walabot.FILTER_TYPE_NONE)
 #Step 3: Start the system in preparation for scanning
 walabot.Start()
 
-#Step 4: Calibration to reduce signals from fixed targets
+scanAntennaPair=walabot.GetAntennaPairs()[0] #Use antenna #1 as tx and antenna #2 as rx (numberings are as specified in the tech spec sheet)
+
+# #Step 4: Calibration to reduce signals from fixed targets
 walabot.StartCalibration()
 while walabot.GetStatus()[0] == walabot.STATUS_CALIBRATING:
-    #Function which initiates a scan and records the signals
+     #Function which initiates a scan and records the signals
     walabot.Trigger()
-
+    baseline = walabot.GetSignal(scanAntennaPair)
 
 #Create window for plots
 pg.setConfigOptions(antialias=True) #To make the plot prettier
@@ -53,46 +56,47 @@ win = pg.GraphicsWindow()
 label = pg.LabelItem(justify='right')
 win.addItem(label)
 signalPlot = win.addPlot(row=1, col=0)
+signalPlot.setYRange(0,1)
 bbAmplitudePlot = win.addPlot(row=2, col=0)
 bbPhasePlot = win.addPlot(row=3, col=0)
 freqDomainPlot=win.addPlot(row=1, col=1)
+freqDomainPlot.setYRange(-20,20)
 instFreqPlot=win.addPlot(row=2, col=1)
+instFreqPlot.setYRange(1e9,11e9)
 avgInstFreqPlot=win.addPlot(row=3,col=1)
 
 
 
 
 y=[]
-counter=0
-
-
-
-
 #Continuously scanning + recording and getting the processed data
 while True:
+
+
     #Step 5: Scan
     walabot.Trigger()
 
     #Step 6: Get the scan
-    scanAntennaPair=walabot.GetAntennaPairs()[0] #Use antenna #1 as tx and antenna #2 as rx (numberings are as specified in the tech spec sheet)
 
     #Plotting signal in time domain
     timeDomainSignal=walabot.GetSignal(scanAntennaPair) #Returns the amplitude vector and corresponding time vector for the received signal
     timeDomainSignalX=timeDomainSignal[1]
     timeDomainSignalY=timeDomainSignal[0]
-    timeDomainSignalY = np.fft.fftshift(timeDomainSignalY)
+    timeDomainSignalY=list(np.array(timeDomainSignalY)-np.array(baseline[0]))
     signalPlot.plot(timeDomainSignalX, timeDomainSignalY, clear=True)
     signalPlot.setTitle("RF Time Domain Signal")
+    print (timeDomainSignalX[len(timeDomainSignalX)-1])
+    print (len(timeDomainSignalX))
 
     #Plotting signal in freq domain
     N=len(timeDomainSignalX)
     Fs=1.024*10**11
     freqDomainSignalY=np.fft.fft(np.asarray(timeDomainSignalY)) #Perform fast fourier transform
-    freqDomainSignalY=np.absolute(freqDomainSignalY)
+    freqDomainSignalY=np.abs(freqDomainSignalY)
     freqDomainSignalY=freqDomainSignalY[1:N/2+1]
     freqDomainSignalX=np.multiply(np.arange(0,N/2),Fs/N)
     freqDomainPlot.plot(freqDomainSignalX, freqDomainSignalY, clear=True)
-
+    print (len(freqDomainSignalX))
 
     #Obtaining the bandwidth and center frequency from the frequency spectrum
     bandwidth = (freqDomainSignalY > 0.01).sum()*(freqDomainSignalX[1]-freqDomainSignalX[0])
@@ -127,8 +131,10 @@ while True:
     avgInstFreqPlot.plot(range(0,len(y)),y,clear=True)
 
 
+
+
     app.processEvents()
-    counter=1
+
 
     time.sleep(0.05)
 
