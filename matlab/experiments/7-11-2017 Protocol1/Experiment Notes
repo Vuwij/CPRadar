@@ -1,0 +1,32 @@
+Changes to default settings of X4M03:
+Set dacmax to 1400 (as this was the minimum dacmax that prevented signals from getting cut off). 
+However always took one signal in which both dacmax and dacmin are at their default values (it is possible that when dacmax and dacmin are at default values, the SNR is maximized)
+
+Saline preparation:
+Amount of distilled water used:
+9 * (1000 mL ± 5%) = 9 L
+Amount of salt used:
+80.9854g
+Saline Concentration:
+8.09854/9=0.8998%
+
+Details on step 6 (getting signal at various distances to saline surface)
+Distances to saline surface:
+29.6cm
+21.6cm
+15.5cm
+
+Details on step 7 (getting signal from a meat piece):
+Distance to saline: 27.2cm
+Size of meat:
+5cm by 4cm x 1 cm
+(5cm x 4cm surface was facing the antennas)
+
+
+Details on step 8 (getting signal from screws):
+Distance to saline: 27.2cm
+Screw sizes at which step 8 was performed:
+3 mm diameter, 1.5cm length
+3 mm diameter, 1.2cm length
+2 mm diameter, 8mm length
+
