@@ -27,7 +27,7 @@ walabot.SetArenaR(1,20,1) #Question: what values can this take on? What is the l
 walabot.SetArenaTheta(-20,20,1)
 walabot.SetArenaPhi(-20,20,1)
 #Set the filter type
-walabot.SetDynamicImageFilter(walabot.FILTER_TYPE_NONE)
+walabot.SetDynamicImageFilter(walabot.FILTER_TYPE_MTI)
 #Set the antenna pair to be used
 scanAntennaPair=walabot.GetAntennaPairs()[0] #Use antenna #1 as tx and antenna #2 as rx (numberings are as specified in the tech spec sheet)
 

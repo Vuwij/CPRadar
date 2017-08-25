@@ -22,7 +22,7 @@ function [bb_data] = cosine_filter(rf_data, Fc)
                     'StopbandAttenuation', 60, 'SampleRate', ...
                     Fs, 'DesignMethod', 'butter');
     
-    bb_data = filtfilt(lpFilt, rf_data2);
+    bb_data = 2*filtfilt(lpFilt, rf_data2);
     
 end
 

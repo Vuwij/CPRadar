@@ -2,10 +2,12 @@ import WalabotAPI as walabot
 from pyqtgraph.Qt import QtGui
 import pyqtgraph as pg
 import numpy as np
+import math
+import matplotlib.pyplot as plt
 import time
 
 '''
-This is a Python script which plots the radio frequency signal received by specified antennas on the Walabot.
+This is a Python script which plots the radio frequency signal received by specified antennas on thnp.e Walabot.
 Parameters:
 -profile type (sensor, sensor narrow, or short range)
 -dimensions of arena to be scanned
@@ -24,8 +26,10 @@ walabot.ConnectAny()
 walabot.SetProfile(walabot.PROF_SHORT_RANGE_IMAGING)
 no_error=True
 y=[]
+vol=[]
+max_R=700
 #Go through several R ranges
-for i in range (2,100,1):
+for i in np.arange(2,max_R,0.1):
     j=1
     no_error=True
     while (no_error):
@@ -37,8 +41,22 @@ for i in range (2,100,1):
         except walabot.WalabotError:
             no_error=False
             y.append(j-1)
+            vol.append((4*(j-1)/3)*math.sin(j-1)*(i**3-1))
+
+
+plt.plot(np.arange(2,max_R,0.1),y,'ro')
+plt.title("R vs Maximum Theta and Phi")
+plt.figure()
+plt.plot(np.arange(2,max_R,0.1),map(abs,vol),'ro')
+plt.title("R vs Range Volume")
+
+
 
 print(y)
+print vol
+
+plt.show()
+
 
 
 

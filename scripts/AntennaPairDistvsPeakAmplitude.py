@@ -6,6 +6,7 @@ import time
 
 '''
 This is a Python script which plots the peak amplitude of the received RF signal as a function of the proximity between the TX and RX antennas.
+There is a slight negative correlation between peak amplitude and TX-RX antenna proximity (expected theoretically because it is likely due to direct leakage). However, it is very weak. 
 '''
 
 walabot.Init('/usr/lib/libWalabotAPI.so')

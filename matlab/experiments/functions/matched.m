@@ -9,7 +9,7 @@ function [s_rx_m] = matched(input_signal, s_tx, Fc)
     
     acor = [zeros(1,int32(length(s_tx)/2+2)), acor];
     acor = acor(1:end-int32(length(s_tx)/2+2));
-    s_rx_m = downconvert(acor, 3);
+    s_rx_m = hilbert_downconvert(acor, Fc);
     
 %     plot(abs(s_rx_m));
 %     hold on;
