@@ -1,0 +1,13 @@
+Radar sensor used: X4M03 (Novelda)
+
+Background:
+The signal obtained from the X4M03 radar sensor has a strong peak before ~ 20 bins due to power being transmitted directly from the TX to the RX. As a result, it is difficult to see the signal from a target that is located within ~ 20 bins from the antennas, as it overlaps with the strong peak. 
+
+Objective:
+To isolate the target signal from the TX signal when the target is in close proximity (within ~ 20 bins) to the antennas
+
+Procedure:
+All signals are obtained as baseband signals with the default center frequency of 7.29 GHZ
+Obtain a baseline signal (Refer to images\baseline.jpg)
+Obtain a signal with the target located farther than ~ 20 bins from the antennas. The target was located 66cm directly beneath the antennas in this experiment. (Refer to images\aluminum_sheet_66cm_7.29GHz.jpg)
+Obtain a signal with the target located within ~ 20 bins from the antennas. The target was located 17.5cm directly beneath the antennas in this experiment. The table is 73.5cm from the radar.
