@@ -9,8 +9,8 @@ Lib.libfunctions
 
 % Input parameters
 COM = 'COM6'; %char(seriallist)
-FPS = 5;
-dataType = 'bb'; % bb seems to downsample 186 , rf is 1520
+FPS = 20;
+dataType = 'rf'; % bb seems to downsample 186 , rf is 1520
 
 % Chip settings
 PPS = 26;
@@ -66,12 +66,13 @@ th = title('');
 grid on;
 
 i = 0;
-
+radar.GetFrameNormalized();
 while ishandle(fh)
     % Peek message data float
     numPackets = radar.bufferSize();
     if numPackets > 0
         i = i+1;
+        clear frame
         % Get frame (uses read_message_data_float)
         [frame, ctr] = radar.GetFrameNormalized();
         
@@ -88,17 +89,15 @@ while ishandle(fh)
         switch dataType
             
             case 'rf'
-                frame=downconvert(frame',3);
-                baseline=obtain_baseline_manual_downconversion(3);
-                frame=frame-baseline;
-                ph.YData = abs(frame)';
-                ylim([0 1.2]);
+                baseline=obtain_baseline('rf',3)';
+                ph.YData = frame-baseline;
+                ylim([-1.2 1.2]);
             case 'bb'
-                frame = frame(1:end/2) + 1i*frame(end/2 + 1:end);
+                frame = frame(1:end/2) - 1i*frame(end/2 + 1:end);
                 baseline=obtain_baseline('bb',3)';
-                frame=frame-baseline;
+                frame=(frame-baseline);
                 ph.YData = abs(frame);
-                ylim([-0.1 2]);
+                ylim([-0.1 0.8]);
         end
         
         th.String = ['FrameNo: ' num2str(i) ' - Length: ' num2str(length(frame)) ' - FrameCtr: ' num2str(ctr)];
