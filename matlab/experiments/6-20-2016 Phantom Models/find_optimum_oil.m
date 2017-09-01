@@ -1,0 +1,44 @@
+% Oil is oil percentage. Maximum 50%
+% Freq Range is a range of frequencies
+% Dielectric Range is a real range of dielectric constants
+% Optional : minFreq, maxFreq values
+function [oil] = find_optimum_oil(freqRange, dielectricRange, minFreq, maxFreq)
+    step_count = 10000;
+    step = 0.01;
+    RMSEmin = 10000000;
+    
+    if(nargin == 4)
+       [~, minIndex] = min(abs(freqRange - minFreq));
+       [~, maxIndex] = min(abs(freqRange - maxFreq));
+    end
+    
+    test_dielectricRange = dielectricRange;
+    for i = 1 : step_count
+        oil_p = i * step;
+        for f = 1 : length(freqRange)
+            test_dielectricRange(f) = oil_to_dielectric(oil_p, freqRange(f));
+        end
+        
+        if(nargin == 4) 
+            RMSE = sqrt(mean((test_dielectricRange(minIndex:maxIndex) - dielectricRange(minIndex:maxIndex)).^2));
+        else
+            RMSE = sqrt(mean((test_dielectricRange - dielectricRange).^2));
+        end
+        if(RMSE < RMSEmin) 
+            RMSEmin = RMSE;
+            oil = oil_p;
+        end 
+    end
+    
+    % Validation and Plotting
+    figure;
+    semilogx(freqRange, dielectricRange);
+    hold on;
+    for f = 1 : length(freqRange)
+        test_dielectricRange(f) = oil_to_dielectric(oil, freqRange(f));
+    end
+    semilogx(freqRange, test_dielectricRange);
+    xlabel('Frequency');
+    ylabel('Dielectric Constant (e)');
+    title('Oil % For best phantom mixture');
+end
