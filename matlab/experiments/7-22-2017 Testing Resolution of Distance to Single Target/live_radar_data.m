@@ -10,7 +10,7 @@ Lib.libfunctions
 % Input parameters
 COM = 'COM6'; %char(seriallist)
 FPS = 5;
-dataType = 'rf'; % bb seems to downsample 186 , rf is 1520
+dataType = 'bb'; % bb seems to downsample 186 , rf is 1520
 
 % Chip settings
 PPS = 26;

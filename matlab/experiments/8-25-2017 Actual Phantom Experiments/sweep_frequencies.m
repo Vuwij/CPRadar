@@ -8,9 +8,10 @@
 clear
 
 % Material data
-Folder = '../8-11-2017 Path Length Interference';
-Material = 'baseline2';
-Depth = 'zero';
+addpath('../functions');
+Folder = '../8-25-2017 Path Length Interference In Water';
+Material = 'water_aluminium';
+Depth = '70mm';
 mkdir(Folder, Material);
 FileName = strcat(Folder, '/', Material, '/', Depth, '.mat');
 delete(FileName);
@@ -57,15 +58,25 @@ for ftype=[0,1]
     end
     
     DACmax = 1400;
-    for DACmin = [0]
-        for freq=[3,4]
-            data = acquire_radar_data(FPS, Duration, freq);
+    DACmin = 0;
+    for freq=[3,4]
+        data = acquire_radar_data(FPS, Duration, freq);
 
-            varname = strcat(dataType, num2str(DACmin), '_', num2str(DACmax), 'f', num2str(freq));
-            str = [varname,'= data;'];
-            eval(str);
-            save(FileName,varname,'-append');
-        end
+        varname = strcat(dataType, num2str(DACmin), '_', num2str(DACmax), 'f', num2str(freq));
+        str = [varname,'= data;'];
+        eval(str);
+        save(FileName,varname,'-append');
+    end
+    
+    DACmax = 1400;
+    DACmin = 949;
+    for freq=[3,4]
+        data = acquire_radar_data(FPS, Duration, freq);
+
+        varname = strcat(dataType, num2str(DACmin), '_', num2str(DACmax), 'f', num2str(freq));
+        str = [varname,'= data;'];
+        eval(str);
+        save(FileName,varname,'-append');
     end
 end
 

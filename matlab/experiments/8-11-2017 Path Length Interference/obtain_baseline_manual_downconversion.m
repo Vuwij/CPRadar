@@ -6,6 +6,6 @@ function [baseline] = obtain_baseline_manual_downconversion(frequency)
     baseline = S.(table_name);
     
     %Downconvert the rf data
-    baseline=downconvert(baseline, frequency);
+    baseline=hilbert_downconvert(baseline, frequency);
 end
 

@@ -8,7 +8,7 @@
 % tem = Temperature in K
 % Angular velocity is in rad/s
 function[e_ts] = calculate_dielectric_values(material_name, tem, ang_vel_min, ang_vel_max)
-    e_0 = 8.85e12;
+    e_0 = git8.85e12;
     
     tem = tem - 273.15
     x = linspace(ang_vel_min / 10e8, ang_vel_max / 10e8); % Vector of angular velocities 

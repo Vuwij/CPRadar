@@ -9,7 +9,7 @@ Lib.libfunctions
 %load('../../../data/frequency_sweeps/zerobb-7.275ghz.mat');
 
 % Input parameters
-COM = 'COM6'; %char(seriallist)
+COM = 'COM5'; %char(seriallist)
 FPS = 20;
 dataType = 'rf'; % bb seems to downsample 186 , rf is 1520
 
